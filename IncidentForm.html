@@ -2,31 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<meta content="en-us" http-equiv="Content-Language" />
-<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-<title>Facility infoPat infoAdverse eff</title>
-<style type="text/css">
-.auto-style1 {
-	margin-right: 0px;
-}
-.auto-style2 {
-	margin-top: 0px;
-}
-</style>
+	<meta content="en-us" http-equiv="Content-Language" />
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<link rel="stylesheet" href="styles.css" />
+	
+	<title>Incident Form (PROTOTYPE)</title>
 </head>
 
-<body bgcolor="#C0C0C0">
+<body>
 
-<form action="" method="post" style="border: #000000 none; height: 2110px; width: 1495px; background-color: #C0C0C0;">
-	<div style="width: 362px; height: 206px; position: static; left: 20px; top: 32px; border-right-color: #000000; border-left-style: solid; border-right-style: solid; border-top-style: solid; border-bottom-style: solid; background-color: #C0C0C0;" id="PatInfo">
-		<div class="auto-style1" style="position: absolute; left: 423px; top: 16px; width: 420px; height: 206px; border: medium solid #000000; background-color: #C0C0C0; z-index: 2;" id="ReportingFacility">
-			Reporting Facility Information<br />
-			<br />
+<form action="" method="post">
+	<div id="PatInfo">
+	
+		<div class ="form-block" id="ReportingFacility">
+			<h3>Reporting Facility Information</h3>
 			Reported by: <input name="rptBy" type="text" /><br />
 			Facility Name: <input name="facName" type="text" /><br />
 			Address: <input name="Address" type="text" /><br />
-			City: <input name="City" type="text" /> State:
-			<select name="FacilityState" size="1" style="width: 123px">
+			City: <input name="City" type="text" /> 
+			State:<select name="FacilityState" size="1" style="width: 123px">
 			<option></option>
 			<option>Alabama</option>
 			<option>Alaska</option>
@@ -80,98 +74,75 @@
 			<option>Wyoming</option>
 			</select><br />
 			Zip: <input name="Zip" type="text" /><br />
-			Phone: <input name="Phone" type="text" /></div>
-		Patient Information<br />
-		<br />
-		<br />
-		a. PT Identifier <input name="ptID" type="text" /><br />
-		b. Age or DOB (mm/dd/year) <input name="DoB" type="date" /><br />
-		c. Sex&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input checked="checked" name="radSex" type="radio" value="female" />female&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input name="radSex" type="radio" value="male" />Male<br />
-		d. Weight&nbsp;&nbsp;&nbsp; <input name="Weight" type="text" />&nbsp;&nbsp;
-		<input checked="checked" name="radWeight" type="radio" value="lbs" />lbs<input name="radWeight" type="radio" value="kgs" />kgs<br />
+			Phone: <input name="Phone" type="text" />
+		</div>
+		
+		<div class ="form-block" id="PatientInfo">
+			<h3>Patient Information</h3>
+			
+			<span class="numbering">a. </span>PT Identifier: <input name="ptID" type="text" /><br />
+			<span class="numbering">b. </span>Age or DOB: (mm/dd/year) <input name="DoB" type="date" /><br />
+			<span class="numbering">c. </span>Sex: <input checked="checked" name="radSex" type="radio" value="female" />Female<input name="radSex" type="radio" value="male" />Male<br />
+			<span class="numbering">d. </span>Weight: <input name="Weight" type="text" /><input checked="checked" name="radWeight" type="radio" value="lbs" />lbs<input name="radWeight" type="radio" value="kgs" />kgs<br />
+		</div>
 	</div>
-	<div class="auto-style1" style="width: 824px; position: absolute; left: 20px; top: 245px; height: 264px; border: #000000 solid; background-color: #C0C0C0; z-index: 1;" id="EventOrProblem">
-		Adverse Event or Product Problem<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	
+	<div class="form-block" id="EventOrProblem">
+		<h3>Adverse Event or Product Problem</h3>
+
 		<input name="AdverseEvent" type="checkbox" value="AdverseEvent" />Adverse 
-		Event&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; and/or&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Event and/or
 		<input name="ProductProblem" type="checkbox" value="ProductProblem" /> 
-		Product Problem (defects/malfunctions)<hr style="height: -12px; color: #000000" />
+		Product Problem (defects/malfunctions)
+		<hr /> 
+		
 		Outcome attributed to adverse event (check all that apply)<br />
 		<br />
 		<input name="death" type="checkbox" value="death" />Death (mm/dd/year)
-		<input name="DoD" type="date" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input name="RequiredIntervention" type="checkbox" value="RequiredIntervention" />Required 
-		intervention to prevent permanent impairment/damage.<br />
-		<input name="LifeThretening" type="checkbox" value="LifeThretening" />Life-Threatening&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input name="DoD" type="date" />
+		<input name="RequiredIntervention" type="checkbox" value="RequiredIntervention" />Required intervention to prevent permanent impairment/damage<br />
+		<input name="LifeThretening" type="checkbox" value="LifeThretening" />Life-Threatening
 		<input name="Disability" type="checkbox" value="Disability" />Disability<br />
-		<input name="Hospitalized" type="checkbox" value="Hospitalized" />Hospitalized&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input name="CongenitalAnomaly" type="checkbox" value="CongenitalAnomaly" />Congenital 
-		Anomaly<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input name="Other" type="checkbox" value="Other" /> Other:
-		<input name="OtherText1" type="text" /><br />
-		<div style="position: absolute; left: 3px; top: 209px; width: 232px; height: 44px; right: 1170px; border: #000000 solid; z-index: 3;" id="DateOfEvent">
-			date of event (mo/day/yr)<br />
-			<input name="DateOfEvent" style="width: 227px" type="date" /></div>
-		<div style="position: absolute; left: 241px; top: 208px; width: 232px; height: 46px; border: black solid; right: 932px; z-index: 2;" id="DateOfReprot">
-			Date of this report (mo/day/yr)<input name="DateOfReport" style="width: 217px" type="date" /></div>
-		<div style="position: absolute; left: 483px; top: 208px; width: 225px; height: 46px; border: black solid; bottom: 318px; z-index: 1;" id="DateClosed">
-			Date Report Closed (mo/day/yr)<input name="DateClosed" style="width: 214px" type="date" /></div>
+		<input name="Hospitalized" type="checkbox" value="Hospitalized" />Hospitalized
+		<input name="CongenitalAnomaly" type="checkbox" value="CongenitalAnomaly" />Congenital Anomaly
 		<br />
-		<br />
-		<br />
+
+		<input name="Other" type="checkbox" value="Other" /> Other: <input name="OtherText1" type="text" /><br />
+		
+		<div class="Dates">
+			<div>
+				Date of event (mo/day/yr): <br />
+				<input name="DateOfEvent" style="width: 227px" type="date" />
+			</div>
+			<div>
+				Date of this report (mo/day/yr): <br />
+				<input name="DateOfReport" style="width: 217px" type="date" />
+			</div>
+			<div>
+				Date report closed (mo/day/yr): <br />
+				<input name="DateClosed" style="width: 214px" type="date" />
+			</div>
+		</div>
 	</div>
-	<br />
-	<br />
-	<div style="border-style: solid; border-color: inherit; border-width: medium; position: absolute; left: 18px; top: 524px; width: 727px; height: 308px; background-color: #C0C0C0; z-index: 3;" id="DescAndFindings">
-		Describe Event or Problem<br />
+	
+	<div class ="form-block" id="DescAndFindings">
+		<h3>Event Information</h3>
+		Describe Event or Problem: <br /><br />
 		<textarea name="Description" style="width: 712px; height: 106px"></textarea><br />
 		<br />
-		Findings<br />
-		<br />
+		Findings: <br /><br />
 		<textarea name="Findings" style="width: 714px; height: 114px"></textarea></div>
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<div style="position: absolute; left: 14px; top: 860px; background-color: #C0C0C0; width: 815px; height: 191px; border-bottom-color: #000000; border: #000000 solid; z-index: 1;" id="SusDevice" class="auto-style2">
-		Suspect Medical Device<br />
-		a. Brand Name:&nbsp;&nbsp; <input name="BrandName" type="text" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-		c. Model # <input name="ModelNum" type="text" /><br />
-		b. type of device: <input name="DeviceType" type="text" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-		d. Serial #&nbsp; <input name="SerielNum" type="text" /><br />
+	
+
+	<div class ="form-block" id="SusDevice">
+		<h3>Suspect Medical Device</h3>
+		<span class="numbering">a. </span>Brand Name: <input name="BrandName" type="text" /> 
+		<span class="numbering">c. </span>Model # <input name="ModelNum" type="text" /><br />
+		<span class="numbering">b. </span>type of device: <input name="DeviceType" type="text" /> 
+		<span class="numbering">d. </span>Serial # <input name="SerielNum" type="text" /><br />
 		<br />
-		Manufacturer Name: <input name="ManuName" type="text" />&nbsp;&nbsp; 
-		City: <input name="ManuCity" type="text" />&nbsp;&nbsp;&nbsp;&nbsp; 
+		Manufacturer Name: <input name="ManuName" type="text" /> 
+		City: <input name="ManuCity" type="text" /> 
 		State: <select name="ManuState" size="1" style="width: 202px">
 		<option></option>
 		<option>Alabama</option>
@@ -226,67 +197,43 @@
 		<option>Wyoming</option>
 		</select><br />
 		<br />
-		f. Operator of device:&nbsp;&nbsp;&nbsp;&nbsp;
-		<input name="Checkbox1" type="checkbox" />Health Professional&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input name="Checkbox2" type="checkbox" />Lay user/patient&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<span class="numbering">f. </span>Operator of device:
+		<input name="Checkbox1" type="checkbox" />Health Professional
+		<input name="Checkbox2" type="checkbox" />Lay user/patient
 		<input name="Checkbox3" type="checkbox" />Other:
 		<input name="OtherText2" type="text" /><br />
 		<br />
 	</div>
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<div id="ReportedBy" style="width: 311px; height: 221px; z-index: 1; position: absolute; top: 1088px; left: 14px">
-		Report Completed by:<br />
-		<br />
-		Company:&nbsp; <input name="RepComp" type="text" /><br />
-		Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input name="RepName" type="text" /><br />
-		Address:&nbsp;&nbsp; <input name="RepAddress" type="text" /><br />
-		City:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input name="RepCity" type="text" /><br />
-		State:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input name="RepState" type="text" /><br />
-		Phone:&nbsp;&nbsp;&nbsp;&nbsp; <input name="RepPhone" type="text" /><br />
-		<br />
-		<br />
-		<div id="ReportedTo" style="width: 458px; height: 147px; z-index: 1; position: absolute; top: 5px; left: 317px">
-			Also Reported to:<br />
+
+
+	<div class="form-block" id="ReportingInfo">
+		<h3 style="flex-basis: 100%;">Reporting Information</h3>
+		
+		<div id="ReportedBy">
+			Report Completed by:<br /><br />
+			Company: <input name="RepComp" type="text" /><br />
+			Name: <input name="RepName" type="text" /><br />
+			Address: <input name="RepAddress" type="text" /><br />
+			City: <input name="RepCity" type="text" /><br />
+			State: <input name="RepState" type="text" /><br />
+			Phone: <input name="RepPhone" type="text" /><br />
+		</div>
+	
+		<div id="ReportedTo">
+			Also Reported to:<br /><br />
 			Name/Company<br />
-			<input name="chkManu" type="checkbox" value="yes" />Manufaturer:&nbsp;
-			<input name="RepManuName" type="text" /><br />
-			<input name="RepUserFac1" type="checkbox" value="yes" />User 
-			Facility: <input name="RepUserFac" type="text" /><br />
-			<input name="RepDistImp" type="checkbox" value="yes" />Distributor/Importer:<input name="RepDisImp" type="text" /><br />
-			<br />
+			<input name="chkManu" type="checkbox" value="yes" />&nbsp;Manufacturer: <input name="RepManuName" type="text" /><br />
+			<input name="RepUserFac1" type="checkbox" value="yes" />&nbsp;User Facility: <input name="RepUserFac" type="text" /><br />
+			<input name="RepDistImp" type="checkbox" value="yes" />&nbsp;Distributor/Importer: <input name="RepDisImp" type="text" /><br />
 		</div>
 	</div>
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<input id="reset" name="Reset1" style="z-index: 1; position: absolute; top: 1259px; left: 342px" type="reset" value="reset" /><br />
-	<input id="submit" name="Submit" style="z-index: 1; position: absolute; top: 1256px; left: 572px; width: 156px; height: 40px" type="submit" value="submit" /><br />
-	<br />
-	<br />
-	<br />
-&nbsp;</form>
+
+	<div id="SubmitForm">
+		
+		<input id="reset" name="Reset1" type="reset" value="reset" />
+		<input id="submit" name="Submit" type="submit" value="submit" />
+	</div>
+</form>
 
 </body>
 
