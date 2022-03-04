@@ -1,16 +1,34 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+﻿<!DOCTYPE html>
+<html>
 
 <head>
 	<meta content="en-us" http-equiv="Content-Language" />
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-	<link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}" />
+	<link rel="stylesheet" href="styles.css" />
 	
 	<title>Incident Form (PROTOTYPE)</title>
 </head>
 
 <body>
+<!--THIS IS A SCRIPT FOR DETECTING IF ANY CHECKBOXES ARE UNCHECKED-->
+<script type="text/javascript">
 
+	function valthisform()
+	{
+		var checkboxs=document.getElementsByName("c1");
+		var okay=false;
+		for(var i=0,l=checkboxs.length;i<l;i++)
+		{
+			if(checkboxs[i].checked)
+			{
+				okay=true;
+				break;
+			}
+		}
+		if(okay)alert("Thank you for checking a checkbox");
+		else alert("Please check a checkbox");
+	}
+</script>
 <div id="header">
 	<h1>Medical Device Incident Reporting Form</h1>
 	<h2>MDIR-1</h2>
@@ -25,184 +43,227 @@
 			<h3><span class="numbering">1. </span>Patient Information</h3>
 			<p class="block-note">It is our policy not to collect any patient information unless requested to do so by the Original Equipment Manufacturer (OEM).</p>
 
-			<span class="numbering">a. </span>PT Identifier: <input name="ptID" type="text" /><br />
-			<span class="numbering">b. </span>Age or DOB: (mm/dd/year) <input name="DoB" type="date" /><br />
-			<span class="numbering">c. </span>Sex: <input checked="checked" name="radSex" type="radio" value="female" />Female<input name="radSex" type="radio" value="male" />Male<br />
-			<span class="numbering">d. </span>Weight: <input name="Weight" type="text" /><input checked="checked" name="radWeight" type="radio" value="lbs" />lbs<input name="radWeight" type="radio" value="kgs" />kgs<br />
+			<span class="numbering">a. </span><label for="ptID">PT Identifier: </label><input name="ptID" id="ptID" type="text" required/><br />
+			<span class="numbering">b. </span><label for="DoB">Date of Birth: (mm/dd/year)</label> <input name="DoB" id="DoB" type="date" required/><br />
+			<span class="numbering">c. </span><label>Sex: </label> <input name="radSex" type="radio" value="female" required />Female<input name="radSex" type="radio" value="male" required/>Male<br />
+			<span class="numbering">d. </span> <label for="Weight"> Weight (lbs): </label> <input id="Weight" name="Weight" type="number" required/><br />
 		</div>
 		
-		<div class ="form-block" id="ReportingFacility">
+		<div class ="form-block" id="ReportingFacility" >
 			<h3><span class="numbering">2. </span>Reporting Facility Information</h3>
-			Reported by: <input name="rptBy" type="text" /><br />
-			Facility Name: <input name="facName" type="text" /><br />
-			Address: <input name="Address" type="text" /><br />
-			City: <input name="City" type="text" /> 
-			State:<select name="FacilityState" size="1" style="width: 123px">
+			<label for="rptBy">Reported by:</label> <input id="rptBy" name="rptBy" type="text" required/><br />
+			<label for="facName">Facility Name:</label><input id="facName" name="facName" type="text" required/><br />
+			<label for="Address"> Address:</label> <input name="Address" id="Address" type="text" required/><br />
+			<label for="City">City:</label> <input name="City" type="text" id="City" required/>
+			<label for="FacilityState">State:</label><select name="FacilityState" id="FacilityState" size="1" style="width: 123px" required>
 			<option></option>
-			<option>Alabama</option>
-			<option>Alaska</option>
-			<option>Arizona</option>
-			<option>Arkansas</option>
-			<option>California</option>
-			<option>Colorado</option>
-			<option>Connecticut</option>
-			<option>Delaware</option>
-			<option>Florida</option>
-			<option>Georgia</option>
-			<option>Hawaii</option>
-			<option>Idaho</option>
-			<option>Illinois</option>
-			<option>Indiana</option>
-			<option>Iowa</option>
-			<option>Kansas</option>
-			<option>Kentucky</option>
-			<option>Louisiana</option>
-			<option>Maine</option>
-			<option>Maryland</option>
-			<option>Massachusetts</option>
-			<option>Michigan</option>
-			<option>Minnesota</option>
-			<option>Mississippi</option>
-			<option>Missouri</option>
-			<option>Montana</option>
-			<option>Nebraska</option>
-			<option>Nevada</option>
-			<option>New Hampshire</option>
-			<option>New Jersey</option>
-			<option>New Mexico</option>
-			<option>New York</option>
-			<option>North Carolina</option>
-			<option>North Dakota</option>
-			<option>Ohio</option>
-			<option>Oklahoma</option>
-			<option>Oregon</option>
-			<option>Pennsylvania</option>
-			<option>Rhode Island</option>
-			<option>South Carolina</option>
-			<option>South Dakota</option>
-			<option>Tennessee</option>
-			<option>Texas</option>
-			<option>Utah</option>
-			<option>Vermont</option>
-			<option>Virginia</option>
-			<option>Washington</option>
-			<option>West Virginia</option>
-			<option>Wisconsin</option>
-			<option>Wyoming</option>
+			<option value="Alabama">Alabama</option>
+			<option value="Alaska">Alaska</option>
+			<option value="Arizona">Arizona</option>
+			<option value="Arkansas">Arkansas</option>
+			<option value="California">California</option>
+			<option value="Colorado">Colorado</option>
+			<option value="Conneticut">Conneticut</option>
+			<option value="Deleware">Delaware</option>
+			<option value="Florida">Florida</option>
+			<option value="Georgia">Georgia</option>
+			<option value="Hawaii">Hawaii</option>
+			<option value ="Idaho">Idaho</option>
+			<option value="Illinois">Illinois</option>
+			<option value="Indiana">Indiana</option>
+			<option value="Iowa">Iowa</option>
+			<option value="Kansas">Kansas</option>
+			<option value="Kentucky">Kentucky</option>
+			<option value="Louisiana">Louisiana</option>
+			<option value="Maine">Maine</option>
+			<option value="Maryland">Maryland</option>
+			<option value="Massachusetts">Massachusetts</option>
+			<option value="Michigan">Michigan</option>
+			<option value="Minnesota">Minnesota</option>
+			<option value="Mississippi">Mississippi</option>
+			<option value="Missouri">Missouri</option>
+			<option value="Montana">Montana</option>
+			<option value="Nebraska">Nebraska</option>
+			<option value="Nevada">Nevada</option>
+			<option value="New Hampshire">New Hampshire</option>
+			<option value="New Jersey">New Jersey</option>
+			<option value="New Mexico">New Mexico</option>
+			<option value="New York">New York</option>
+			<option value="North Carolina">North Carolina</option>
+			<option value="North Dakota">North Dakota</option>
+			<option value="Ohio">Ohio</option>
+			<option value="Oklahoma">Oklahoma</option>
+			<option value="Oregon">Oregon</option>
+			<option value="Pennsylvania">Pennsylvania</option>
+			<option value="Rhode Island">Rhode Island</option>
+			<option value="South Carolina">South Carolina</option>
+			<option value="South Dakota">South Dakota</option>
+			<option value="Tennessee">Tennessee</option>
+			<option value="Texas">Texas</option>
+			<option value="Utah">Utah</option>
+			<option value="Vermont">Vermont</option>
+			<option value="Virginia">Virginia</option>
+			<option value ="Washington">Washington</option>
+			<option value ="Washington DC">Washington DC</option>
+			<option value="West Virginia">West Virginia</option>
+			<option value="Wisconsin">Wisconsin</option>
+			<option value="Wyoming">Wyoming</option>
 			</select><br />
-			Zip: <input name="Zip" type="text" /><br />
-			Phone: <input name="Phone" type="text" />
+			Zip: <input id="Zip" name="Zip" type="number" maxlength="5" placeholder="xxxxx" required><br />
+			Phone: <input name="Phone" id="Phone" type="tel" placeholder="xxxxxxxxxx" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required/>
 		</div>
 	</div>
 	
 	<div class="form-block" id="EventOrProblem">
 		<h3><span class="numbering">3. </span>Adverse Event or Product Problem</h3>
 
-		<span class="numbering">a. </span><input name="AdverseEvent" type="checkbox" value="AdverseEvent" />Adverse 
-		Event and/or
-		<input name="ProductProblem" type="checkbox" value="ProductProblem" /> 
-		Product Problem (defects/malfunctions)
+		<span class="numbering">a. </span><input id="AdverseEvent" name="AdverseEvent" type="checkbox" value="AdverseEvent" />
+		<label for="AdverseEvent">Adverse Event</label>
+		and/or
+		<input name="ProductProblem" type="checkbox" value="ProductProblem" id="ProductProblem"/>
+		<label for="ProductProblem">Product Problem (defects/malfunctions)</label>
 		<hr /> 
 		
 		<span class="numbering">b. </span>Outcome attributed to adverse event (check all that apply): <br />
 		<br />
-		<input name="death" type="checkbox" value="death" />Death (mm/dd/year)
+		<input name="death" type="checkbox" value="death" id="Death" />
+		<label for="Death">Death (mm/dd/year)</label>
 		<input name="DoD" type="date" />
-		<input name="RequiredIntervention" type="checkbox" value="RequiredIntervention" />Required intervention to prevent permanent impairment/damage<br />
-		<input name="LifeThretening" type="checkbox" value="LifeThretening" />Life-Threatening
-		<input name="Disability" type="checkbox" value="Disability" />Disability<br />
-		<input name="Hospitalized" type="checkbox" value="Hospitalized" />Hospitalized
-		<input name="CongenitalAnomaly" type="checkbox" value="CongenitalAnomaly" />Congenital Anomaly
+
+		<input name="RequiredIntervention" type="checkbox" value="RequiredIntervention" id="RequiredIntervention" />
+		<label for="RequiredIntervention">Required intervention to prevent permanent impairment/damage</label><br />
+
+		<input name="LifeThretening" type="checkbox" value="LifeThreatening" id="LifeThreatening"/>
+		<label for="LifeThreatening">Life-Threatening</label>
+
+		<input name="Disability" type="checkbox" value="Disability" id="Disability" />
+		<label for="Disability">Disability</label><br />
+
+		<input name="Hospitalized" type="checkbox" value="Hospitalized" id="Hospitalized"/>
+		<label for="Hospitalized">Hospitalized</label>
+
+		<input name="CongenitalAnomaly" type="checkbox" value="CongenitalAnomaly" id="CongenitalAnomaly"/>
+		<label for="CongenitalAnomaly">Congenital Anomaly</label>
 		<br />
 
-		<input name="Other" type="checkbox" value="Other" /> Other: <input name="OtherText1" type="text" /><br />
+		<input name="Other" type="checkbox" value="Other" id="Other" />
+		<label for="Other"> Other: </label>
+		<input name="OtherText1" type="text" /><br />
 		
 		<div id="Dates" class="flexbox-wrapper">
 			<div class="date">
-				<span class="numbering">4. </span>Date of event (mo/day/yr): <br />
-				<input name="DateOfEvent" type="date" />
+				<span class="numbering">4.</span>
+				<label for="DateOfEvent"> Date of event (mo/day/yr):</label> <br />
+				<input name="DateOfEvent" type="date" id="DateOfEvent" required/>
 			</div>
 			<div class="date">
-				<span class="numbering">5. </span>Date of this report (mo/day/yr): <br />
-				<input name="DateOfReport" type="date" />
+				<span class="numbering">5. </span>
+				<label for="DateOfReport">Date of this report (mo/day/yr):</label> <br />
+				<input name="DateOfReport" type="date" id="DateOfReport" required/>
 			</div>
 			<div class="date">
-				<span class="numbering">6. </span>Date report closed (mo/day/yr): <br />
-				<input name="DateClosed" type="date" />
+				<span class="numbering">6. </span>
+				<label for="DateClosed">Date report closed (mo/day/yr):</label> <br />
+				<input name="DateClosed" type="date" id="DateClosed" required />
 			</div>
 		</div>
 	</div>
 	
 	<div class ="form-block" id="DescAndFindings">
 		<h3>Event Information</h3>
-		<span class="numbering">7. </span>Describe Event or Problem: <br /><br />
-		<textarea name="Description"></textarea><br />
+
+		<span class="numbering">7. </span>
+		<label for="Description">Describe Event or Problem: </label> <br /><br />
+		<textarea name="Description" placeholder="Please type here..." id="Description" required> </textarea><br />
 		<br />
-		<span class="numbering">8. </span>Findings: <br /><br />
-		<textarea name="Findings"></textarea></div>
+		<span class="numbering">8. </span>
+		<label for="Findings">Findings:</label> <br /><br />
+		<textarea name="Findings" placeholder="Please type here..." id="Findings" required> </textarea></div>
 	
 
 	<div class ="form-block" id="SusDevice">
-		<h3><span class="numbering">9. </span>Suspect Medical Device</h3>
-		<span class="numbering">a. </span>Brand Name: <input name="BrandName" type="text" /> 
-		<span class="numbering">c. </span>Model # <input name="ModelNum" type="text" /><br />
-		<span class="numbering">b. </span>type of device: <input name="DeviceType" type="text" /> 
-		<span class="numbering">d. </span>Serial # <input name="SerielNum" type="text" /><br />
+		<h3><span class="numbering">9. </span>
+			Suspect Medical Device</h3>
+
+		<span class="numbering">a. </span>
+		<label for="BrandName">Brand Name:</label>
+		<input name="BrandName" type="text" id="BrandName" required/>
+
+		<span class="numbering">c. </span>
+		<label for="ModelNum">Model # </label>
+		<input name="ModelNum" type="text" id="ModelNum" required/><br />
+
+		<span class="numbering">b. </span>
+		<label for="DeviceType">type of device:</label>
+		<input name="DeviceType" type="text" id="DeviceType" required/>
+
+		<span class="numbering">d. </span>
+		<label for="SerielNum">Serial #</label>
+		<input name="SerielNum" type="text" id="SerielNum" required/><br />
+
 		<br />
-		Manufacturer Name: <input name="ManuName" type="text" /> 
-		City: <input name="ManuCity" type="text" /> 
-		State: <select name="ManuState" size="1" style="width: 202px">
+
+		<label for="ManuName"> Manufacturer Name:</label>
+		<input name="ManuName" type="text" id="ManuName"/>
+
+		<label for="ManuCity"> City: </label>
+		<input name="ManuCity" type="text" id="ManuCity" />
+
+		<label for="ManuState">State: </label>
+		<select name="ManuState" size="1" style="width: 202px" required id="ManuState">
+
 		<option></option>
-		<option>Alabama</option>
-		<option>Alaska</option>
-		<option>Arizona</option>
-		<option>Arkansas</option>
-		<option>California</option>
-		<option>Colorado</option>
-		<option>Connecticut</option>
-		<option>Delaware</option>
-		<option>Florida</option>
-		<option>Georgia</option>
-		<option>Hawaii</option>
-		<option>Idaho</option>
-		<option>Illinois</option>
-		<option>Indiana</option>
-		<option>Iowa</option>
-		<option>Kansas</option>
-		<option>Kentucky</option>
-		<option>Louisiana</option>
-		<option>Maine</option>
-		<option>Maryland</option>
-		<option>Massachusetts</option>
-		<option>Michigan</option>
-		<option>Minnesota</option>
-		<option>Mississippi</option>
-		<option>Missouri</option>
-		<option>Montana</option>
-		<option>Nebraska</option>
-		<option>Nevada</option>
-		<option>New Hampshire</option>
-		<option>New Jersey</option>
-		<option>New Mexico</option>
-		<option>New York</option>
-		<option>North Carolina</option>
-		<option>North Dakota</option>
-		<option>Ohio</option>
-		<option>Oklahoma</option>
-		<option>Oregon</option>
-		<option>Pennsylvania</option>
-		<option>Rhode Island</option>
-		<option>South Carolina</option>
-		<option>South Dakota</option>
-		<option>Tennessee</option>
-		<option>Texas</option>
-		<option>Utah</option>
-		<option>Vermont</option>
-		<option>Virginia</option>
-		<option>Washington</option>
-		<option>West Virginia</option>
-		<option>Wisconsin</option>
-		<option>Wyoming</option>
+		<option value="Alabama">Alabama</option>
+		<option value="Alaska">Alaska</option>
+		<option value="Arizona">Arizona</option>
+		<option value="Arkansas">Arkansas</option>
+		<option value="California">California</option>
+		<option value="Colorado">Colorado</option>
+		<option value="Conneticut">Conneticut</option>
+		<option value="Deleware">Delaware</option>
+		<option value="Florida">Florida</option>
+		<option value="Georgia">Georgia</option>
+		<option value="Hawaii">Hawaii</option>
+		<option value ="Idaho">Idaho</option>
+		<option value="Illinois">Illinois</option>
+		<option value="Indiana">Indiana</option>
+		<option value="Iowa">Iowa</option>
+		<option value="Kansas">Kansas</option>
+		<option value="Kentucky">Kentucky</option>
+		<option value="Louisiana">Louisiana</option>
+		<option value="Maine">Maine</option>
+		<option value="Maryland">Maryland</option>
+		<option value="Massachusetts">Massachusetts</option>
+		<option value="Michigan">Michigan</option>
+		<option value="Minnesota">Minnesota</option>
+		<option value="Mississippi">Mississippi</option>
+		<option value="Missouri">Missouri</option>
+		<option value="Montana">Montana</option>
+		<option value="Nebraska">Nebraska</option>
+		<option value="Nevada">Nevada</option>
+		<option value="New Hampshire">New Hampshire</option>
+		<option value="New Jersey">New Jersey</option>
+		<option value="New Mexico">New Mexico</option>
+		<option value="New York">New York</option>
+		<option value="North Carolina">North Carolina</option>
+		<option value="North Dakota">North Dakota</option>
+		<option value="Ohio">Ohio</option>
+		<option value="Oklahoma">Oklahoma</option>
+		<option value="Oregon">Oregon</option>
+		<option value="Pennsylvania">Pennsylvania</option>
+		<option value="Rhode Island">Rhode Island</option>
+		<option value="South Carolina">South Carolina</option>
+		<option value="South Dakota">South Dakota</option>
+		<option value="Tennessee">Tennessee</option>
+		<option value="Texas">Texas</option>
+		<option value="Utah">Utah</option>
+		<option value="Vermont">Vermont</option>
+		<option value="Virginia">Virginia</option>
+		<option value ="Washington">Washington</option>
+		<option value ="Washington DC">Washington DC</option>
+		<option value="West Virginia">West Virginia</option>
+		<option value="Wisconsin">Wisconsin</option>
+		<option value="Wyoming">Wyoming</option>
 		</select><br />
 		<br />
 		<span class="numbering">f. </span>Operator of device:
@@ -217,13 +278,26 @@
 	<div class="flexbox-wrapper" id="ReportingInfo">
 		<!--<h3>Reporting Information</h3>-->
 			<div id="ReportedBy" class="form-block">
-				<h3><span class="numbering">10. </span>Report Completed by:</h3>
-				Company: <input name="RepComp" type="text" /><br />
-				Name: <input name="RepName" type="text" /><br />
-				Address: <input name="RepAddress" type="text" /><br />
-				City: <input name="RepCity" type="text" /><br />
-				State: <input name="RepState" type="text" /><br />
-				Phone: <input name="RepPhone" type="text" /><br />
+				<h3><span class="numbering">10. </span>
+					Report Completed by:</h3>
+
+				<label for="repComp">Company: </label>
+				<input name="RepComp" type="text" id="repComp" required/><br />
+
+				<label for="repName">Name: </label>
+				<input name="RepName" type="text" id="repName" required/><br />
+
+				<label for="repAddress">Address: </label>
+				<input name="RepAddress" type="text" id="repAddress" required/><br />
+
+				<label for="repCity"> City: </label>
+				<input name="RepCity" type="text" id="repCity" required/><br />
+
+				<label for="repState">State:</label>
+				<input name="RepState" type="text" id="repState" required/><br />
+
+				<label for="repPhone">Phone: </label>
+				<input name="RepPhone" type="tel" placeholder="xxxxxxxxxx" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required id="repPhone"/><br />
 			</div>
 		
 			<div id="ReportedTo" class="form-block">
