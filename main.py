@@ -1,6 +1,6 @@
-from flask import Flask
+from flask import *
 
 app = Flask(__name__)
 @app.route("/")
 def home():
-    return "<h1>this is the main flask file in the main folder with this added text plus MORE TESTTTTT"
+    return render_template('index.html')
