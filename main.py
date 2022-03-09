@@ -12,6 +12,7 @@ mysql = MySQL(main)
 #Our first route / 
 @main.route('/', methods=['GET', 'POST'])
 def index():
+    
     if request.method =='POST':
         userDetails = request.form
         PTID = userDetails['ptID']
