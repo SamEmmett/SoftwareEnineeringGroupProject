@@ -18,7 +18,7 @@
 </div>
 
 
-<form action="" method="post" onsubmit="validate()">
+<form action="" method="post" >
 <div id="form-container">
 	<div id="PatInfo" class="flexbox-wrapper">
 	
@@ -26,19 +26,19 @@
 			<h3><span class="numbering">1. </span>Patient Information</h3>
 			<p class="block-note">It is our policy not to collect any patient information unless requested to do so by the Original Equipment Manufacturer (OEM).</p>
 
-			<span class="numbering">a. </span><label for="ptID">PT Identifier: </label><input name="ptID" id="ptID" type="text" required/><br />
-			<span class="numbering">b. </span><label for="DoB">Date of Birth: (mm/dd/year)</label> <input name="DoB" id="DoB" type="date" required /><br />
-			<span class="numbering">c. </span><label>Sex: </label> <input name="radSex" type="radio" value="female" required />Female<input name="radSex" type="radio" value="male" required/>Male<br />
-			<span class="numbering">d. </span> <label for="Weight"> Weight (lbs): </label> <input id="Weight" name="Weight" type="number" required/><br />
+			<span class="numbering">a. </span><label for="ptID">PT Identifier: </label><input name="ptID" id="ptID" type="text" /><br />
+			<span class="numbering">b. </span><label for="DoB">Date of Birth: (mm/dd/year)</label> <input name="DoB" id="DoB" type="date"  /><br />
+			<span class="numbering">c. </span><label>Sex: </label> <input name="radSex" type="radio" value="female" required />Female<input name="radSex" type="radio" value="male"/>Male<br />
+			<span class="numbering">d. </span> <label for="Weight"> Weight (lbs): </label> <input id="Weight" name="Weight" type="number" /><br />
 		</div>
 		
 		<div class ="form-block" id="ReportingFacility" >
 			<h3><span class="numbering">2. </span>Reporting Facility Information</h3>
-			<label for="rptBy">Reported by:</label> <input id="rptBy" name="rptBy" type="text" required/><br />
-			<label for="facName">Facility Name:</label><input id="facName" name="facName" type="text" required/><br />
-			<label for="Address"> Address:</label> <input name="Address" id="Address" type="text" required/><br />
+			<label for="rptBy">Reported by:</label> <input id="rptBy" name="rptBy" type="text" /><br />
+			<label for="facName">Facility Name:</label><input id="facName" name="facName" type="text" /><br />
+			<label for="Address"> Address:</label> <input name="Address" id="Address" type="text" /><br />
 			<label for="City">City:</label> <input name="City" type="text" id="City" required/>
-			<label for="FacilityState">State:</label><select name="FacilityState" id="FacilityState" size="1" style="width: 123px" required>
+			<label for="FacilityState">State:</label><select name="FacilityState" id="FacilityState" size="1" style="width: 123px" >
 			<option></option>
 			<option value="Alabama">Alabama</option>
 			<option value="Alaska">Alaska</option>
@@ -93,7 +93,7 @@
 			<option value="Wyoming">Wyoming</option>
 			</select><br />
 			Zip: <input id="Zip" name="Zip" type="number" maxlength="5" placeholder="xxxxx" required ><br />
-			Phone: <input name="Phone" id="Phone" type="tel" placeholder="xxxxxxxxxx" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" required/>
+			Phone: <input name="Phone" id="Phone" type="tel" placeholder="xxxxxxxxxx" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" />
 		</div>
 	</div>
 	
@@ -109,7 +109,7 @@
 		
 		<span class="numbering">b. </span>Outcome attributed to adverse event (check all that apply): <br />
 		<br />
-		<input name="outcome" type="checkbox" value="death" id="death" onclick="setDoD()" /> <!--THIS DOESN'T WORK RIGHT-->
+		<input name="outcome" type="checkbox" value="death" id="death" /> <!--THIS DOESN'T WORK RIGHT-->
 		<label for="death">Death (mm/dd/year)</label>
 		<input name="DoD" type="date" id="DoD" />
 
@@ -137,17 +137,17 @@
 			<div class="date">
 				<span class="numbering">4.</span>
 				<label for="DateOfEvent"> Date of event (mo/day/yr):</label> <br />
-				<input name="DateOfEvent" type="date" id="DateOfEvent" required/>
+				<input name="DateOfEvent" type="date" id="DateOfEvent" />
 			</div>
 			<div class="date">
 				<span class="numbering">5. </span>
 				<label for="DateOfReport">Date of this report (mo/day/yr):</label> <br />
-				<input name="DateOfReport" type="date" id="DateOfReport" required />
+				<input name="DateOfReport" type="date" id="DateOfReport"  />
 			</div>
 			<div class="date">
 				<span class="numbering">6. </span>
 				<label for="DateClosed">Date report closed (mo/day/yr):</label> <br />
-				<input name="DateClosed" type="date" id="DateClosed" required/>
+				<input name="DateClosed" type="date" id="DateClosed" />
 			</div>
 		</div>
 	</div>
@@ -157,11 +157,11 @@
 
 		<span class="numbering">7. </span>
 		<label for="Description">Describe Event or Problem: </label> <br /><br />
-		<textarea name="Description" placeholder="Please type here..." id="Description" required> </textarea><br />
+		<textarea name="Description" placeholder="Please type here..." id="Description" > </textarea><br />
 		<br />
 		<span class="numbering">8. </span>
 		<label for="Findings">Findings:</label> <br /><br />
-		<textarea name="Findings" placeholder="Please type here..." id="Findings" required> </textarea></div>
+		<textarea name="Findings" placeholder="Please type here..." id="Findings" > </textarea></div>
 	
 
 	<div class ="form-block" id="SusDevice">
@@ -170,30 +170,30 @@
 
 		<span class="numbering">a. </span>
 		<label for="BrandName">Brand Name:</label>
-		<input name="BrandName" type="text" id="BrandName" required />
+		<input name="BrandName" type="text" id="BrandName" />
 
 		<span class="numbering">c. </span>
 		<label for="ModelNum">Model # </label>
-		<input name="ModelNum" type="text" id="ModelNum" required/><br />
+		<input name="ModelNum" type="text" id="ModelNum" /><br />
 
 		<span class="numbering">b. </span>
 		<label for="DeviceType">type of device:</label>
-		<input name="DeviceType" type="text" id="DeviceType" required />
+		<input name="DeviceType" type="text" id="DeviceType"  />
 
 		<span class="numbering">d. </span>
 		<label for="SerielNum">Serial #</label>
-		<input name="SerielNum" type="text" id="SerielNum" required/><br />
+		<input name="SerialNum" type="text" id="SerielNum" /><br />
 
 		<br />
 
 		<label for="ManuName"> Manufacturer Name:</label>
-		<input name="ManuName" type="text" id="ManuName" required/>
+		<input name="ManuName" type="text" id="ManuName" />
 
 		<label for="ManuCity"> City: </label>
-		<input name="ManuCity" type="text" id="ManuCity" required />
+		<input name="ManuCity" type="text" id="ManuCity" />
 
 		<label for="ManuState">State: </label>
-		<select name="ManuState" size="1" style="width: 202px"  id="ManuState" required>
+		<select name="ManuState" size="1" style="width: 202px"  id="ManuState" >
 
 		<option></option>
 		<option value="Alabama">Alabama</option>
@@ -265,22 +265,22 @@
 					Report Completed by:</h3>
 
 				<label for="repComp">Company: </label>
-				<input name="RepComp" type="text" id="repComp" required/><br />
+				<input name="RepComp" type="text" id="repComp" /><br />
 
 				<label for="repName">Name: </label>
-				<input name="RepName" type="text" id="repName" required /><br />
+				<input name="RepName" type="text" id="repName" /><br />
 
 				<label for="repAddress">Address: </label>
-				<input name="RepAddress" type="text" id="repAddress" required /><br />
+				<input name="RepAddress" type="text" id="repAddress"  /><br />
 
 				<label for="repCity"> City: </label>
-				<input name="RepCity" type="text" id="repCity" required/><br />
+				<input name="RepCity" type="text" id="repCity" /><br />
 
 				<label for="repState">State:</label>
-				<input name="RepState" type="text" id="repState" required /><br />
+				<input name="RepState" type="text" id="repState" /><br />
 
 				<label for="repPhone">Phone: </label>
-				<input name="RepPhone" type="tel" placeholder="xxxxxxxxxx" pattern="[0-9]{3}[0-9]{3}[0-9]{4}"  id="repPhone" required/><br />
+				<input name="RepPhone" type="tel" placeholder="xxxxxxxxxx" pattern="[0-9]{3}[0-9]{3}[0-9]{4}"  id="repPhone" ><br />
 			</div>
 		
 			<div id="ReportedTo" class="form-block">
