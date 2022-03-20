@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿<!---Right Index file-->
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -109,7 +110,7 @@
 		
 		<span class="numbering">b. </span>Outcome attributed to adverse event (check all that apply): <br />
 		<br />
-		<input name="outcome" type="checkbox" value="death" id="death" /> <!--THIS DOESN'T WORK RIGHT-->
+		<input name="outcome" type="checkbox" value="death" id="death" />
 		<label for="death">Death (mm/dd/year)</label>
 		<input name="DoD" type="date" id="DoD" />
 
@@ -252,9 +253,11 @@
 		<span class="numbering">f. </span>Operator of device:
 		<input name="operator" type="checkbox" value="HealthProfessional" />Health Professional
 		<input name="operator" type="checkbox" value="User/Patient"/>Lay user/patient
-		<input name="operator" type="checkbox" id="Other2" onclick="setOther2()"/>Other:
+		<input name="operator" type="checkbox" id="otherCHK" value="Other2" />Other: <!--<input name="outcome" type="checkbox" value="death" id="death" />-->
 		<input name="OtherText2" type="text" id="otherText2" /><br />
 		<br />
+
+		
 	</div>
 
 

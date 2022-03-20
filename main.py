@@ -1,3 +1,5 @@
+#Right Main File
+from lib2to3.pgen2.token import OP
 from flask import Flask, render_template, request
 from flask_mysqldb import MySQL
 
@@ -34,6 +36,7 @@ def index():
                 ADVERSEEVENT = DESCRIBEEVENTORPROBLEM[i]
             if(DESCRIBEEVENTORPROBLEM[i] == a1):
                 PRODUCTPROBLEM = DESCRIBEEVENTORPROBLEM[i]
+        print(DESCRIBEEVENTORPROBLEM)
         OUTCOME = request.form.getlist('outcome')
         b = 'death'
         b1 = 'Intervention'
@@ -57,6 +60,19 @@ def index():
                 CONGETITALANOMALY = OUTCOME[i]
             if(OUTCOME[i] == b6):
                 OTHER = OUTCOME[i]
+        print(OUTCOME)
+        OPERATOR = request.form.getlist('operator')
+        c = 'HealthProfessional'
+        c1 = 'User/Patient'
+        c2 = 'Other2'
+        for i in range(len(OPERATOR)):
+            if(OPERATOR[i] == c):
+               HEALTHPROFESSIONAL = OPERATOR[i]    
+            if(OPERATOR[i] == c1):
+               LAYUSERPATIENT = OPERATOR[i]
+            if(OPERATOR[i] == c2):
+                OTHER2 = userDetails['OtherText2']
+        print(OPERATOR)
         DATEOFEVENT = userDetails['DateOfEvent']
         DATEOFREPORT = userDetails['DateOfReport']
         DATEREPORTCLOSED = userDetails['DateClosed']
@@ -65,10 +81,9 @@ def index():
         MODELNUMBER = userDetails['ModelNum']
         DEVICETYPE = userDetails['DeviceType']
         SERIALNUMBER = userDetails['SerialNum']
-        MANUFACTURERNAME = userDetails['ManuName']
-        OPERATOR = request.form.getlist('operator')
-        REPCOMPANY = userDetails['RepComp']
-        REPNAME = userDetails['RepName']
+        MANUNAME = userDetails['ManuName']
+        MANUCITY = userDetails['ManuCity']
+        MANUSTATE = userDetails['ManuState']
         REPADDRESS = userDetails['RepAddress']
         REPCITY = userDetails['RepCity']
         REPSTATE = userDetails['RepState']
@@ -77,7 +92,7 @@ def index():
         USERFACILITY = userDetails['RepUserFac']
         DISTRIBUTORIMPORTER = userDetails['RepDisImp']
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO Form(ptID, DoB, Sex, Weight, ReportedBy, FacilityName, Address, City, FacilityState, Zip, Phone, AdverseEvent, ProductProblem, DoD, Intervention, LifeThreatening, Disability, Hospitalized, CongenitalAnomaly, Other, DateOfEvent, DateOfReport, DateReportClosed, Findings, BrandName, ModelNumber, TOD, SerialNumber, ManufacturerNameManufacturerName, OperatorofDevice, RepCompany, RepName, RepAddress, RepCity, RepState, RepPhone, Manufacturer, UserFacility, DistributorImporter) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s ,%s ,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",(PTID, DOB, SEX, WEIGHT, RPTBY, FACNAME, ADDRESS, CITY, FACILITYSTATE, ZIP, PHONE, ADVERSEEVENT, PRODUCTPROBLEM, DATEOFDEATH, INTERVENTION, LIFETHREATENING, DISABILITY, HOSPITALIZED, CONGETITALANOMALY, OTHER, DATEOFEVENT, DATEOFREPORT, DATEREPORTCLOSED, DESCRIBEEVENTORPROBLEM, FINDINGS, BRANDNAME, MODELNUMBER, DEVICETYPE, SERIALNUMBER, MANUFACTURERNAME, OPERATOR, REPCOMPANY, REPNAME, REPADDRESS, REPCITY, REPSTATE, REPPHONE, MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER))
+        cur.execute("INSERT INTO Form(ptID, DoB, Sex, Weight, ReportedBy, FacilityName, Address, City, FacilityState, Zip, Phone, AdverseEvent, ProductProblem, DoD, Intervention, LifeThreatening, Disability, Hospitalized, CongenitalAnomaly, Other, HealthProfessional, LayUserPatient, Other2, DateOfEvent, DateOfReport, DateReportClosed, Findings, BrandName, ModelNumber, TOD, SerialNumber, ManufacturerName, MCity, MState, RepCompany, RepName, RepAddress, RepCity, RepState, RepPhone, Manufacturer, UserFacility, DistributorImporter) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s ,%s ,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",(PTID, DOB, SEX, WEIGHT, RPTBY, FACNAME, ADDRESS, CITY, FACILITYSTATE, ZIP, PHONE, ADVERSEEVENT, PRODUCTPROBLEM, DATEOFDEATH, INTERVENTION, LIFETHREATENING, DISABILITY, HOSPITALIZED, CONGETITALANOMALY, OTHER, HEALTHPROFESSIONAL, LAYUSERPATIENT, OTHER2, DATEOFEVENT, DATEOFREPORT, DATEREPORTCLOSED,  FINDINGS, BRANDNAME, MODELNUMBER, DEVICETYPE, SERIALNUMBER, MANUNAME, MANUCITY, MANUSTATE, REPADDRESS, REPCITY, REPADDRESS, REPCITY, REPSTATE, REPPHONE, MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER))
         mysql.connection.commit()
         cur.close()
         return 'Values have been added'
