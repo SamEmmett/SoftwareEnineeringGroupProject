@@ -1,3 +1,5 @@
+#Right Main File
+from lib2to3.pgen2.token import OP
 from flask import Flask, render_template, request
 from flask_mysqldb import MySQL
 
@@ -29,11 +31,29 @@ def index():
     
         a = 'AdverseEvent'
         a1 = 'ProductProblem'
+
+        achk = False
+        a1chk= False
+
         for i in range(len(DESCRIBEEVENTORPROBLEM)):
-            if(DESCRIBEEVENTORPROBLEM[i] == a):
-                ADVERSEEVENT = DESCRIBEEVENTORPROBLEM[i]
-            if(DESCRIBEEVENTORPROBLEM[i] == a1):
-                PRODUCTPROBLEM = DESCRIBEEVENTORPROBLEM[i]
+
+            if (DESCRIBEEVENTORPROBLEM[i] == a):
+                achk = True
+            if (DESCRIBEEVENTORPROBLEM[i] == a1):
+                a1chk = True
+
+
+        if (achk == True):
+            ADVERSEEVENT = DESCRIBEEVENTORPROBLEM[i]
+        else:
+            ADVERSEEVENT = None
+
+        if (a1chk == True):
+            PRODUCTPROBLEM = DESCRIBEEVENTORPROBLEM[i]
+        else:
+            PRODUCTPROBLEM = None
+
+        print(DESCRIBEEVENTORPROBLEM)
         OUTCOME = request.form.getlist('outcome')
         b = 'death'
         b1 = 'Intervention'
@@ -42,21 +62,101 @@ def index():
         b4 = 'Hospitalized'
         b5 = 'CongenitalAnomaly'
         b6 = 'Other'
+
+        bchk = False
+        b1chk = False
+        b2chk = False
+        b3chk = False
+        b4chk = False
+        b5chk = False
+        b6chk = False
+
         for i in range(len(OUTCOME)):
             if(OUTCOME[i] == b):
-                DATEOFDEATH = userDetails['DoD']
+                bchk = True
             if(OUTCOME[i] == b1):
-                INTERVENTION = OUTCOME[i]
+                b1chk = True
             if(OUTCOME[i] == b2):
-                LIFETHREATENING = OUTCOME[i]
+                b2chk = True
             if(OUTCOME[i] == b3):
-                DISABILITY = OUTCOME[i]
+                b3chk = True
             if(OUTCOME[i] == b4):
-                HOSPITALIZED = OUTCOME[i]
+                b4chk = True
             if(OUTCOME[i] == b5):
-                CONGETITALANOMALY = OUTCOME[i]
+                b5chk = True
             if(OUTCOME[i] == b6):
-                OTHER = OUTCOME[i]
+                b6chk = True
+
+        if (bchk == True):
+            DATEOFDEATH = userDetails['DoD']
+        else:
+            DATEOFDEATH = None
+
+        if (b1chk == True):
+            INTERVENTION = OUTCOME[i]
+        else:
+            INTERVENTION = None
+
+        if (b2chk == True):
+            LIFETHREATENING = OUTCOME[i]
+        else:
+            LIFETHREATENING = None
+
+        if (b3chk == True):
+            DISABILITY = OUTCOME[i]
+        else:
+            DISABILITY = None
+
+        if (b4chk == True):
+            HOSPITALIZED = OUTCOME[i]
+        else:
+            HOSPITALIZED = None
+
+        if (b5chk == True):
+            CONGETITALANOMALY = OUTCOME[i]
+        else:
+            CONGETITALANOMALY = None
+
+        if (b6chk == True):
+            OTHER = OUTCOME[i]
+        else:
+            OTHER = None
+
+        print(OUTCOME)
+        OPERATOR = request.form.getlist('operator')
+        c = 'HealthProfessional'
+        c1 = 'User/Patient'
+        c2 = 'Other2'
+
+        cchk = False
+        c1chk = False
+        c2chk = False
+
+
+        for i in range(len(OPERATOR)):
+            if(OPERATOR[i] == c):
+              cchk = True
+            if(OPERATOR[i] == c1):
+               c1chk = True
+            if(OPERATOR[i] == c2):
+                c2chk = True
+
+        if (cchk == True):
+            HEALTHPROFESSIONAL = OPERATOR[i]
+        else:
+            HEALTHPROFESSIONAL = None
+
+        if (c1chk == True):
+            LAYUSERPATIENT = OPERATOR[i]
+        else:
+            LAYUSERPATIENT = None
+
+        if (c2chk == True):
+            OTHER2 = userDetails['OtherText2']
+        else:
+            OTHER2 = None
+
+        print(OPERATOR)
         DATEOFEVENT = userDetails['DateOfEvent']
         DATEOFREPORT = userDetails['DateOfReport']
         DATEREPORTCLOSED = userDetails['DateClosed']
@@ -65,10 +165,9 @@ def index():
         MODELNUMBER = userDetails['ModelNum']
         DEVICETYPE = userDetails['DeviceType']
         SERIALNUMBER = userDetails['SerialNum']
-        MANUFACTURERNAME = userDetails['ManuName']
-        OPERATOR = request.form.getlist('operator')
-        REPCOMPANY = userDetails['RepComp']
-        REPNAME = userDetails['RepName']
+        MANUNAME = userDetails['ManuName']
+        MANUCITY = userDetails['ManuCity']
+        MANUSTATE = userDetails['ManuState']
         REPADDRESS = userDetails['RepAddress']
         REPCITY = userDetails['RepCity']
         REPSTATE = userDetails['RepState']
@@ -77,7 +176,7 @@ def index():
         USERFACILITY = userDetails['RepUserFac']
         DISTRIBUTORIMPORTER = userDetails['RepDisImp']
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO Form(ptID, DoB, Sex, Weight, ReportedBy, FacilityName, Address, City, FacilityState, Zip, Phone, AdverseEvent, ProductProblem, DoD, Intervention, LifeThreatening, Disability, Hospitalized, CongenitalAnomaly, Other, DateOfEvent, DateOfReport, DateReportClosed, Findings, BrandName, ModelNumber, TOD, SerialNumber, ManufacturerNameManufacturerName, OperatorofDevice, RepCompany, RepName, RepAddress, RepCity, RepState, RepPhone, Manufacturer, UserFacility, DistributorImporter) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s ,%s ,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",(PTID, DOB, SEX, WEIGHT, RPTBY, FACNAME, ADDRESS, CITY, FACILITYSTATE, ZIP, PHONE, ADVERSEEVENT, PRODUCTPROBLEM, DATEOFDEATH, INTERVENTION, LIFETHREATENING, DISABILITY, HOSPITALIZED, CONGETITALANOMALY, OTHER, DATEOFEVENT, DATEOFREPORT, DATEREPORTCLOSED, DESCRIBEEVENTORPROBLEM, FINDINGS, BRANDNAME, MODELNUMBER, DEVICETYPE, SERIALNUMBER, MANUFACTURERNAME, OPERATOR, REPCOMPANY, REPNAME, REPADDRESS, REPCITY, REPSTATE, REPPHONE, MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER))
+        cur.execute("INSERT INTO Form(ptID, DoB, Sex, Weight, ReportedBy, FacilityName, Address, City, FacilityState, Zip, Phone, AdverseEvent, ProductProblem, DoD, Intervention, LifeThreatening, Disability, Hospitalized, CongenitalAnomaly, Other, HealthProfessional, LayUserPatient, Other2, DateOfEvent, DateOfReport, DateReportClosed, Findings, BrandName, ModelNumber, TOD, SerialNumber, ManufacturerName, MCity, MState, RepCompany, RepName, RepAddress, RepCity, RepState, RepPhone, Manufacturer, UserFacility, DistributorImporter) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s ,%s ,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",(PTID, DOB, SEX, WEIGHT, RPTBY, FACNAME, ADDRESS, CITY, FACILITYSTATE, ZIP, PHONE, ADVERSEEVENT, PRODUCTPROBLEM, DATEOFDEATH, INTERVENTION, LIFETHREATENING, DISABILITY, HOSPITALIZED, CONGETITALANOMALY,OTHER, HEALTHPROFESSIONAL, LAYUSERPATIENT, OTHER2, DATEOFEVENT, DATEOFREPORT, DATEREPORTCLOSED, FINDINGS,BRANDNAME, MODELNUMBER, DEVICETYPE, SERIALNUMBER, MANUNAME, MANUCITY, MANUSTATE, REPADDRESS, REPCITY, REPADDRESS,REPCITY, REPSTATE, REPPHONE, MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER))
         mysql.connection.commit()
         cur.close()
         return 'Values have been added'

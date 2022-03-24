@@ -77,12 +77,10 @@
 #PatInfo .form-block{
 	width: 50%;
 	height: 200px;
-	/*margin-bottom: 10px;  fix for the weird extra margin */
 }
 
 
 #ReportingFacility {
-	
 	height: auto;
 }
 
@@ -95,7 +93,6 @@
 
 #EventOrProblem {
 	position: relative;
- 
 }
 
 #Dates {
@@ -233,6 +230,5 @@ h3 {
 		width: 100%;
 		height: auto;
 	}
-
 	
 }
