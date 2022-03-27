@@ -167,7 +167,7 @@
 
 /* BUTTONS */
 
-#SubmitForm {
+#SubmitForm, #login-buttons {
 	position: relative;
 	margin: auto;
 	width: 100%;
@@ -175,7 +175,7 @@
 	text-align: center;
 }
 
-#SubmitForm input {
+#SubmitForm input, #login-buttons input {
 	border: none;
 	margin: 0 20px;
 	padding: 5px 15px;
