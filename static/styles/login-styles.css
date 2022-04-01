@@ -1,0 +1,105 @@
+body {
+    padding: 2em 2em;
+    text-align: center;
+}
+
+#login {
+    padding: 10px;
+    border: 2px black solid;
+    width: 50%;
+    max-width: 600px;
+    min-width: 500px;
+    height: 75%;
+    max-height: 400px;
+    min-height: 300px;
+    padding-top: 20px;
+
+    right: 50%;
+    bottom: 50%;
+    transform: translate(50%,50%);
+    position: absolute;
+
+    font-size: 16px;
+
+    overflow-y: hidden;
+    overflow-x:hidden;
+}
+
+
+#login h1 {
+    padding-bottom: 20px;
+    text-align: center;
+    font-size: 24px;
+}
+
+#login-elements {
+    margin:auto;
+    
+    display: inline-block;
+    text-align:center;
+    width: 80%;
+    max-width: 900px;
+}
+
+
+
+.login-label {
+    width: 25%;
+    align-self: center;
+    display: inline-block;
+    text-align: right;
+}
+
+.login-textbox {
+    width: 75%;
+    text-align: left;
+    margin-left: 15px;
+}
+
+.login-textbox input {
+    align-self: center;
+    margin: 2px;
+    text-align: left;
+    min-width: 100px;
+    width: 90%;
+    max-width: 300px;
+    height: 25px;
+}
+
+
+.msg {
+    padding-top: 30px;
+}
+
+
+#login-buttons {
+    position: relative;
+}
+
+#login-buttons input {
+    position: relative;
+}
+
+
+
+@media screen and (max-width: 600px) {  
+	#login { 
+		width: 90%;
+        min-width: 0;
+        height: 75%;
+
+        position: absolute;
+        
+	}
+}
+
+@media screen and (max-width: 1000px) {  
+    .login-label, .login-textbox {
+        width: 100%;
+        text-align: left;
+    }
+	.login-textbox input {
+        width: 100%;
+        min-width:0;
+    }
+}
