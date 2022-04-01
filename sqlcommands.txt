@@ -1,0 +1,19 @@
+# create user table. Must be in groupproject db
+create table Users(
+userID int NOT NULL,
+FirstName nvarchar(20),
+LastName nvarchar(20) NOT NULL,
+UName nvarchar(30) NOT NULL,
+Pword nvarchar(16) NOT NULL,
+Company nvarchar(20) NOT NULL,
+Address  nvarchar(100) NOT NULL,
+City nvarchar(50) NOT NULL,
+State nvarchar(50) NOT NULL,
+Phone int NOT NULL,
+email varchar(50) NOT NULL,
+primary key (userID)
+);
+
+#add user
+INSERT INTO users
+VALUES(1, 'Daniel', 'Woods', 'dwoods', 'password', 'Stockton University', '101 Vera King Farris Drive', 'Galloway', 'New Jersey', 6096521776, 'daniel.woods@stockton.edu');

@@ -1,10 +1,11 @@
 
 #Right Main File
 from lib2to3.pgen2.token import OP
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mysqldb import MySQL
 
 main = Flask(__name__)
+main.secret_key = '0'
 #This is the server connection you can change each attribute to connect to a server of your choice
 main.config['MYSQL_HOST'] = 'localhost'
 main.config['MYSQL_USER'] = 'root'
@@ -182,6 +183,32 @@ def index():
         cur.close()
         return 'Values have been added'
     return render_template('index.html')
+
+
+@main.route('/login', methods=['GET', 'POST'])
+def login():
+    msg = ''
+    if request.method =='POST':
+        loginCreds = request.form
+        Username = loginCreds['username']
+        Password = loginCreds['password']
+        cur =mysql.connection.cursor()
+        cur.execute("Select userID, Uname from users WHERE UName = %s and Pword = %s", (Username, Password))
+        account = cur.fetchone()
+        print(account)
+        if account:
+            session['loggedin']=True
+            session['id'] = account[0]
+            session['username'] = account[1]
+            # this is the redirect to the page after login
+            return redirect(url_for('index'))
+        else:
+            #account doesn't exist or incorrect info entered
+            msg = "Incorrect credentials"
+    return render_template('login.html', msg=msg)
+
+  
+
 
 
 if __name__ == '__main__':
