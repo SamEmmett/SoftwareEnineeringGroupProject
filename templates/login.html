@@ -4,8 +4,8 @@
 		<meta charset="utf-8">
 		<title>Login</title>
 		
-		<link rel="stylesheet" href="{{ url_for('static',filename='styles/styles.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static',filename='styles/login-styles.css') }}">
+		<link rel="stylesheet" href="../static/styles/styles.css">
+        <link rel="stylesheet" href="../static/styles/login-styles.css">
 
 		<!-- for testing only
 		<link rel="stylesheet" href="../static/styles/styles.css">
@@ -14,36 +14,40 @@
 	</head>
 
 	<body>
-		<div id="login">
-			<h1>Login</h1>
-			
-			<form action="{{ url_for('login') }}" method="post">
-				<div id="login-elements">
-					<div class="flexbox-wrapper">
-						<div class="login-label">
-							<label for="username">Username: </label>
+			<div id="login">
+				<h1>Login</h1>
+				<!-- get rid of these if we dont have a register page?
+				<div class="links">
+					<a href="{{ url_for('login') }}" class="active">Login</a>
+					<a href="{{ url_for('register') }}">Register</a>
+				</div>
+				-->
+				<form action="{{ url_for('login') }}" method="post">
+					<div id="login-elements">
+						<div class="flexbox-wrapper">
+							<div class="login-label">
+								<label for="username">Username: </label>
+							</div>
+							<div class="login-textbox">
+								<input type="text" name="username" id="username" required>
+							</div>
 						</div>
-						<div class="login-textbox">
-							<input type="text" name="username" id="username" required>
+						<br>
+						<div class="flexbox-wrapper">
+							<div class="login-label">
+								<label for="password">Password:</label>
+							</div>
+							<div class="login-textbox">
+								<input type="password" name="password" id="password" required>
+							</div>
 						</div>
 					</div>
-					<br>
-					<div class="flexbox-wrapper">
-						<div class="login-label">
-							<label for="password">Password: </label>
-						</div>
-						<div class="login-textbox">
-							<input type="password" name="password" id="password" required>
-						</div>
+					<div class="msg"></div>
+
+					<div id ="login-buttons" >
+						<input type="submit" value="Login">
 					</div>
-				</div>
-
-				<div class="msg">{{ msg }}</div>
-
-				<div id="login-buttons" >
-					<input type="submit" value="Login">
-				</div>
-			</form>
-		</div>
+				</form>
+			</div>
 	</body>
 </html>
