@@ -25,7 +25,15 @@
 </script>
 
 <body onload="hideEmptySections()">
-<!--THIS IS A SCRIPT FOR DETECTING IF ANY CHECKBOXES ARE UNCHECKED-->
+
+<div id="navbar">
+	<div id="navwrapper" class="flexbox-wrapper">
+		<div class="navelement">Sample Element</div>
+		<div class="navelement">Sample Element</div>
+		<div class="navelement">Sample Element</div>
+	</div>
+</div>
+
 
 <div id="header">
 	<h1>Medical Device Incident Reporting Form</h1>
@@ -36,7 +44,6 @@
 <form action="" method="post" >
 <div id="form-container">
 	<div id="PatInfo" class="flexbox-wrapper form-section-hideable">
-	
 		<!-- PATIENT INFO -->
 		
 		<!-- REPORTING FACILITY -->
@@ -50,29 +57,37 @@
 	
 	<div class ="form-block form-section-hideable" id="DescAndFindings">
 		<!-- DESC AND FINDINGS -->
+
     </div>
 	
 
 	<div class ="form-block form-section-hideable" id="SusDevice" >
 		<!-- SUS DEVICE -->
+	
 	</div>
 
 
 	<div class="flexbox-wrapper" id="ReportingInfo">
         <div id="ReportedBy" class="form-block form-section-hideable" >
             <!-- REPORTED BY -->
+
         </div>
     
         <div id="ReportedTo" class="form-block form-section-hideable">
             <!-- REPORTED TO -->
+			
         </div>
+
+	</div>
+
+	<div class="flexbox-wrapper form-section-hideable" id="Signature">
+        <!-- SIGNATURE -->
 
 	</div>
 	
 	</div>
 
 	<div id="SubmitForm">
-		
 		<input id="reset" name="Reset1" type="reset" value="Reset" />
 		or
 		<input id="submit" name="Submit" type="submit" value="Submit" />
