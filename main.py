@@ -207,8 +207,9 @@ def login():
             msg = "Incorrect credentials"
     return render_template('login.html', msg=msg)
 
-  
-
+@main.route('/homepage', methods=['GET', 'POST'])
+def home():
+    return render_template("Homepage.html")
 
 
 if __name__ == '__main__':
