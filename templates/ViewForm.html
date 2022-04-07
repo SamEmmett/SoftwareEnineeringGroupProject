@@ -1,0 +1,46 @@
+<!doctype html>
+  <head>
+    <link rel="stylesheet" href="../static/styles/Homepage.css"/>
+    <link rel="stylesheet" href="../static/styles/ViewPage.css"/>
+  </head>
+  
+  <body>
+        <center>
+            <div class=header>
+                <h1><font>Welcome To The Incident Report Viewing Page</font></h1>
+                <p>Select which form you would like to view below</p>
+            </div>
+        </center>
+    <!-- NAVBAR -->  
+    <div class="topnav" id="myTopnav">
+        <a href="Homepage.html" class="active">Home</a>
+        <a href="index.html">Create Form</a>
+        <a href="ViewForm.html">View Form</a>
+      </div>
+      <div>
+        <center>
+            <div class="box">
+                <h1>Welcome to my website</h1>
+                <p><font size="3px">You can do various operations with images. Click on the button to read more</font></p>
+                <button onclick="myFunction()" class = "btn btn-success">Read More</button>
+            </div>
+        </center>
+       </div> 
+    <div>
+        <form action="javascript:redirect();">
+                <div class="form-group">
+                    <label for = "option">What would you like to do:</label>
+                    <h3></h3>
+                    <input list="Choice" id="option" name="option" size="97">
+                    <datalist id="Choice">
+                        <option value = "Image Rollover">
+                        <option value = "Image Preview">
+                        <option value = "Image SlideShow">   
+                    </datalist>
+                    <h3></h3>
+                    <input type="submit" value="submit" />
+                </div>
+        </form>
+
+    </div>
+  </body>
