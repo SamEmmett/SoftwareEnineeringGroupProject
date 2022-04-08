@@ -212,6 +212,9 @@ def home():
         return render_template("Homepage.html", username = 'Hello, '+ session['username'])
     return render_template("Homepage.html" , username = 'Log in')
 
+@main.route('/viewform', methods=['GET', 'POST'])
+def viewform():
+    return render_template("ViewForm.html")
 
 if __name__ == '__main__':
    main.run(debug=True)
