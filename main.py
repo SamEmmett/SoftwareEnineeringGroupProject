@@ -1,4 +1,3 @@
-
 #Right Main File
 from lib2to3.pgen2.token import OP
 from flask import Flask, render_template, request, redirect, url_for, session
@@ -209,7 +208,9 @@ def login():
 
 @main.route('/homepage', methods=['GET', 'POST'])
 def home():
-    return render_template("Homepage.html")
+    if 'loggedin' in session:
+        return render_template("Homepage.html", username = 'Hello, '+ session['username'])
+    return render_template("Homepage.html" , username = 'Log in')
 
 
 if __name__ == '__main__':
