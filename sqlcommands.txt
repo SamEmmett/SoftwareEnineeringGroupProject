@@ -1,4 +1,112 @@
-# create user table. Must be in groupproject db
+
+use groupproject;
+DROP table Form;
+
+-- Patient info entity
+create table patientinfo(
+`ptID` int NOT NULL,
+`DoB` date NOT NULL,
+`Sex` nvarchar(60) NOT NULL,
+`Weight` nvarchar(50) NOT NULL,
+PRIMARY KEY(`ptID`));
+
+-- reportingfacilityinformation
+create table reportingfacilityinfo(
+`rfiID` int NOT NULL AUTO_INCREMENT,
+`ReportedBy` nvarchar(100) NOT NULL,
+`FacilityName` nvarchar(100) NOT NULL,
+`Address` nvarchar(100) NOT NULL,
+`City` nvarchar(50) NOT NULL,
+`FacilityState` nvarchar(50) NOT NULL,
+`Zip` int NOT NULL,
+`Phone` int NOT NULL,
+PRIMARY KEY(`rfiID`));
+
+-- suspectmedicaldevice
+create table susmedicaldevice(
+`smdID` int NOT NULL AUTO_INCREMENT,
+`BrandName`nvarchar(50),
+`ModelNumber` int,
+`TOD` nvarchar(50),
+`SerialNumber` int,
+`ManufacturerName` nvarchar(50),
+`MCity` nvarchar(50),
+`MState` nvarchar(50),
+`HealthProfessional` nvarchar(60),
+`LayUserPatient` nvarchar(60),
+`Other2` nvarchar(60),
+PRIMARY KEY(`smdID`));
+
+create table adverseeventorproductproblem(
+`aeoppID` int NOT NULL AUTO_INCREMENT,
+`AdverseEvent` nvarchar(50),
+`ProductProblem` nvarchar(50),
+`DoD` date,
+`Intervention` nvarchar(50),
+`LifeThreatening` nvarchar(50),
+`Disability` nvarchar(50),
+`Hospitalized` nvarchar(50),
+`CongenitalAnomaly` nvarchar(50),
+`Other` nvarchar(60),
+`DateOfEvent` date,
+`DateofReport` date,
+`DateReportClosed` date,
+PRIMARY KEY(`aeoppID`));
+
+-- reportcompletedby
+create table reportcompletedby(
+`rcbID` int NOT NULL AUTO_INCREMENT,
+`RepCompany`nvarchar(50),
+`RepName` nvarchar(50),
+`RepAddress` nvarchar(50),
+`RepCity` nvarchar(50),
+`RepState` nvarchar(50),
+`RepPhone` nvarchar(50),
+PRIMARY KEY(`rcbID`));
+
+-- Sign Off
+create table signoff(
+`soID` int NOT NULL AUTO_INCREMENT,
+`Signature`nvarchar(50),
+`DateCompleted` date,
+PRIMARY KEY(`soID`));
+
+-- EventInformation
+create table EventInformation(
+`EventID` int NOT NULL AUTO_INCREMENT,
+`DescribeEoP` nvarchar(100),
+`Findings` nvarchar(100),
+PRIMARY KEY(`EventID`));
+
+-- Also Reported To
+create table AlsoReportedTo(
+`artID` int NOT NULL AUTO_INCREMENT,
+`Manufacturer` nvarchar(50),
+`UserFacility` nvarchar(50),
+`DistributorImporter` nvarchar(50),
+PRIMARY KEY(`artID`));
+
+-- Form Entity
+create table Form(
+`FormID` int NOT NULL AUTO_INCREMENT,
+`ptID` int NOT NULL,
+`rfiID` int NOT NULL,
+`aeoppID` int not NULL,
+`rcbID` int not NULL,
+`soID` int not NULL,
+`EventID` int not NULL,
+`artID` int not NULL,
+PRIMARY KEY(`FormID`),
+FOREIGN KEY (ptID) REFERENCES patientinfo(ptID),
+FOREIGN KEY (rfiID) REFERENCES reportingfacilityinfo(rfiID),
+FOREIGN KEY (smdID) REFERENCES susmedicaldevice(smdID),
+FOREIGN KEY (aeoppIDD) REFERENCES susmedicaldevice(aeoppID),
+FOREIGN KEY (rcbID) REFERENCES reportcompletedby(rcbID),
+FOREIGN KEY (soID) REFERENCES signoff(soID),
+FOREIGN KEY (EventID) REFERENCES EventInformation(EventID),
+FOREIGN KEY (artID) REFERENCES AlsoReportedTo(artID)
+);
+
 create table Users(
 userID int NOT NULL,
 FirstName nvarchar(20),
@@ -17,3 +125,10 @@ primary key (userID)
 #add user
 INSERT INTO users
 VALUES(1, 'Daniel', 'Woods', 'dwoods', 'password', 'Stockton University', '101 Vera King Farris Drive', 'Galloway', 'New Jersey', 6096521776, 'daniel.woods@stockton.edu');
+
+
+
+
+
+
+
