@@ -192,13 +192,15 @@ def login():
         Username = loginCreds['username']
         Password = loginCreds['password']
         cur =mysql.connection.cursor()
-        cur.execute("Select userID, Uname from users WHERE UName = %s and Pword = %s", (Username, Password))
+        cur.execute("Select userID, Uname, FirstName, LastName from users WHERE UName = %s and Pword = %s", (Username, Password))
         account = cur.fetchone()
         print(account)
         if account:
             session['loggedin']=True
             session['id'] = account[0]
             session['username'] = account[1]
+            session['first'] = account[2]
+            session['last'] = account[3]
             # this is the redirect to the page after login
             return redirect(url_for('index'))
         else:
@@ -209,7 +211,7 @@ def login():
 @main.route('/homepage', methods=['GET', 'POST'])
 def home():
     if 'loggedin' in session:
-        return render_template("Homepage.html", username = 'Hello, '+ session['username'])
+        return render_template("Homepage.html", username = 'Hello, '+ session['first']+" "+session['last'])
     return render_template("Homepage.html" , username = 'Log in')
 
 @main.route('/viewform', methods=['GET', 'POST'])
