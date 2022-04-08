@@ -21,6 +21,8 @@
         <a href="ViewForm.html">View Form</a>
       </div>
       <div>
+
+	<script src="/~0/scripts.js"></script>
 </head>
 
 <body>
@@ -126,7 +128,7 @@
 		
 		<span class="numbering">b. </span>Outcome attributed to adverse event (check all that apply): <br />
 		<br />
-		<input name="outcome" type="checkbox" value="death" id="death" />
+		<input name="outcome" type="checkbox" value="death" id="death" onclick="setDoD()"/>
 		<label for="death">Death (mm/dd/year)</label>
 		<input name="DoD" type="date" id="DoD" />
 
