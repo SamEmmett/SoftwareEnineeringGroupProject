@@ -407,7 +407,7 @@ h3 {
 
     background-color:#eaecef;
     right: 50%;
-    bottom: 55%;
+    bottom: 45%;
     transform: translate(50%,50%);
     position: absolute;
 
@@ -419,14 +419,14 @@ h3 {
   
   .form-view{
     position:relative; 
-    left:515px; 
-    top: 330px;
+    left: 23.5%;
+    top: 280px;
     font-size: 16px;
   }
   .submitBTN{
 	 position: relative;
 	 size: 9px;
-	 right: 208px;
+	 left:20px;
 
   }
 /*CSSING for the login page  */
