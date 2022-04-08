@@ -503,12 +503,12 @@ h3 {
 
 #login-buttons {
     position: relative;
-    transform: scale(2);
    }
   
 
 #login-buttons input {
     position: relative;
+    transform: scale(1.5);
 }
 
 
@@ -537,6 +537,7 @@ h3 {
   color: white;
   padding: 1% 1%;
   font-weight: bold;
+  border: 2pt;
   
 }
 

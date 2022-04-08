@@ -16,7 +16,7 @@
         <a href="{{url_for('home')}}" class="active">Home</a>
         <a href="{{url_for('index')}}">Create Form</a>
         <a href="{{url_for('viewform')}}">View Form</a>
-        <div class= userbutton><a href="{{url_for('login')}}">{{username}}</a></div>
+        <div class= userbutton><a href="{{url_for(page)}}">{{usermsg}}</a></div>
 
 
       </div>
@@ -30,7 +30,7 @@
         </div>
         <div class="main">
           <h2>Incident Report Form</h2>
-          <p>To fill out an incident report form click the create report option above or click <a href="index.html"> Here</a></p>
+          <p>To fill out an incident report form click the create report option above or click <a href="{{url_for('index')}}"> Here</a></p>
           <h2>What is an incident report form</h2>
           <p>Some text..</p>
         </div>

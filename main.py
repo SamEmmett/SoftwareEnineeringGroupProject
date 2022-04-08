@@ -161,6 +161,7 @@ def index():
         DATEOFEVENT = userDetails['DateOfEvent']
         DATEOFREPORT = userDetails['DateOfReport']
         DATEREPORTCLOSED = userDetails['DateClosed']
+        DESCRIBE = userDetails['Description']
         FINDINGS = userDetails['Findings']
         BRANDNAME = userDetails['BrandName']
         MODELNUMBER = userDetails['ModelNum']
@@ -177,12 +178,13 @@ def index():
         USERFACILITY = userDetails['RepUserFac']
         DISTRIBUTORIMPORTER = userDetails['RepDisImp']
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO patientinfo(ptID, DoB, Sex, Weight)VALUES(%s, %s, %s, %s)",(PTID, DOB, SEX, WEIGHT,))
-        cur.execute("INSERT INTO (ptID, DoB, Sex, Weight)VALUES(%s, %s, %s, %s)",(PTID, DOB, SEX, WEIGHT,))
-        cur.execute("INSERT INTO AlsoReportedTo(reportingfacilityinformation"MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER")
-
-        ReportedBy, FacilityName, Address, City, FacilityState, Zip, Phone, AdverseEvent, ProductProblem, DoD, Intervention, LifeThreatening, Disability, Hospitalized, CongenitalAnomaly, Other, HealthProfessional, LayUserPatient, Other2, DateOfEvent, DateOfReport, DateReportClosed, Findings, BrandName, ModelNumber, TOD, SerialNumber, ManufacturerName, MCity, MState, RepCompany, RepName, RepAddress, RepCity, RepState, RepPhone, Manufacturer, UserFacility, DistributorImporter) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s ,%s ,%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) RPTBY, FACNAME, ADDRESS, CITY, FACILITYSTATE, ZIP, PHONE, ADVERSEEVENT, PRODUCTPROBLEM, DATEOFDEATH, INTERVENTION, LIFETHREATENING, DISABILITY, HOSPITALIZED, CONGETITALANOMALY,OTHER, HEALTHPROFESSIONAL, LAYUSERPATIENT, OTHER2, DATEOFEVENT, DATEOFREPORT, DATEREPORTCLOSED, FINDINGS,BRANDNAME, MODELNUMBER, DEVICETYPE, SERIALNUMBER, MANUNAME, MANUCITY, MANUSTATE, REPADDRESS, REPCITY, REPADDRESS,REPCITY, REPSTATE, REPPHONE, MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER))
-       
+        cur.execute("INSERT INTO patientinfo(ptID, DoB, Sex, Weight)VALUES(%s, %s, %s, %s)",(PTID, DOB, SEX, WEIGHT))
+        cur.execute("INSERT INTO reportingfacilityinformation(ReportedBy, FacilityName, Address, City, FacilityState, Zip, Phone)VALUES(%s, %s, %s, %s,%s, %s, %s))",(RPTBY, FACNAME, ADDRESS, CITY, FACILITYSTATE, ZIP, PHONE))
+        cur.execute("INSERT INTO susmedicaldevice(BrandName, ModelNumber, TOD, SerialNumber, ManufacturerName, MCity, MState, HealthProfessional, LayUserPatient, Other2)VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s , %s))",(BRANDNAME, MODELNUMBER, DEVICETYPE, SERIALNUMBER, MANUNAME, MANUCITY, MANUSTATE,HEALTHPROFESSIONAL, LAYUSERPATIENT, OTHER2))
+        cur.execute("INSERT INTO adverseeventorproductproblem(AdverseEvent, ProductProblem, DoD, Intervention, LifeThreatening, Disability, Hospitalized, CongenitalAnomaly, Other, DateOfEvent, DateOfReport, DateReportClosed)VALUES(%s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s, %s))",(ADVERSEEVENT, PRODUCTPROBLEM, DATEOFDEATH, INTERVENTION, LIFETHREATENING, DISABILITY, HOSPITALIZED, CONGETITALANOMALY,OTHER, DATEOFEVENT, DATEOFREPORT, DATEREPORTCLOSED))
+        cur.execute("INSERT INTO reportcompletedby(RepCompany, RepName, RepAddress, RepCity, RepState, RepPhone)Values(%s,%s,%s,%s,%s,%s))",(REPADDRESS, REPCITY, REPADDRESS,REPCITY, REPSTATE, REPPHONE))
+        cur.execute("INSERT INTO EventInformation(DescribeEoP, Findings )VALUES(%s, %s))",(DESCRIBE,FINDINGS))
+        cur.execute("INSERT INTO AlsoReportedTo(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER)VALUES(%s, %s, %s))",(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER))
         mysql.connection.commit()
         cur.close()
         return 'Values have been added'
@@ -207,7 +209,7 @@ def login():
             session['first'] = account[2]
             session['last'] = account[3]
             # this is the redirect to the page after login
-            return redirect(url_for('index'))
+            return redirect(url_for('home'))
         else:
             #account doesn't exist or incorrect info entered
             msg = "Incorrect credentials"
@@ -215,13 +217,23 @@ def login():
 
 @main.route('/homepage', methods=['GET', 'POST'])
 def home():
+    page = 'login'
+    usermsg = 'Log In'
     if 'loggedin' in session:
-        return render_template("Homepage.html", username = 'Hello, '+ session['first']+" "+session['last'])
-    return render_template("Homepage.html" , username = 'Log in')
+        usermsg ='Hello, '+ session['first']+" "+session['last']
+        page = 'profile'
+        return render_template("Homepage.html", page=page, usermsg=usermsg)
+    return render_template("Homepage.html" , page=page, usermsg=usermsg)
+    
 
 @main.route('/viewform', methods=['GET', 'POST'])
+
 def viewform():
     return render_template("ViewForm.html")
+    
 
+@main.route('/profile', methods=['GET', 'POST'])
+def profile():
+    return render_template("profile.html")
 if __name__ == '__main__':
    main.run(debug=True)
