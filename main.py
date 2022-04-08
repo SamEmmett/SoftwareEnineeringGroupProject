@@ -14,7 +14,7 @@ main.config['MYSQL_DB'] = 'groupproject'
 
 mysql = MySQL(main)
 #Our first route / 
-@main.route('/', methods=['GET', 'POST'])
+@main.route('/form', methods=['GET', 'POST'])
 def index():  
     if request.method =='POST':
         userDetails = request.form
@@ -185,7 +185,7 @@ def index():
     return render_template('index.html')
 
 
-@main.route('/login', methods=['GET', 'POST'])
+@main.route('/', methods=['GET', 'POST'])
 def login():
     msg = ''
     if request.method =='POST':
@@ -209,7 +209,9 @@ def login():
 
 @main.route('/homepage', methods=['GET', 'POST'])
 def home():
-    return render_template("Homepage.html")
+    if 'loggedin' in session:
+        return render_template("Homepage.html", username = 'Hello, '+ session['username'])
+    return render_template("Homepage.html" , username = 'Log in')
 
 
 if __name__ == '__main__':
