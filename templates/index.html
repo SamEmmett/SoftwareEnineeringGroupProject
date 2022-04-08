@@ -15,10 +15,13 @@
             </div>
         </center>
     <!-- NAVBAR -->  
-    <div class="topnav" id="myTopnav">
-        <a href="Homepage.html" class="active">Home</a>
-        <a href="index.html">Create Form</a>
-        <a href="ViewForm.html">View Form</a>
+    div class="topnav" id="myTopnav">
+        <a href="{{url_for('home')}}" class="active">Home</a>
+        <a href="{{url_for('index')}}">Create Form</a>
+        <a href="{{url_for('viewform')}}">View Form</a>
+        <div class= userbutton><a href="{{url_for('login')}}">{{username}}</a></div>
+
+
       </div>
       <div>
 
