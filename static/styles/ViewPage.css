@@ -22,3 +22,10 @@
     overflow-y: hidden;
     overflow-x:hidden;
   }
+  
+  .form-group{
+    position:relative; 
+    left:395px; 
+    top: 345px;
+    font-size: 16px;
+  }
