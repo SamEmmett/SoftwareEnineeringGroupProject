@@ -1,7 +1,7 @@
 <!doctype html>
+    <link rel="stylesheet" href="../static/styles/styles.css"/>
   <head>
-    <link rel="stylesheet" href="../static/styles/Homepage.css"/>
-    <link rel="stylesheet" href="../static/styles/ViewPage.css"/>
+    
   </head>
   
   <body>
@@ -19,28 +19,26 @@
       </div>
       <div>
         <center>
-            <div class="box">
-                <h1>Welcome to my website</h1>
-                <p><font size="3px">You can do various operations with images. Click on the button to read more</font></p>
-                <button onclick="myFunction()" class = "btn btn-success">Read More</button>
+            <div class="boxView">
+                <p style="color: rgb(255, 0, 0);"> <font size="6+">Please select the form you would like to view below</font></p>
+                <p> <font size="3px">This is the viewing page for already submited icident report forms. If you need to fill out a incident report click create form above or click  <a href="index.html"> here</a></font></p>
             </div>
         </center>
        </div> 
-    <div>
-        <form action="javascript:redirect();">
-                <div class="form-group">
-                    <label for = "option">What would you like to do:</label>
-                    <h3></h3>
-                    <input list="Choice" id="option" name="option" size="97">
+    <div class="form-view">
+        <form>
+                    <label for = "option" >What would you like to do:</label>
+                    <h5></h5>
+                    <input list="Choice" id="option" name="option" size="107">
                     <datalist id="Choice">
-                        <option value = "Image Rollover">
-                        <option value = "Image Preview">
-                        <option value = "Image SlideShow">   
+                        <option value = "form 1">
+                        <option value = "form 2">
+                        <option value = "form 3">   
                     </datalist>
-                    <h3></h3>
-                    <input type="submit" value="submit" />
-                </div>
+                    <h5></h5>
+                    <center>
+                    <input type="submit" value="submit" class="submitBTN">
+                   </center>
         </form>
-
     </div>
   </body>

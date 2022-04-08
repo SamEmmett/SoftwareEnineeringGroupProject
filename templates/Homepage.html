@@ -1,26 +1,30 @@
 <!doctype html>
+<link rel="stylesheet" href="../static/styles/styles.css"/>
   <head>
-    <link rel="stylesheet" href="../static/styles/Homepage.css"/>
+    
   </head>
   
   <body>
         <center>
-            <div class=header>
+            <div class=headerHome>
                 <h1><font>Welcome To The Incident Report Form Page</font></h1>
                 <p>To fill out an incident report form read and follow the instruction below</p>
             </div>
         </center>
     <!-- NAVBAR -->  
     <div class="topnav" id="myTopnav">
-        <a href="Homepage.html" class="active">Home</a>
-        <a href="index.html">Create Form</a>
-        <a href="view.html">View Form</a>
+        <a href="{{url_for('home')}}" class="active">Home</a>
+        <a href="{{url_for('index')}}">Create Form</a>
+        <a href="{{url_for('ViewForm)}}">View Form</a>
+        <div>{{username}}</div>
+
+
       </div>
       <div class="row">
         <div class="side">
           <h3>Americal Medical</h3>
           <img src="../static/styles/stock.jpg" alt="">
-          <p> Here at americal medical we want to ensure everone feels safe at all time. So in the event that something does go wrong we encourage your to fill out an incident report form.
+          <p> Here at americal medical we want to ensure everone feels safe at all time. So in the event that something does go wrong we encourage you to fill out an incident report form.
           </p>
           <br>
         </div>
@@ -37,6 +41,6 @@
             <th><font color = "white" size="1" align="center">Ⓒ All rights reseverd</font></th>
             </tr>
         </center>
-<div>
+      </div>
   </body>
 </html>
