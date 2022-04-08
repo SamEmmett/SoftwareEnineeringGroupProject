@@ -1,6 +1,5 @@
 <!doctype html>
-    <link rel="stylesheet" href="../static/styles/Homepage.css"/>
-    <link rel="stylesheet" href="../static/styles/ViewPage.css"/>
+    <link rel="stylesheet" href="../static/styles/styles.css"/>
   <head>
     
   </head>
@@ -20,27 +19,28 @@
       </div>
       <div>
         <center>
-            <div class="box">
-                <p> <font size="15px">Please select the form you would like to view below</font></p>
+            <div class="boxView">
+                <p style="color: rgb(255, 0, 0);"> <font size="6+">Please select the form you would like to view below</font></p>
                 <p> <font size="3px">This is the viewing page for already submited icident report forms. If you need to fill out a incident report click create form above or click  <a href="index.html"> here</a></font></p>
             </div>
         </center>
        </div> 
     <div>
         <form>
-                <div class="form-group">
-                    <label for = "option">What would you like to do:</label>
-                    <h3></h3>
+                <div class="form-view">
+                    <label for = "option" >What would you like to do:</label>
+                    <h5></h5>
                     <input list="Choice" id="option" name="option" size="97">
                     <datalist id="Choice">
                         <option value = "form 1">
                         <option value = "form 2">
                         <option value = "form 3">   
                     </datalist>
-                    <h3></h3>
-                    <input type="submit" value="submit" />
+                    <h5></h5>
+                    <center>
+                    <input type="submit" value="submit" class="submitBTN">
+                   </center>
                 </div>
         </form>
-
     </div>
   </body>
