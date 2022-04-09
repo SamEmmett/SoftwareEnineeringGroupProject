@@ -238,6 +238,14 @@ def viewform():
 
 @main.route('/profile', methods=['GET', 'POST'])
 def profile():
-    return render_template("profile.html")
+    
+    page = 'login'
+    usermsg = 'Log In'
+    if 'loggedin' in session:
+        usermsg ='Hello, '+ session['first']+" "+session['last']
+        page = 'profile'
+        return render_template("profile.html", page=page, usermsg=usermsg)
+    return render_template("profile.html" , page=page, usermsg=usermsg)
+    
 if __name__ == '__main__':
    main.run(debug=True)

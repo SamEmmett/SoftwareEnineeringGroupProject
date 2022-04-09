@@ -541,4 +541,14 @@ h3 {
   
 }
 
-/*CSSING for the Homepage page  */
+/*CSSING for the Profile page  */
+.Profilerow {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Profileside {
+  flex: 30%; 
+  background-color: #EFEFEF; 
+  padding: 20px; 
+}
