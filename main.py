@@ -226,6 +226,7 @@ def home():
     if 'loggedin' in session:
         usermsg ='Hello, '+ session['first']+" "+session['last']
         page = 'profile'
+       
         return render_template("Homepage.html", page=page, usermsg=usermsg)
     return render_template("Homepage.html" , page=page, usermsg=usermsg)
     
@@ -244,7 +245,11 @@ def profile():
     if 'loggedin' in session:
         usermsg ='Hello, '+ session['first']+" "+session['last']
         page = 'profile'
-        return render_template("profile.html", page=page, usermsg=usermsg)
+        cur=mysql.connection.cursor()
+        cur.execute("Select email, FirstName, LastName, Company, Address, City, State, Phone from users WHERE UName = '{0}'".format(session['username']))
+        info = cur.fetchone()
+        print("\n\n\n\n\n\n\n"+info[2]+"\n\n\n\n\n\n\n\n")
+        return render_template("profile.html", page=page, usermsg=usermsg, username=session['username'], email = info[0], FirstName = info[1], lastname = info[2], Company = info[3], Address=info[4], City=info[5], State=info[6], Phone=info[7])
     return render_template("profile.html" , page=page, usermsg=usermsg)
     
 if __name__ == '__main__':
