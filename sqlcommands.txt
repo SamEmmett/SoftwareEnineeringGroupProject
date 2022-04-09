@@ -1,7 +1,6 @@
-
+create database groupproject;
 use groupproject;
-DROP table Form;
-
+DROP database groupproject;
 -- Patient info entity
 create table patientinfo(
 `ptID` int NOT NULL,
@@ -90,7 +89,8 @@ PRIMARY KEY(`artID`));
 create table Form(
 `FormID` int NOT NULL AUTO_INCREMENT,
 `ptID` int NOT NULL,
-`rfiID` int NOT NULL,
+`rfiID` int NOT NULL, 
+`smdID` int NOT NULL,
 `aeoppID` int not NULL,
 `rcbID` int not NULL,
 `soID` int not NULL,
@@ -100,7 +100,7 @@ PRIMARY KEY(`FormID`),
 FOREIGN KEY (ptID) REFERENCES patientinfo(ptID),
 FOREIGN KEY (rfiID) REFERENCES reportingfacilityinfo(rfiID),
 FOREIGN KEY (smdID) REFERENCES susmedicaldevice(smdID),
-FOREIGN KEY (aeoppIDD) REFERENCES susmedicaldevice(aeoppID),
+FOREIGN KEY (aeoppID) REFERENCES adverseeventorproductproblem(aeoppID),
 FOREIGN KEY (rcbID) REFERENCES reportcompletedby(rcbID),
 FOREIGN KEY (soID) REFERENCES signoff(soID),
 FOREIGN KEY (EventID) REFERENCES EventInformation(EventID),
@@ -124,7 +124,7 @@ primary key (userID)
 
 #add user
 INSERT INTO users
-VALUES(1, 'Daniel', 'Woods', 'dwoods', 'password', 'Stockton University', '101 Vera King Farris Drive', 'Galloway', 'New Jersey', 6096521776, 'daniel.woods@stockton.edu');
+VALUES(1, 'Daniel', 'Woods', 'dwoods', 'password', 'Stockton University', '101 Vera King Farris Drive', 'Galloway', 'New Jersey', 609652177, 'daniel.woods@stockton.edu');
 
 
 
