@@ -19,28 +19,33 @@
             <a href="{{url_for('profile')}}">View Profile</a>
             
       </div>
-      <div>
+      <div class="row">
+        <div class="side">
+            <p style="color: rgb(255, 0, 0);"> <font size="6+">Please select the form you would like to view</font></p>
+            <p> <font size="3px">This is the viewing page for an already submited icident report forms. If you need to fill out a incident report click create form above or click <a href="{{url_for('index')}}">Here</a></font></p>
+          <br>
+        </div>
+        <div class="main">
+            <form>
+                <label for = "option">Select the form you would like to view below:</label>
+                <h5></h5>
+                <input list="Choice" id="option" name="option" size="102">
+                <datalist id="Choice">
+                    <option value = "form 1">
+                    <option value = "form 2">
+                    <option value = "form 3">   
+                </datalist>
+                <h5></h5>
+                <input type="submit" value="submit">
+            </form>
+        </div>
+      </div>
+      <table width = "100%"  align = "center" bgcolor=#1F497D>  
         <center>
-            <div class="boxView">
-                <p style="color: rgb(255, 0, 0);"> <font size="6+">Please select the form you would like to view below</font></p>
-                <p> <font size="3px">This is the viewing page for already submited icident report forms. If you need to fill out a incident report click create form above or click  <a href="index.html"> here</a></font></p>
-            </div>
+            <tr style="height:30px">
+            <th><font color = "white" size="1" align="center">Ⓒ All rights reseverd</font></th>
+            </tr>
         </center>
-       </div> 
-    <div class="form-view">
-        <form>
-                    <label for = "option" >What would you like to do:</label>
-                    <h5></h5>
-                    <input list="Choice" id="option" name="option" size="102">
-                    <datalist id="Choice">
-                        <option value = "form 1">
-                        <option value = "form 2">
-                        <option value = "form 3">   
-                    </datalist>
-                    <h5></h5>
-                    <center>
-                    <input type="submit" value="submit" class="submitBTN">
-                   </center>
-        </form>
+      </div>
     </div>
   </body>

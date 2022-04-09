@@ -406,10 +406,11 @@ h3 {
     color: rgb(0, 0, 0);
 
     background-color:#eaecef;
-    right: 21%;
-    bottom: 75%;
+    right: 50%;
+    bottom: 55%;
     transform: translate(50%,50%);
-    position: relative;
+    position: absolute;
+    margin: auto;
 
     font-size: 25px;
 
@@ -418,15 +419,18 @@ h3 {
   }
   
   .form-view{
-    position:relative; 
-    left: 29%;
-    top: 140px;
+    position:absolute; 
+    margin: auto;
+    left: 30.5%;
+    top: 60%;
     font-size: 16px;
+    /*margin: auto; look into for margin fixing on the html view form page*/
   }
   .submitBTN{
 	 position: absolute;
 	 size: 9px;
-	 left:90%;
+	 left:93%;
+   
 
   }
 /*CSSING for the login page  */
