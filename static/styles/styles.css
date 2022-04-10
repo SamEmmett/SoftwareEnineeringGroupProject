@@ -392,47 +392,7 @@ h3 {
       width: 100%;
     }
   }
-/*Viewing form cssing */
-.boxView {
-    border: 1px solid #000000;
-    padding: 10px;
-    width: 50%;
-    max-width: 750px;
-    min-width: 750px;
-    height: 75%;
-    max-height: 250px;
-    min-height: 250px;
-    padding-top: 10px;
-    color: rgb(0, 0, 0);
-
-    background-color:#eaecef;
-    right: 50%;
-    bottom: 55%;
-    transform: translate(50%,50%);
-    position: absolute;
-    margin: auto;
-
-    font-size: 25px;
-
-    overflow-y: hidden;
-    overflow-x:hidden;
-  }
   
-  .form-view{
-    position:absolute; 
-    margin: auto;
-    left: 30.5%;
-    top: 60%;
-    font-size: 16px;
-    /*margin: auto; look into for margin fixing on the html view form page*/
-  }
-  .submitBTN{
-	 position: absolute;
-	 size: 9px;
-	 left:93%;
-   
-
-  }
 /*CSSING for the login page  */
 
 #login {
