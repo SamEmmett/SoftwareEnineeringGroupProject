@@ -13,19 +13,22 @@
         </center>
     <!-- NAVBAR -->  
     <div class="topnav" id="myTopnav">
-      <a href="{{url_for('home')}}" class="active">Home</a>
-      <a href="{{url_for('index')}}">Create Form</a>
-      <a href="{{url_for('viewform')}}">View Form</a>
-      <a herf="profile.html">View Profile</a>
-        <div class= userbutton><a href="{{url_for(page)}}">{{usermsg}}</a></div>
+      <div class="navwrapper">
+        <a href="{{url_for('home')}}" class="active">Home</a>
+        <a href="{{url_for('index')}}">Create Form</a>
+        <a href="{{url_for('viewform')}}">View Form</a>
+        <a href="{{url_for('profile')}}">View Profile</a>
+        <div class="userbutton"><a href="{{url_for(page)}}">{{usermsg}}</a></div>
+      </div>
     </div>
+    
     <div class="Profilerow">
         <div class="Profileside">
           <h3>Profile settings</h3>
           <center>
           <img src="../static/styles/Profile.jpeg" height="50%" width="30%">
           </center>
-          <p>This page displays your profile setting. Your profile is setup through the hosptial, so if anything needs to be changed contact support. </p>
+          <p>This page displays your profile settings. Your profile is set up through the hosptial, so if anything needs to be changed, please contact support. </p>
           <br>
           <br>
         </div>
@@ -72,7 +75,7 @@
       <table width = "100%"  align = "center" bgcolor=#1F497D>  
         <center>
             <tr style="height:30px">
-            <th><font color = "white" size="1" align="center">Ⓒ All rights reseverd</font></th>
+            <th><font color = "white" size="1" align="center">&#169; All Rights Reserved</font></th>
             </tr>
         </center>
       </div>
