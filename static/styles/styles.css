@@ -253,6 +253,10 @@
 
 /* BUTTONS */
 
+select {
+  width: 120px;
+}
+
 #SubmitForm, #login-buttons {
 	position: relative;
 	margin: auto;
