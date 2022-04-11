@@ -236,7 +236,7 @@ def viewform():
     if request.method =='GET':
             cur = mysql.connection.cursor()
             ID = session['id']
-            cur.execute("SELECT FormID, %s , ptID, EventID, DateOfReport FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID",(ID))
+            cur.execute("SELECT FormID, %s , ptID, EventID, DateOfReport FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID",(ID,))
             myresult = cur.fetchall()
             # table with forms created by user id list = form 1 = 1,10/22/2022 when clicked
             for i in myresult:
