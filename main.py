@@ -156,6 +156,7 @@ def index():
             OTHER2 = userDetails['OtherText2']
         else:
             OTHER2 = None
+
         DATEOFEVENT = None
         DATEOFREPORT = None
         DATEREPORTCLOSED = None
@@ -181,6 +182,7 @@ def index():
         USERFACILITY = userDetails['RepUserFac']
         DISTRIBUTORIMPORTER = userDetails['RepDisImp']
         cur = mysql.connection.cursor()
+
         cur.execute("INSERT INTO patientinfo(ptID, DoB, Sex, Weight)VALUES(%s, %s, %s, %s)",(PTID, DOB, SEX, WEIGHT))
         cur.execute("INSERT INTO reportingfacilityinfo(ReportedBy, FacilityName, Address, City, FacilityState, Zip, Phone)VALUES(%s, %s, %s, %s, %s, %s, %s)",(RPTBY, FACNAME, ADDRESS, CITY, FACILITYSTATE, ZIP, PHONE))
         cur.execute("INSERT INTO susmedicaldevice(BrandName, ModelNumber, TOD, SerialNumber, ManufacturerName, MCity, MState, HealthProfessional, LayUserPatient, Other2)VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s , %s)",(BRANDNAME, MODELNUMBER, DEVICETYPE, SERIALNUMBER, MANUNAME, MANUCITY, MANUSTATE,HEALTHPROFESSIONAL, LAYUSERPATIENT, OTHER2))
@@ -190,8 +192,11 @@ def index():
         cur.execute("INSERT INTO EventInformation(DescribeEoP, Findings )VALUES(%s, %s)",(DESCRIBE,FINDINGS))
         cur.execute("INSERT INTO AlsoReportedTo(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER)VALUES(%s, %s, %s)",(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER))
         mysql.connection.commit()
+
+        pkey = cur.execute()
+
         cur.close()
-        return 'Values have been added'
+        return redirect(url_for('home')) 
     return render_template('index.html')
 
 
@@ -241,6 +246,7 @@ def viewform():
             # table with forms created by user id list = form 1 = 1,10/22/2022 when clicked
             for i in myresult:
                 formID = myresult[i]
+                print('hi')
                 print(formID)    
     return render_template("ViewForm.html")
     
