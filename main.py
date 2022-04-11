@@ -193,7 +193,13 @@ def index():
         cur.execute("INSERT INTO AlsoReportedTo(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER)VALUES(%s, %s, %s)",(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER))
         mysql.connection.commit()
 
-        pkey = cur.execute()
+        pkey = cur.execute("SELECT FormID, a.UserID, f.UserID, f.ptID, b.ptID, f.rfiID, c.rfiID, f.smdID, d.smdID, f.aeoppID, e.aeoppID, f.rcbID, g.rcbID, f.soID, h.soID, f.EventID, i.EventID, f.artID, j.artID FROM Form AS f JOIN Users AS a ON a.UserID = f.UserID JOIN patientinfo AS b ON b.ptID = f.ptID JOIN reportingfacilityinfo AS c ON c.rfiID = f.rfiID JOIN susmedicaldevice AS d ON d.smdID = f.smdID JOIN adverseeventorproductproblem AS e ON e.aeoppID = f.aeoppID JOIN reportcompletedby AS g  ON g.rcbID = f.rcbID JOIN signoff AS h ON h.soID = f.soID JOIN EventInformation AS i ON i.EventID = f.EventID JOIN  AlsoReportedTo as j ON j.artID = f.artID",)
+
+        for i in pkey:
+            k = pkey[i]
+            print(k)
+
+        cur.execute("INSERT INTO Form (FormID, UserID, ptID, rfiID, smdID, aeoppID, rcbID, soID, EventID, artID) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (FID,UID,PTID,RFIID,SMDID,AEOPPID,RCBID,SOID,EVENTID,ARTID))
 
         cur.close()
         return redirect(url_for('home')) 
@@ -262,7 +268,7 @@ def profile():
         cur=mysql.connection.cursor()
         cur.execute("Select email, FirstName, LastName, Company, Address, City, State, Phone from users WHERE UName = '{0}'".format(session['username']))
         info = cur.fetchone()
-        print("\n\n\n\n\n\n\n"+info[2]+"\n\n\n\n\n\n\n\n")
+        ###print("\n\n\n\n\n\n\n"+info[2]+"\n\n\n\n\n\n\n\n")
         return render_template("profile.html", page=page, usermsg=usermsg, username=session['username'], email = info[0], FirstName = info[1], lastname = info[2], Company = info[3], Address=info[4], City=info[5], State=info[6], Phone=info[7])
     return render_template("profile.html" , page=page, usermsg=usermsg)
     
