@@ -18,7 +18,7 @@ create table reportingfacilityinfo(
 `City` nvarchar(50) NOT NULL,
 `FacilityState` nvarchar(50) NOT NULL,
 `Zip` int NOT NULL,
-`Phone` int NOT NULL,
+`Phone` varchar(15) NOT NULL,
 PRIMARY KEY(`rfiID`));
 
 -- suspectmedicaldevice
@@ -88,6 +88,7 @@ PRIMARY KEY(`artID`));
 -- Form Entity
 create table Form(
 `FormID` int NOT NULL AUTO_INCREMENT,
+`UserID` int NOT NULL,
 `ptID` int NOT NULL,
 `rfiID` int NOT NULL, 
 `smdID` int NOT NULL,
@@ -97,6 +98,7 @@ create table Form(
 `EventID` int not NULL,
 `artID` int not NULL,
 PRIMARY KEY(`FormID`),
+FOREIGN KEY (UserID)references Users(UserID),
 FOREIGN KEY (ptID) REFERENCES patientinfo(ptID),
 FOREIGN KEY (rfiID) REFERENCES reportingfacilityinfo(rfiID),
 FOREIGN KEY (smdID) REFERENCES susmedicaldevice(smdID),

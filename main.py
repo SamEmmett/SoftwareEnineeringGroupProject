@@ -186,14 +186,8 @@ def index():
         cur.execute("INSERT INTO susmedicaldevice(BrandName, ModelNumber, TOD, SerialNumber, ManufacturerName, MCity, MState, HealthProfessional, LayUserPatient, Other2)VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s , %s)",(BRANDNAME, MODELNUMBER, DEVICETYPE, SERIALNUMBER, MANUNAME, MANUCITY, MANUSTATE,HEALTHPROFESSIONAL, LAYUSERPATIENT, OTHER2))
         cur.execute("INSERT INTO adverseeventorproductproblem(AdverseEvent, ProductProblem, DoD, Intervention, LifeThreatening, Disability, Hospitalized, CongenitalAnomaly, Other, DateOfEvent, DateOfReport, DateReportClosed)VALUES(%s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s)",(ADVERSEEVENT, PRODUCTPROBLEM, DATEOFDEATH, INTERVENTION, LIFETHREATENING, DISABILITY, HOSPITALIZED, CONGETITALANOMALY,OTHER, DATEOFEVENT, DATEOFREPORT, DATEREPORTCLOSED))
         cur.execute("INSERT INTO reportcompletedby(RepCompany, RepName, RepAddress, RepCity, RepState, RepPhone)Values(%s,%s,%s,%s,%s,%s)",(REPADDRESS, REPCITY, REPADDRESS,REPCITY, REPSTATE, REPPHONE))
-<<<<<<< HEAD
-        cur.execute("INSERT INTO SignOff(Signature, DateCompleted )VALUES(%s, %s)",(SIGNATURE, DATECOMP))
-        cur.execute("INSERT INTO EventInformation(DescribeEoP, Findings )VALUES(%s, %s)",(DESCRIBE,FINDINGS))
-=======
         cur.execute("INSERT INTO SignOff(Signature, DateCompleted)VALUES(%s, %s)",(SIGNATURE, DATECOMP))
         cur.execute("INSERT INTO EventInformation(DescribeEoP, Findings )VALUES(%s, %s)",(DESCRIBE,FINDINGS))
-
->>>>>>> 8a2cebd099cd41974f60a5880c8320e5e5024d0b
         cur.execute("INSERT INTO AlsoReportedTo(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER)VALUES(%s, %s, %s)",(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER))
         mysql.connection.commit()
         cur.close()
@@ -238,9 +232,21 @@ def home():
     
 
 @main.route('/viewform', methods=['GET', 'POST'])
+def search():
+    if request.method =='GET':
+       
+            cur = mysql.connection.cursor()
+            ID = session['id']
+            cur.execute("SELECT FormID, %s , ptID, EventID, DateOfReport FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID",(ID))
+            myresult = cur.fetchall()
+            # table with forms created by user id list = form 1 = 1,10/22/2022 when clicked
 
-def viewform():
-    return render_template("ViewForm.html")
+            for i in myresult:
+                formID = myresult[i][1]
+                print(formID)
+    else:  
+        
+     return render_template("ViewForm.html")
     
 
 @main.route('/profile', methods=['GET', 'POST'])
@@ -256,5 +262,6 @@ def profile():
         print("\n\n\n\n\n\n\n"+info[2]+"\n\n\n\n\n\n\n\n")
         return render_template("profile.html", page=page, usermsg=usermsg, username=session['username'], email = info[0], FirstName = info[1], lastname = info[2], Company = info[3], Address=info[4], City=info[5], State=info[6], Phone=info[7])
     return render_template("profile.html" , page=page, usermsg=usermsg)
+    
 if __name__ == '__main__':
    main.run(debug=True)
