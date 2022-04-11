@@ -193,7 +193,7 @@ def index():
         cur.execute("INSERT INTO AlsoReportedTo(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER)VALUES(%s, %s, %s)",(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER))
         mysql.connection.commit()
 
-        pkey = cur.execute()
+        #pkey = cur.execute()
 
         cur.close()
         return redirect(url_for('home')) 
