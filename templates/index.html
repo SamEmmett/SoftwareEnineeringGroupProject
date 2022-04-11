@@ -4,7 +4,14 @@
 <html>
 
 <head>
+	<script>
+		function getText() {
 
+			var a = document.getElementById("ourPara")
+			alert("Your form has been succsfully submitted")
+		}
+
+	</script>
 	<meta content="en-us" http-equiv="Content-Language" />
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 	<link rel="stylesheet" href="../static/styles/styles.css" />
@@ -186,7 +193,7 @@
 
 	<div class ="form-block form-section-hideable" id="SusDevice">
 		<h3><span class="numbering">9. </span>
-			Suspect Medical Device</h3>
+			<h3>Suspect Medical Device</h3>
 
 		<span class="numbering">a. </span>
 		<label for="BrandName">Brand Name:</label>
@@ -387,7 +394,7 @@
 		
 		<input id="reset" name="Reset1" type="reset" value="Reset" />
 		or
-		<input id="submit" name="Submit" type="submit" value="Submit" />
+		<input id = "ourPara" onClick = "getText()" id="submit" name="Submit" type="submit" value="Submit" />
 	</div>
 
 	<script type="text/javascript"

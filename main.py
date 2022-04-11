@@ -193,6 +193,7 @@ def index():
         cur.execute("INSERT INTO AlsoReportedTo(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER)VALUES(%s, %s, %s)",(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER))
         mysql.connection.commit()
 
+<<<<<<< HEAD
         pkey = cur.execute("SELECT FormID, a.UserID, f.UserID, f.ptID, b.ptID, f.rfiID, c.rfiID, f.smdID, d.smdID, f.aeoppID, e.aeoppID, f.rcbID, g.rcbID, f.soID, h.soID, f.EventID, i.EventID, f.artID, j.artID FROM Form AS f JOIN Users AS a ON a.UserID = f.UserID JOIN patientinfo AS b ON b.ptID = f.ptID JOIN reportingfacilityinfo AS c ON c.rfiID = f.rfiID JOIN susmedicaldevice AS d ON d.smdID = f.smdID JOIN adverseeventorproductproblem AS e ON e.aeoppID = f.aeoppID JOIN reportcompletedby AS g  ON g.rcbID = f.rcbID JOIN signoff AS h ON h.soID = f.soID JOIN EventInformation AS i ON i.EventID = f.EventID JOIN  AlsoReportedTo as j ON j.artID = f.artID",)
 
         for i in pkey:
@@ -200,6 +201,9 @@ def index():
             print(k)
 
         cur.execute("INSERT INTO Form (FormID, UserID, ptID, rfiID, smdID, aeoppID, rcbID, soID, EventID, artID) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (FID,UID,PTID,RFIID,SMDID,AEOPPID,RCBID,SOID,EVENTID,ARTID))
+=======
+        #pkey = cur.execute()
+>>>>>>> 3ccf1a75bfad2e886b311857374b6ec1ba5cc1c0
 
         cur.close()
         return redirect(url_for('home')) 
