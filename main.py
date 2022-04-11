@@ -232,9 +232,8 @@ def home():
     
 
 @main.route('/viewform', methods=['GET', 'POST'])
-def search():
+def viewform():
     if request.method =='GET':
-       
             cur = mysql.connection.cursor()
             ID = session['id']
             cur.execute("SELECT FormID, %s , ptID, EventID, DateOfReport FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID",(ID))
@@ -243,10 +242,8 @@ def search():
 
             for i in myresult:
                 formID = myresult[i][1]
-                print(formID)
-    else:  
-        
-     return render_template("ViewForm.html")
+                print(formID)    
+    return render_template("ViewForm.html")
     
 
 @main.route('/profile', methods=['GET', 'POST'])
