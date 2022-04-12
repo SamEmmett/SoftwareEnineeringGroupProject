@@ -1,4 +1,4 @@
-
+m 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 function setDoD() { //toggles the date box for DoD being required
@@ -115,12 +115,14 @@ function validate() {
 
 }
 
-function processResults (myResults) {
+function removeGarbage (myResult) {
+    var options = myResult
+    
+    options = options.replace(/[() ]/g,'')
 
-    var select = document.getElementById("Choice");
-    var options = myResults
-
-    print(myResults)
+    alert(options)
+    return document.getElementById('optchoice').innerHTML = "Form" + options
+    
     
     // for(var i = 0; i < options.length; i++) {
     //     var opt = options[i];

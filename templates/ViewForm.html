@@ -1,7 +1,7 @@
 <!doctype html>
     <link rel="stylesheet" href="../static/styles/styles.css"/>
   <head>
-    
+
   </head>
   
   <body>
@@ -16,7 +16,7 @@
             <a href="{{url_for('home')}}" class="active">Home</a>
             <a href="{{url_for('index')}}">Create Form</a>
             <a href="{{url_for('viewform')}}" >View Form</a>
-            <a href="{{url_for('profile')}}">View Profile{{myresult}}</a>
+            <a href="{{url_for('profile')}}">View Profile</a>
             
       </div>
       <div class="row">
@@ -26,14 +26,16 @@
           <br>
         </div>
         <div class="main">
-            <form>
+            <form action="" method="post">
                 <label for = "option">Select the form you would like to view below:</label>
                 <h5></h5>
-                <input list="Choice" id="option" name="option" size="102">
-                <datalist id="Choice" onselect="processResults()">
-                    <option value = "form 1">
-                    <option value = "form 2">
-                    <option value = "form 3">   
+                Form: <input list="Choice" id="option" name="formnumlist" size="65">
+                <datalist id="Choice" > 
+                  {% for i in new_list %}
+                    <option id="optchoice" value = "{{i}}">
+                  {% endfor %}
+                  </option>
+                <!--  ((2,),(1,) [0][0])-->  
                 </datalist>
                 <h5></h5>
                 <input type="submit" value="submit">
@@ -48,6 +50,5 @@
         </center>
       </div>
     </div>
-    <script type="text/javascript"
-         src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
   </body>

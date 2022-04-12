@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="../static/styles/styles.css" />
 	<center>
             <div class=header>
-                <h1><font>Form _______ Is shown below</font></h1>
+                <h1><font>Form {{seshlist[0]}} Is shown below</font></h1>
             </div>
         </center>
     <!-- NAVBAR -->  
@@ -25,8 +25,8 @@
 			<a href="{{url_for('home')}}" class="active">Home</a>
 			<a href="{{url_for('index')}}">Create Form</a>
 			<a href="{{url_for('viewform')}}">View Form</a>
-			<a href="{{url_for('profile')}}">{{usermsg}}View Profile</a>
-			<div class="userbutton"><a href="{{url_for('index')}}">{{myresult}}</a></div>
+			<a href="{{url_for('profile')}}">View Profile</a>
+			<div class="userbutton"><a href="{{url_for('index')}}"></a></div>
 		</div>
 	</div>
 </head>
@@ -51,74 +51,22 @@
 			<h3><span class="numbering">1. </span>Patient Information</h3>
 			<p class="block-note">It is our policy not to collect any patient information unless requested to do so by the Original Equipment Manufacturer (OEM).</p>
 
-			<span class="numbering">a. </span><label for="ptID">PT Identifier: </label><input name="ptID" id="ptID" type="number"/><br />
-			<span class="numbering">b. </span><label for="DoB">Date of Birth: (mm/dd/year)</label> <input name="DoB" id="DoB" type="date"  /><br />
-			<span class="numbering">c. </span><label>Sex: </label> <input name="radSex" type="radio" value="female" required />Female<input name="radSex" type="radio" value="male"/>Male<br />
-			<span class="numbering">d. </span> <label for="Weight"> Weight (lbs): </label> <input id="Weight" name="Weight" type="number" /><br />
+			<span class="numbering">a. </span><label for="ptID">PT Identifier: </label>{{seshlist[22]}} <br/>
+			<span class="numbering">b. </span><label for="DoB">Date of Birth: (mm/dd/year):</label>{{seshlist[23]}} <br />
+			<span class="numbering">c. </span><label>Sex: </label>{{seshlist[24]}}<br />
+			<span class="numbering">d. </span> <label for="Weight"> Weight (lbs):</label>{{seshlist[25]}} <br/>
 		</div>
 		
 		<div class ="form-block" id="ReportingFacility" >
 			<h3><span class="numbering">2. </span>Reporting Facility Information</h3>
-			<label for="rptBy">Reported by:</label> <input id="rptBy" name="rptBy" type="text" /><br />
-			<label for="facName">Facility Name:</label><input id="facName" name="facName" type="text" /><br />
-			<label for="Address"> Address:</label> <input name="Address" id="Address" type="text" /><br />
-			<label for="City">City:</label> <input name="City" type="text" id="City" required/>
-			<label for="FacilityState">State:</label><select name="FacilityState" id="FacilityState" size="1">
-				<option></option>
-				<option value="Alabama">Alabama</option>
-				<option value="Alaska">Alaska</option>
-				<option value="Arizona">Arizona</option>
-				<option value="Arkansas">Arkansas</option>
-				<option value="California">California</option>
-				<option value="Colorado">Colorado</option>
-				<option value="Conneticut">Conneticut</option>
-				<option value="Deleware">Delaware</option>
-				<option value="Florida">Florida</option>
-				<option value="Georgia">Georgia</option>
-				<option value="Hawaii">Hawaii</option>
-				<option value ="Idaho">Idaho</option>
-				<option value="Illinois">Illinois</option>
-				<option value="Indiana">Indiana</option>
-				<option value="Iowa">Iowa</option>
-				<option value="Kansas">Kansas</option>
-				<option value="Kentucky">Kentucky</option>
-				<option value="Louisiana">Louisiana</option>
-				<option value="Maine">Maine</option>
-				<option value="Maryland">Maryland</option>
-				<option value="Massachusetts">Massachusetts</option>
-				<option value="Michigan">Michigan</option>
-				<option value="Minnesota">Minnesota</option>
-				<option value="Mississippi">Mississippi</option>
-				<option value="Missouri">Missouri</option>
-				<option value="Montana">Montana</option>
-				<option value="Nebraska">Nebraska</option>
-				<option value="Nevada">Nevada</option>
-				<option value="New Hampshire">New Hampshire</option>
-				<option value="New Jersey">New Jersey</option>
-				<option value="New Mexico">New Mexico</option>
-				<option value="New York">New York</option>
-				<option value="North Carolina">North Carolina</option>
-				<option value="North Dakota">North Dakota</option>
-				<option value="Ohio">Ohio</option>
-				<option value="Oklahoma">Oklahoma</option>
-				<option value="Oregon">Oregon</option>
-				<option value="Pennsylvania">Pennsylvania</option>
-				<option value="Rhode Island">Rhode Island</option>
-				<option value="South Carolina">South Carolina</option>
-				<option value="South Dakota">South Dakota</option>
-				<option value="Tennessee">Tennessee</option>
-				<option value="Texas">Texas</option>
-				<option value="Utah">Utah</option>
-				<option value="Vermont">Vermont</option>
-				<option value="Virginia">Virginia</option>
-				<option value ="Washington">Washington</option>
-				<option value ="Washington DC">Washington DC</option>
-				<option value="West Virginia">West Virginia</option>
-				<option value="Wisconsin">Wisconsin</option>
-				<option value="Wyoming">Wyoming</option>
-			</select><br />
-			Zip: <input id="Zip" name="Zip" type="number" maxlength="5" placeholder="xxxxx" required ><br />
-			Phone: <input name="Phone" id="Phone" type="tel" placeholder="xxxxxxxxxx" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" />
+			<label for="rptBy">Reported by:</label> {{seshlist[30]}}<br />
+			<label for="facName">Facility Name:</label>{{seshlist[31]}}<br />
+			<label for="Address"> Address:</label> {{seshlist[32]}}<br />
+			<label for="City">City:</label> {{seshlist[33]}}
+			<label for="FacilityState">State:{{seshlist[34]}}
+			<br/>
+			Zip:{{seshlist[35]}}<br />
+			Phone: {{seshlist[36]}}<br />
 		</div>
 	</div>
 	
@@ -136,7 +84,6 @@
 		<br />
 		<input name="outcome" type="checkbox" value="death" id="death" onclick="setDoD()"/>
 		<label for="death">Death (mm/dd/year)</label>
-		<input name="DoD" type="date" id="DoD" />
 
 		<input name="outcome" type="checkbox" value="Intervention" id="Intervention" />
 		<label for="Intervention"> intervention to prevent permanent impairment/damage</label><br />
@@ -162,17 +109,17 @@
 			<div class="date">
 				<span class="numbering">4.</span>
 				<label for="DateOfEvent"> Date of event (mo/day/yr):</label> <br />
-				<input name="DateOfEvent" type="date" id="DateOfEvent" />
+				{{seshlist[58]}}
 			</div>
 			<div class="date">
 				<span class="numbering">5. </span>
 				<label for="DateOfReport">Date of this report (mo/day/yr):</label> <br />
-				<input name="DateOfReport" type="date" id="DateOfReport"  />
+				{{seshlist[59]}}
 			</div>
 			<div class="date">
 				<span class="numbering">6. </span>
 				<label for="DateClosed">Date report closed (mo/day/yr):</label> <br />
-				<input name="DateClosed" type="date" id="DateClosed" />
+				{{seshlist[60]}}
 			</div>
 		</div>
 	</div>
@@ -182,12 +129,13 @@
 
 		<span class="numbering">7. </span>
 		<label for="Description">Describe Event or Problem: </label> <br /><br />
-		<textarea name="Description" placeholder="Please type here..." id="Description" maxlength="256" > </textarea><br />
+		{{seshlist[27]}}
 		<br />
 		<span class="numbering">8. </span>
 		<label for="Findings">Findings:</label> <br /><br />
-		<textarea name="Findings" placeholder="Please type here..." id="Findings" maxlength = 100 > </textarea></div>
-	
+		{{seshlist[28]}}
+		<br />
+		<br />
 
 	<div class ="form-block form-section-hideable" id="SusDevice">
 		<h3><span class="numbering">9. </span>
@@ -195,82 +143,30 @@
 
 		<span class="numbering">a. </span>
 		<label for="BrandName">Brand Name:</label>
-		<input name="BrandName" type="text" id="BrandName" />
+		{{seshlist[38]}}
 
 		<span class="numbering">c. </span>
 		<label for="ModelNum">Model # </label>
-		<input name="ModelNum" type="text" id="ModelNum" /><br />
+		{{seshlist[39]}}
 
 		<span class="numbering">b. </span>
 		<label for="DeviceType">type of device:</label>
-		<input name="DeviceType" type="text" id="DeviceType"  />
+		{{seshlist[40]}}
 
 		<span class="numbering">d. </span>
 		<label for="SerielNum">Serial #</label>
-		<input name="SerialNum" type="text" id="SerielNum" /><br />
-
+		{{seshlist[41]}}
+		<br />
 		<br />
 
 		<label for="ManuName"> Manufacturer Name:</label>
-		<input name="ManuName" type="text" id="ManuName" />
-
+		{{seshlist[]}}
+		
 		<label for="ManuCity"> City: </label>
-		<input name="ManuCity" type="text" id="ManuCity" />
+		{{seshlist[]}}
 
 		<label for="ManuState">State: </label>
-		<select name="ManuState" id="ManuState" size="1">
-			<option></option>
-			<option value="Alabama">Alabama</option>
-			<option value="Alaska">Alaska</option>
-			<option value="Arizona">Arizona</option>
-			<option value="Arkansas">Arkansas</option>
-			<option value="California">California</option>
-			<option value="Colorado">Colorado</option>
-			<option value="Conneticut">Conneticut</option>
-			<option value="Deleware">Delaware</option>
-			<option value="Florida">Florida</option>
-			<option value="Georgia">Georgia</option>
-			<option value="Hawaii">Hawaii</option>
-			<option value ="Idaho">Idaho</option>
-			<option value="Illinois">Illinois</option>
-			<option value="Indiana">Indiana</option>
-			<option value="Iowa">Iowa</option>
-			<option value="Kansas">Kansas</option>
-			<option value="Kentucky">Kentucky</option>
-			<option value="Louisiana">Louisiana</option>
-			<option value="Maine">Maine</option>
-			<option value="Maryland">Maryland</option>
-			<option value="Massachusetts">Massachusetts</option>
-			<option value="Michigan">Michigan</option>
-			<option value="Minnesota">Minnesota</option>
-			<option value="Mississippi">Mississippi</option>
-			<option value="Missouri">Missouri</option>
-			<option value="Montana">Montana</option>
-			<option value="Nebraska">Nebraska</option>
-			<option value="Nevada">Nevada</option>
-			<option value="New Hampshire">New Hampshire</option>
-			<option value="New Jersey">New Jersey</option>
-			<option value="New Mexico">New Mexico</option>
-			<option value="New York">New York</option>
-			<option value="North Carolina">North Carolina</option>
-			<option value="North Dakota">North Dakota</option>
-			<option value="Ohio">Ohio</option>
-			<option value="Oklahoma">Oklahoma</option>
-			<option value="Oregon">Oregon</option>
-			<option value="Pennsylvania">Pennsylvania</option>
-			<option value="Rhode Island">Rhode Island</option>
-			<option value="South Carolina">South Carolina</option>
-			<option value="South Dakota">South Dakota</option>
-			<option value="Tennessee">Tennessee</option>
-			<option value="Texas">Texas</option>
-			<option value="Utah">Utah</option>
-			<option value="Vermont">Vermont</option>
-			<option value="Virginia">Virginia</option>
-			<option value ="Washington">Washington</option>
-			<option value ="Washington DC">Washington DC</option>
-			<option value="West Virginia">West Virginia</option>
-			<option value="Wisconsin">Wisconsin</option>
-			<option value="Wyoming">Wyoming</option>
+		{{seshlist[]}}
 		</select><br />
 		
 		<span class="numbering">f. </span>Operator of device:
@@ -291,72 +187,20 @@
 					Report Completed by:</h3>
 
 				<label for="repComp">Company: </label>
-				<input name="RepComp" type="text" id="repComp" /><br />
+				{{seshlist[]}}<br />
 
 				<label for="repName">Name: </label>
-				<input name="RepName" type="text" id="repName" /><br />
+				{{seshlist[]}}<br />
 
 				<label for="repAddress">Address: </label>
-				<input name="RepAddress" type="text" id="repAddress"  /><br />
+				{{seshlist[]}}<br />
 
 				<label for="repCity"> City: </label>
-				<input name="RepCity" type="text" id="repCity" /><br />
+				{{seshlist[]}}<br />
 
 				<label for="repState">State:</label>
-				<select name="RepState" id="repState" size="1">
-					<option></option>
-					<option value="Alabama">Alabama</option>
-					<option value="Alaska">Alaska</option>
-					<option value="Arizona">Arizona</option>
-					<option value="Arkansas">Arkansas</option>
-					<option value="California">California</option>
-					<option value="Colorado">Colorado</option>
-					<option value="Conneticut">Conneticut</option>
-					<option value="Deleware">Delaware</option>
-					<option value="Florida">Florida</option>
-					<option value="Georgia">Georgia</option>
-					<option value="Hawaii">Hawaii</option>
-					<option value ="Idaho">Idaho</option>
-					<option value="Illinois">Illinois</option>
-					<option value="Indiana">Indiana</option>
-					<option value="Iowa">Iowa</option>
-					<option value="Kansas">Kansas</option>
-					<option value="Kentucky">Kentucky</option>
-					<option value="Louisiana">Louisiana</option>
-					<option value="Maine">Maine</option>
-					<option value="Maryland">Maryland</option>
-					<option value="Massachusetts">Massachusetts</option>
-					<option value="Michigan">Michigan</option>
-					<option value="Minnesota">Minnesota</option>
-					<option value="Mississippi">Mississippi</option>
-					<option value="Missouri">Missouri</option>
-					<option value="Montana">Montana</option>
-					<option value="Nebraska">Nebraska</option>
-					<option value="Nevada">Nevada</option>
-					<option value="New Hampshire">New Hampshire</option>
-					<option value="New Jersey">New Jersey</option>
-					<option value="New Mexico">New Mexico</option>
-					<option value="New York">New York</option>
-					<option value="North Carolina">North Carolina</option>
-					<option value="North Dakota">North Dakota</option>
-					<option value="Ohio">Ohio</option>
-					<option value="Oklahoma">Oklahoma</option>
-					<option value="Oregon">Oregon</option>
-					<option value="Pennsylvania">Pennsylvania</option>
-					<option value="Rhode Island">Rhode Island</option>
-					<option value="South Carolina">South Carolina</option>
-					<option value="South Dakota">South Dakota</option>
-					<option value="Tennessee">Tennessee</option>
-					<option value="Texas">Texas</option>
-					<option value="Utah">Utah</option>
-					<option value="Vermont">Vermont</option>
-					<option value="Virginia">Virginia</option>
-					<option value ="Washington">Washington</option>
-					<option value ="Washington DC">Washington DC</option>
-					<option value="West Virginia">West Virginia</option>
-					<option value="Wisconsin">Wisconsin</option>
-					<option value="Wyoming">Wyoming</option>
-				</select><br />
+				{{seshlist[]}}
+				<br />
 
 				<label for="repPhone">Phone: </label>
 				<input name="RepPhone" type="tel" placeholder="xxxxxxxxxx" pattern="[0-9]{3}[0-9]{3}[0-9]{4}"  id="repPhone" ><br />

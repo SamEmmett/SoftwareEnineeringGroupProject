@@ -12,7 +12,7 @@ main.config['MYSQL_PASSWORD'] = 'dbsucks'
 main.config['MYSQL_DB'] = 'groupproject'
 
 mysql = MySQL(main)
-#Our first route / 
+#Our first route /
 @main.route('/form', methods=['GET', 'POST'])
 def index():  
     if request.method =='POST':
@@ -152,7 +152,7 @@ def index():
         else:
             LAYUSERPATIENT = None
 
-        if (c2chk == True):
+        if (c2chk == True):   
             OTHER2 = userDetails['OtherText2']
         else:
             OTHER2 = None
@@ -276,12 +276,35 @@ def viewform():
             cur.execute("SELECT FormID FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID WHERE UserID = %s ORDER BY DateOfReport ASC",(ID,))
             
             #cur.execute("SELECT FormID, %s , piID, EventID, DateOfReport FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID",(ID,))
-            # 1 2 3
             myresult = cur.fetchall()
-            # table with forms created by user id list = form 1 = 1,10/22/2022 when clicked 
-    return render_template("ViewForm.html" , myresult = myresult )
+            new_list = []
+            for item in myresult:
+                new_list.append(item[0])
+            cur.close()
     
-    
+            return render_template("ViewForm.html" , new_list = new_list )
+    if request.method == 'POST':
+        formnum = request.form
+        FORMNUML = formnum['formnumlist']
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM Form JOIN USERS on users.USERID = form.USERID JOIN PATIENTINFO ON patientinfo.PIID = form.PIID JOIN EventInformation ON EventInformation.EVENTID = form.EVENTID JOIN reportingfacilityinfo ON reportingfacilityinfo.RFIID = form.RFIID JOIN susmedicaldevice ON susmedicaldevice.SMDID = form.SMDID JOIN adverseeventorproductproblem ON adverseeventorproductproblem.aeoppID = form.aeoppID JOIN reportcompletedby ON reportcompletedby.rcbID = form.rcbID JOIN signoff ON signoff.soID = form.soID JOIN AlsoReportedTo ON AlsoReportedTo.artID = form.artID WHERE FormID = %s ORDER BY DateOfReport ASC", (FORMNUML,))
+        getformData = cur.fetchall()   
+        print(getformData)
+        new_list1 = []
+        for item in getformData:
+            for j in item:
+                new_list1.append(j)
+        print(new_list1)
+        session['ses_list'] = new_list1
+        cur.close()
+        return redirect(url_for('getform')) 
+
+@main.route('/getform', methods=['GET', 'POST'])
+def getform():
+    seshlist = session['ses_list'] 
+    print(seshlist)
+    if request.method =='GET':
+        return render_template("Viewingindex.html", seshlist = seshlist)
 
 @main.route('/profile', methods=['GET', 'POST'])
 def profile(): 
