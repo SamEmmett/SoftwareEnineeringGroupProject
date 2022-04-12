@@ -99,6 +99,7 @@ City nvarchar(50) NOT NULL,
 State nvarchar(50) NOT NULL,
 Phone int NOT NULL,
 email varchar(50) NOT NULL,
+IsAdmin int NOT NULL,
 primary key (userID)
 );
 
@@ -128,9 +129,11 @@ Constraint FK_ART FOREIGN KEY (artID) REFERENCES AlsoReportedTo(artID)
 
 #add user
 INSERT INTO users
-VALUES(1, 'Daniel', 'Woods', 'dwoods', 'password', 'Stockton University', '101 Vera King Farris Drive', 'Galloway', 'New Jersey', 609652177, 'daniel.woods@stockton.edu');
+VALUES(1, 'Daniel', 'Woods', 'dwoods', 'password', 'Stockton University', '101 Vera King Farris Drive', 'Galloway', 'New Jersey', 609652177, 'daniel.woods@stockton.edu', 1);
  
- 
+# non admin user
+INSERT INTO users
+VALUES(2, 'John', 'Doe', 'jdoe', 'password', 'Stockton University', '101 Vera King Farris Drive', 'Galloway', 'New Jersey', 609652177, 'doej5@go.stockton.edu', 0);
 
 
 
