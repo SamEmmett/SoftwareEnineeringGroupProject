@@ -1,13 +1,15 @@
 create database groupproject;
 use groupproject;
 DROP database groupproject;
+
 -- Patient info entity
 create table patientinfo(
+`piID` int NOT NULL AUTO_INCREMENT,
 `ptID` int NOT NULL,
 `DoB` date NOT NULL,
 `Sex` nvarchar(60) NOT NULL,
 `Weight` nvarchar(50) NOT NULL,
-PRIMARY KEY(`ptID`));
+PRIMARY KEY(`piID`));
 
 -- reportingfacilityinformation
 create table reportingfacilityinfo(
@@ -85,30 +87,6 @@ create table AlsoReportedTo(
 `DistributorImporter` nvarchar(50),
 PRIMARY KEY(`artID`));
 
--- Form Entity
-create table Form(
-`FormID` int NOT NULL AUTO_INCREMENT,
-`UserID` int NOT NULL,
-`ptID` int NOT NULL,
-`rfiID` int NOT NULL, 
-`smdID` int NOT NULL,
-`aeoppID` int not NULL,
-`rcbID` int not NULL,
-`soID` int not NULL,
-`EventID` int not NULL,
-`artID` int not NULL,
-PRIMARY KEY(`FormID`),
-FOREIGN KEY (UserID)references Users(UserID),
-FOREIGN KEY (ptID) REFERENCES patientinfo(ptID),
-FOREIGN KEY (rfiID) REFERENCES reportingfacilityinfo(rfiID),
-FOREIGN KEY (smdID) REFERENCES susmedicaldevice(smdID),
-FOREIGN KEY (aeoppID) REFERENCES adverseeventorproductproblem(aeoppID),
-FOREIGN KEY (rcbID) REFERENCES reportcompletedby(rcbID),
-FOREIGN KEY (soID) REFERENCES signoff(soID),
-FOREIGN KEY (EventID) REFERENCES EventInformation(EventID),
-FOREIGN KEY (artID) REFERENCES AlsoReportedTo(artID)
-);
-
 create table Users(
 userID int NOT NULL,
 FirstName nvarchar(20),
@@ -124,13 +102,35 @@ email varchar(50) NOT NULL,
 primary key (userID)
 );
 
+-- Form Entity
+create table Form(
+`FormID` int NOT NULL AUTO_INCREMENT,
+`UserID` int NOT NULL,
+`piID` int NOT NULL,
+`rfiID` int NOT NULL, 
+`smdID` int NOT NULL,
+`aeoppID` int not NULL,
+`rcbID` int not NULL,
+`soID` int not NULL,
+`EventID` int not NULL,
+`artID` int not NULL,
+PRIMARY KEY(`FormID`),
+CONSTRAINT FK_UserID FOREIGN KEY (UserID)references Users(UserID),
+CONSTRAINT FK_PTInfo FOREIGN KEY (piID) REFERENCES patientinfo(piID),
+CONSTRAINT FK_RFI FOREIGN KEY (rfiID) REFERENCES reportingfacilityinfo(rfiID),
+CONSTRAINT FK_SusDev FOREIGN KEY (smdID) REFERENCES susmedicaldevice(smdID),
+CONSTRAINT FK_aeopp FOREIGN KEY (aeoppID) REFERENCES adverseeventorproductproblem(aeoppID),
+CONSTRAINT FK_rcb FOREIGN KEY (rcbID) REFERENCES reportcompletedby(rcbID),
+CONSTRAINT FK_signoff FOREIGN KEY (soID) REFERENCES signoff(soID),
+CONSTRAINT FK_EventInfo FOREIGN KEY (EventID) REFERENCES EventInformation(EventID),
+Constraint FK_ART FOREIGN KEY (artID) REFERENCES AlsoReportedTo(artID)
+);
+
 #add user
 INSERT INTO users
 VALUES(1, 'Daniel', 'Woods', 'dwoods', 'password', 'Stockton University', '101 Vera King Farris Drive', 'Galloway', 'New Jersey', 609652177, 'daniel.woods@stockton.edu');
-
-
-
-
+ 
+ 
 
 
 
