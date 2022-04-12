@@ -271,30 +271,25 @@ def home():
 def viewform():
     
     if request.method =='GET':
+            ID = session['id'] 
             cur = mysql.connection.cursor()
-            ID = session['id']
-            results = cur.fetchall()    
-            print(results)
-            cur = mysql.connection.cursor()
-            cur.execute("SELECT FormID, %s , ptID, EventID, DateOfReport FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID",(ID,))
+            cur.execute("SELECT FormID FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID WHERE UserID = %s ORDER BY DateOfReport ASC",(ID,))
+            
+            #cur.execute("SELECT FormID, %s , piID, EventID, DateOfReport FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID",(ID,))
+            # 1 2 3
             myresult = cur.fetchall()
-            print(myresult)
-            # table with forms created by user id list = form 1 = 1,10/22/2022 when clicked
-            for i in myresult:
-                formID = myresult[i]
-                print('hi')
-                print(formID)    
-    return render_template("ViewForm.html")
+            # table with forms created by user id list = form 1 = 1,10/22/2022 when clicked 
+    return render_template("ViewForm.html" , myresult = myresult )
     
     
 
 @main.route('/profile', methods=['GET', 'POST'])
-def profile():
-    page = 'login'
-    usermsg = 'Log In'
-    if 'loggedin' in session:
-        usermsg ='Hello, '+ session['first']+" "+session['last']
-        page = 'profile'
+def profile(): 
+    page = 'login' 
+    usermsg = 'Log In' 
+    if 'loggedin' in session: 
+        usermsg ='Hello, '+ session['first']+" "+session['last'] 
+        page = 'profile' 
         cur=mysql.connection.cursor()
         cur.execute("Select email, FirstName, LastName, Company, Address, City, State, Phone from users WHERE UName = '{0}'".format(session['username']))
         info = cur.fetchone()

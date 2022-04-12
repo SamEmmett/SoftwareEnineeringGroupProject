@@ -114,3 +114,20 @@ function validate() {
     checkOperator();
 
 }
+
+function processResults (myResults) {
+
+    var select = document.getElementById("Choice");
+    var options = myResults
+
+    print(myResults)
+    
+    // for(var i = 0; i < options.length; i++) {
+    //     var opt = options[i];
+    //     var el = document.createElement("option");
+    //     el.textContent = opt;
+    //     el.value = opt;
+    //     select.appendChild(el);
+    // }
+
+}
