@@ -11,8 +11,6 @@ main.config['MYSQL_USER'] = 'root'
 main.config['MYSQL_PASSWORD'] = 'dbsucks'
 main.config['MYSQL_DB'] = 'groupproject'
 
-
-
 mysql = MySQL(main)
 #Our first route / 
 @main.route('/form', methods=['GET', 'POST'])
@@ -194,15 +192,40 @@ def index():
         cur.execute("INSERT INTO EventInformation(DescribeEoP, Findings )VALUES(%s, %s)",(DESCRIBE,FINDINGS))
         cur.execute("INSERT INTO AlsoReportedTo(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER)VALUES(%s, %s, %s)",(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER))
         mysql.connection.commit()
-
-        pkey = cur.execute("SELECT FormID, a.UserID, f.UserID, f.ptID, b.ptID, f.rfiID, c.rfiID, f.smdID, d.smdID, f.aeoppID, e.aeoppID, f.rcbID, g.rcbID, f.soID, h.soID, f.EventID, i.EventID, f.artID, j.artID FROM Form AS f JOIN Users AS a ON a.UserID = f.UserID JOIN patientinfo AS b ON b.ptID = f.ptID JOIN reportingfacilityinfo AS c ON c.rfiID = f.rfiID JOIN susmedicaldevice AS d ON d.smdID = f.smdID JOIN adverseeventorproductproblem AS e ON e.aeoppID = f.aeoppID JOIN reportcompletedby AS g  ON g.rcbID = f.rcbID JOIN signoff AS h ON h.soID = f.soID JOIN EventInformation AS i ON i.EventID = f.EventID JOIN  AlsoReportedTo as j ON j.artID = f.artID",)
-
-        for i in pkey:
-            k = pkey[i]
-            print(k)
-
-        cur.execute("INSERT INTO Form (FormID, UserID, ptID, rfiID, smdID, aeoppID, rcbID, soID, EventID, artID) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)", (FID,UID,PTID,RFIID,SMDID,AEOPPID,RCBID,SOID,EVENTID,ARTID))
-
+        form = 0
+        form += 1
+        ID = session['id']
+        form = 1
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT UserID FROM Users WHERE UserID  = %s ", (ID,))
+        UIDVAL = cur.fetchall()
+        cur.execute("SELECT piID FROM patientinfo WHERE piID = %s ", (form,))
+        PIIDVAL = cur.fetchall()
+        cur.execute("SELECT rfiID FROM reportingfacilityinfo WHERE rfiID  = %s ", (form,))
+        RFIIDVAL = cur.fetchall()
+        cur.execute("SELECT smdID FROM susmedicaldevice WHERE smdID  = %s ", (form,))
+        SMDIDVAL = cur.fetchall()
+        cur.execute("SELECT aeoppID FROM adverseeventorproductproblem WHERE aeoppID  = %s ", (form,))
+        AEOPPIDVAL = cur.fetchall()
+        cur.execute("SELECT rcbID FROM reportcompletedby WHERE rcbID  = %s ", (form,))
+        RCBIDVAL = cur.fetchall()
+        cur.execute("SELECT soID FROM signoff WHERE soID = %s ", (form,))
+        SOIDVAL = cur.fetchall()
+        cur.execute("SELECT EventID FROM EventInformation WHERE EventID = %s ", (form,))
+        EVENTIDVAL = cur.fetchall()
+        cur.execute("SELECT artID FROM AlsoReportedTo WHERE artID = %s ", (form,))
+        ARTIDVAL = cur.fetchall()
+        UID = UIDVAL[0][0]
+        PIID = PIIDVAL[0][0]
+        RFIID = RFIIDVAL[0][0]
+        SMDID = SMDIDVAL[0][0]
+        AEOPPID = AEOPPIDVAL[0][0]
+        RCBID = RCBIDVAL[0][0]
+        SOID = SOIDVAL[0][0]
+        EVENTID = EVENTIDVAL[0][0]
+        ARTID = ARTIDVAL[0][0]
+        cur.execute("INSERT INTO Form (UserID, piID, rfiID, smdID, aeoppID, rcbID, soID, EventID, artID) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)", (UID,PIID,RFIID,SMDID,AEOPPID,RCBID,SOID,EVENTID,ARTID))
+        mysql.connection.commit()
         cur.close()
         return redirect(url_for('home')) 
     return render_template('index.html')
@@ -246,11 +269,16 @@ def home():
 
 @main.route('/viewform', methods=['GET', 'POST'])
 def viewform():
+    
     if request.method =='GET':
             cur = mysql.connection.cursor()
             ID = session['id']
+            results = cur.fetchall()    
+            print(results)
+            cur = mysql.connection.cursor()
             cur.execute("SELECT FormID, %s , ptID, EventID, DateOfReport FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID",(ID,))
             myresult = cur.fetchall()
+            print(myresult)
             # table with forms created by user id list = form 1 = 1,10/22/2022 when clicked
             for i in myresult:
                 formID = myresult[i]
