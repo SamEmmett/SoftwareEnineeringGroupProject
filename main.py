@@ -239,7 +239,7 @@ def login():
         Username = loginCreds['username']
         Password = loginCreds['password']
         cur =mysql.connection.cursor()
-        cur.execute("Select userID, Uname, FirstName, LastName from users WHERE UName = %s and Pword = %s", (Username, Password))
+        cur.execute("Select userID, Uname, FirstName, LastName, IsAdmin from users WHERE UName = %s and Pword = %s", (Username, Password))
         account = cur.fetchone()
         print(account)
         if account:
@@ -248,6 +248,9 @@ def login():
             session['username'] = account[1]
             session['first'] = account[2]
             session['last'] = account[3]
+            session['admin'] = "Standard User"
+            if account[4]==1:
+                session['admin']="Administrator"
             # this is the redirect to the page after login
             return redirect(url_for('home'))
         else:
@@ -317,7 +320,7 @@ def profile():
         cur.execute("Select email, FirstName, LastName, Company, Address, City, State, Phone from users WHERE UName = '{0}'".format(session['username']))
         info = cur.fetchone()
         ###print("\n\n\n\n\n\n\n"+info[2]+"\n\n\n\n\n\n\n\n")
-        return render_template("profile.html", page=page, usermsg=usermsg, username=session['username'], email = info[0], FirstName = info[1], lastname = info[2], Company = info[3], Address=info[4], City=info[5], State=info[6], Phone=info[7])
+        return render_template("profile.html", page=page, usermsg=usermsg, username=session['username'], email = info[0], FirstName = info[1], lastname = info[2], Company = info[3], Address=info[4], City=info[5], State=info[6], Phone=info[7], Admin = session['admin'])
     return render_template("profile.html" , page=page, usermsg=usermsg)
     
 if __name__ == '__main__':
