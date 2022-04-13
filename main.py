@@ -165,6 +165,11 @@ def index():
         DATEREPORTCLOSED = userDetails['DateClosed']
         DESCRIBE = userDetails['Description']
         FINDINGS = userDetails['Findings']
+        cur = mysql.connection.cursor()
+        ID = session['id']
+        
+        SIGNATURE = None
+        DATECOMP = None
         SIGNATURE = userDetails['Signature']
         DATECOMP = userDetails['SignatureDate']
         BRANDNAME = userDetails['BrandName']
@@ -183,7 +188,7 @@ def index():
         MANUFACTURER = userDetails['RepManuName']
         USERFACILITY = userDetails['RepUserFac']
         DISTRIBUTORIMPORTER = userDetails['RepDisImp']
-        cur = mysql.connection.cursor()
+      
 
         cur.execute("INSERT INTO patientinfo(ptID, DoB, Sex, Weight)VALUES(%s, %s, %s, %s)",(PTID, DOB, SEX, WEIGHT))
         cur.execute("INSERT INTO reportingfacilityinfo(ReportedBy, FacilityName, Address, City, FacilityState, Zip, Phone)VALUES(%s, %s, %s, %s, %s, %s, %s)",(RPTBY, FACNAME, ADDRESS, CITY, FACILITYSTATE, ZIP, PHONE))
@@ -196,9 +201,9 @@ def index():
         mysql.connection.commit()
         form = 0
         form += 1
-        ID = session['id']
+        
         form = 1
-        cur = mysql.connection.cursor()
+        
         cur.execute("SELECT UserID FROM Users WHERE UserID  = %s ", (ID,))
         UIDVAL = cur.fetchall()
         cur.execute("SELECT piID FROM patientinfo WHERE piID = %s ", (form,))
@@ -228,9 +233,24 @@ def index():
         ARTID = ARTIDVAL[0][0]
         cur.execute("INSERT INTO Form (UserID, piID, rfiID, smdID, aeoppID, rcbID, soID, EventID, artID) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)", (UID,PIID,RFIID,SMDID,AEOPPID,RCBID,SOID,EVENTID,ARTID))
         mysql.connection.commit()
+       
         cur.close()
         return redirect(url_for('home')) 
-    return render_template('index.html')
+    if request.method =='GET':
+        alist = []
+        cur = mysql.connection.cursor()
+        ID = session['id']
+        cur.execute("SELECT isAdmin FROM Users WHERE UserID = %s",(ID,))
+        admincheck = cur.fetchall()
+     
+        for item in admincheck:
+            alist.append(item)
+            session['admincheck'] = alist[0]
+        
+        print(admincheck)
+        adminitem = session['admincheck']
+        return render_template("index.html" , adminitem = adminitem)
+
 
 
 @main.route('/', methods=['GET', 'POST'])
@@ -270,11 +290,12 @@ def home():
        
         return render_template("Homepage.html", page=page, usermsg=usermsg)
     return render_template("Homepage.html" , page=page, usermsg=usermsg)
+   
+    
     
 
 @main.route('/viewform', methods=['GET', 'POST'])
 def viewform():
-    
     if request.method =='GET':
             ID = session['id'] 
             cur = mysql.connection.cursor()
@@ -305,6 +326,7 @@ def viewform():
         return redirect(url_for('getform')) 
 
 @main.route('/getform', methods=['GET', 'POST'])
+
 def getform():
     seshlist = session['ses_list'] 
     print(seshlist)

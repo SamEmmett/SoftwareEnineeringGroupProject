@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="../static/styles/styles.css" />
 	<center>
             <div class=header>
-                <h1><font>Form {{seshlist[0]}} Is shown below</font></h1>
+                <h1><font>Form {{seshlist[1]}} Is shown below</font></h1>
             </div>
         </center>
     <!-- NAVBAR -->  
@@ -160,13 +160,13 @@
 		<br />
 
 		<label for="ManuName"> Manufacturer Name:</label>
-		{{seshlist[]}}
+		{{seshlist[42]}}
 		
 		<label for="ManuCity"> City: </label>
-		{{seshlist[]}}
+		{{seshlist[43]}}
 
 		<label for="ManuState">State: </label>
-		{{seshlist[]}}
+		{{seshlist[44]}}
 		</select><br />
 		
 		<span class="numbering">f. </span>Operator of device:
@@ -187,23 +187,23 @@
 					Report Completed by:</h3>
 
 				<label for="repComp">Company: </label>
-				{{seshlist[]}}<br />
-
+				{{seshlist[62]}}<br />
 				<label for="repName">Name: </label>
-				{{seshlist[]}}<br />
+				{{seshlist[63]}}<br />
 
 				<label for="repAddress">Address: </label>
-				{{seshlist[]}}<br />
+				{{seshlist[64]}}<br />
 
 				<label for="repCity"> City: </label>
-				{{seshlist[]}}<br />
+				{{seshlist[65]}}<br />
 
 				<label for="repState">State:</label>
-				{{seshlist[]}}
+				{{seshlist[66]}}
 				<br />
 
 				<label for="repPhone">Phone: </label>
-				<input name="RepPhone" type="tel" placeholder="xxxxxxxxxx" pattern="[0-9]{3}[0-9]{3}[0-9]{4}"  id="repPhone" ><br />
+				{{seshlist[67]}}
+				<br />
 			</div>
 		
 			<div id="ReportedTo" class="form-block form-section-hideable">
@@ -214,22 +214,7 @@
 				<input name="chkDistImp" type="checkbox" value="yes" onclick="notifiedDistImp()"/>&nbsp;Distributor/Importer: <input name="RepDisImp" id="repDistImp" type="text" /><br />
 			</div>
 	
-	</div>
-
-
-	<div class="flexbox-wrapper form-section-hideable" id="Signature">
-        <div id="sigbox" class="form-block form-section-hideable" >
-			<h3>Signature of QA Director</h3>
-			<input name="Signature" type="text" id="signature" required>
-		</div>
-		
-		<div id="sigdate" class="form-block form-section-hideable">
-			<h3>Date Signed</h3>
-			<input name="SignatureDate" type="date" id="signatureDate" required>
-		</div>
-	</div>
-
-	
+	</div>	
 	</div>
 </form>
 

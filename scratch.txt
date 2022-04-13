@@ -1,75 +1,69 @@
-2, 
-1, 
-1, 
 1,
-1, 
-1, 
-1, 
-1, 
-1, 
-1, 
-1, 
-'Daniel'
-'Woods', 
-'dwoods', 
-'password'
-'Stockton University'
-'101 Vera King Farris Drive'
-'Galloway'
-'New Jersey'
- 609652177, 
- 'daniel.woods@stockton.edu',
-1, 
-1, 
-'Tue, 05 Apr 2022 00:00:00 GMT'
-'male'
-1
-1
-" Machine wouldn't display output."
-' '
-1
-'Mark Jones'
-'Johns Hopkins'
-'Baltimore, MD 21218'
-, 'Baltimore'
-, 'Maryland'
-, 21218, 
-'4105168000',
  1, 
- 'Gilero]'
- , 678908, 
- 'Heart Monitor'
- , 8908, 
- 'Integrity'
- , 'Hammonton'
- , 'New Jersey'
- , None
- , None
- , None
- , 1
- , None
- , 'ProductProblem'
- , None
- , None
- , None
- , None
- , None
- , None
- , None
- , 'Fri, 08 Apr 2022 00:00:00 GMT'
- , 'Fri, 22 Apr 2022 00:00:00 GMT'
- , 'Thu, 07 Apr 2022 00:00:00 GMT'
-1, 
-1601 Tilton Rd, Northfield, NJ 08225',
-'Northfield',
-'1601 Tilton Rd,Northfield, NJ 08225', 
-'Northfield', 
-'New Jersey', 
-''
-1
-'Evan James'
-'Wed, 27 Apr 2022 00:00:00 GMT'
  1, 
-'',
-''
-'']
+ 1,
+  1,
+   1,
+    1,
+     1,
+      1,
+       1,
+        'Daniel',
+         'Woods', 
+         'dwoods', 
+         'password', '
+         Stockton University', 
+         '101 Vera King Farris Drive',
+          'Galloway', 
+          'New Jersey', 
+          609652177,
+           'daniel.woods@stockton.edu', 
+           1,
+            1,
+             2, 
+             'Thu, 07 Apr 2022 00:00:00 GMT', 
+             'female', 
+             '120',
+              1, 
+              ' Bed Malfucntioned', 
+              ' Circuit board needed to be replaced', 
+              1, 'Amber Lee', 
+              'Jefferson University Hospital', 
+              'Address: 1020 Walnut St, Philadelphia, 
+              PA 
+              19107', 
+              'Philadelphia', 
+              'Maryland', 
+              19107, '
+              4105168000',
+               1, 
+               'Sterling', 
+               9088989, 
+               'Bed', 
+               378847, 
+               'Xometry',
+                'Hammonton', 
+                'New Jersey', 
+                None, 
+                None, 
+                None, 
+                1, 
+                'AdverseEvent', 
+                None,
+                 None,
+                  None, 
+                  'LifeThreatening', 
+                  None,
+                   None,
+                    None, 
+                    None, 
+                    'Fri, 15 Apr 2022 00:00:00 GMT', 
+                    'Thu, 14 Apr 2022 00:00:00 GMT', 
+                    'Wed, 20 Apr 2022 00:00:00 GMT',
+                     1,
+                    'American Medical', 
+                    'Keith Richards', 
+                    '1601 Tilton Rd, Northfield, NJ 08225', 
+                    'NorthField', 
+                    'New Jersey', 
+                    '8907687658', 1, '', '', '']

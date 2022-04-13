@@ -45,7 +45,7 @@
 </div>
 
 
-<form action="" method="post" >
+<form action="" method="post">
 <div id="form-container">
 	<div id="PatInfo" class="flexbox-wrapper form-section-hideable">
 	
@@ -376,6 +376,17 @@
 
 
 	<!-- SIGNATURE GOES HERE -->
+	<div class="flexbox-wrapper form-section-hideable" id="Signature">
+		<div id="sigbox" class="form-block form-section-hideable" >
+			<h3>Signature of QA Director</h3>
+			<input name="Signature" type="text" id="signature" required>
+		</div>
+		
+		<div id="sigdate" class="form-block form-section-hideable">
+			<h3>Date Signed</h3>
+			<input name="SignatureDate" type="date" id="signatureDate" required>
+		</div>
+	</div>
 
 	
 	</div>
@@ -387,8 +398,29 @@
 		<input id = "ourPara" onClick = "getText()" id="submit" name="Submit" type="submit" value="Submit" />
 	</div>
 
-	<script type="text/javascript"
-         src="{{ url_for('static', filename='scripts.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
+	<script src="js/jquery-1.11.0.min.js" type="text/javascript">
+	$(document).ready(function () {
+        loadSig();
+    });
+   
+ function loadSig() {
+		var isAdmin = "{{adminitem[0]}}"
+
+			alert(isAdmin)
+			if (isAdmin == 0) //checks t see if other checkbox is checked
+			{
+				document.getElementById("signature").setAttribute("hidden", true);
+				document.getElementById("signatureDate").setAttribute("hidden", true);
+			}
+		else
+			{
+				document.getElementById("signature").removeAttribute("hidden", true);
+				document.getElementById("signatureDate").removeAttribute("hidden", true);	
+						
+			}
+			
+	</script>
 </form>
 
 </body>

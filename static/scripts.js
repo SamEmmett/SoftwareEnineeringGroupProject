@@ -115,21 +115,18 @@ function validate() {
 
 }
 
-function removeGarbage (myResult) {
-    var options = myResult
-    
-    options = options.replace(/[() ]/g,'')
+function loadSig (val) {
+    var isAdmin = val
 
-    alert(options)
-    return document.getElementById('optchoice').innerHTML = "Form" + options
-    
-    
-    // for(var i = 0; i < options.length; i++) {
-    //     var opt = options[i];
-    //     var el = document.createElement("option");
-    //     el.textContent = opt;
-    //     el.value = opt;
-    //     select.appendChild(el);
-    // }
-
+    alert(isAdmin)
+    if (isAdmin == 0) //checks to see if other checkbox is checked
+    {
+        document.getElementById("signature").setAttribute("hidden", true);
+        document.getElementById("signatureDate").setAttribute("hidden", true);
+    }
+    else
+    {
+        document.getElementById("signature").removeAttribute("hidden", true);
+        document.getElementById("signatureDate").removeAttribute("hidden", true);
+    }
 }
