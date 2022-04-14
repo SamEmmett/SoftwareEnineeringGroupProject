@@ -1,6 +1,7 @@
+DROP database groupproject;
 create database groupproject;
 use groupproject;
-DROP database groupproject;
+
 
 -- Patient info entity
 create table patientinfo(

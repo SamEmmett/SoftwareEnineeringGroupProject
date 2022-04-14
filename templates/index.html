@@ -4,14 +4,6 @@
 <html>
 
 <head>
-	<script>
-		function getText() {
-
-			var a = document.getElementById("ourPara")
-			alert("Your form has been succsfully submitted")
-		}
-
-	</script>
 	<meta content="en-us" http-equiv="Content-Language" />
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 	<link rel="stylesheet" href="../static/styles/styles.css" />
@@ -34,6 +26,25 @@
 </head>
 
 <body>
+	<script type="text/javascript">
+	
+		function loadSig() {
+		   var isAdmin = "{{adminitem[0]}}"
+   
+			   if (isAdmin == 0) //checks t see if other checkbox is checked
+			   {
+				   document.getElementById("signature").setAttribute("hidden", true);
+				   document.getElementById("signatureDate").setAttribute("hidden", true);
+			   }
+		   else
+			   {
+				   document.getElementById("signature").removeAttribute("hidden", true);
+				   document.getElementById("signatureDate").removeAttribute("hidden", true);	
+						   
+			   }
+		   }
+	   window.onload = loadSig
+	   </script>
 <!--THIS IS A SCRIPT FOR DETECTING IF ANY CHECKBOXES ARE UNCHECKED-->
 <!--
 	Nav bars testing
@@ -399,28 +410,7 @@
 	</div>
 
 	<script type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
-	<script src="js/jquery-1.11.0.min.js" type="text/javascript">
-	$(document).ready(function () {
-        loadSig();
-    });
-   
- function loadSig() {
-		var isAdmin = "{{adminitem[0]}}"
-
-			alert(isAdmin)
-			if (isAdmin == 0) //checks t see if other checkbox is checked
-			{
-				document.getElementById("signature").setAttribute("hidden", true);
-				document.getElementById("signatureDate").setAttribute("hidden", true);
-			}
-		else
-			{
-				document.getElementById("signature").removeAttribute("hidden", true);
-				document.getElementById("signatureDate").removeAttribute("hidden", true);	
-						
-			}
-			
-	</script>
+	
 </form>
 
 </body>
