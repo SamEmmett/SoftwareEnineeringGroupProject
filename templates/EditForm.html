@@ -1,0 +1,51 @@
+<!doctype html>
+    <link rel="stylesheet" href="../static/styles/styles.css"/>
+  <head>
+
+  </head>
+  
+  <body>
+        <div class=header>
+            <h1>Welcome To The Incident Report Editing Page</h1>
+            <p>Select which form you would like to edit below.</p>
+        </div>
+
+    <!-- NAVBAR -->  
+        <div class="topnav" id="myTopnav">
+            <a href="{{url_for('home')}}" class="active">Home</a>
+            <a href="{{url_for('index')}}">Create Form</a>
+            <a href="{{url_for('viewform')}}" >View Form</a>
+            <a href="{{url_for('profile')}}">View Profile</a>
+            
+      </div>
+      <div class="row">
+        <div class="side">
+            <p style="color: red; font-size: 1.25em;">Please select the form you would like to edit.</p>
+            <p>This is the editing page for an already submited incident report form. If you need to fill out a incident report, click create form above, or click <a href="{{url_for('index')}}">Here</a></p>
+          <br>
+        </div>
+        <div class="main">
+            <form action="" method="post">
+                <label for = "option">Select the form you would like to edit below:</label>
+                <h5></h5>
+                Form: <input list="Choice" id="option" name="formnumlist" size="65">
+                <datalist id="Choice" > 
+                  {% for i in new_list %}
+                    <option id="optchoice" value = "{{i}}">
+                  {% endfor %}
+                  </option>
+                <!--  ((2,),(1,) [0][0])-->  
+                </datalist>
+                
+                <input type="submit" value="submit">
+            </form>
+        </div>
+      </div>
+      <table width = "100%"  align = "center" bgcolor=#1F497D>  
+        <tr style="height:30px">
+        <th><font color = "white" size="1" align="center">&#169; All Rights Reserved</font></th>
+        </tr>
+      </div>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
+  </body>
