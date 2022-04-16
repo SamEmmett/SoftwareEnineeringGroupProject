@@ -17,6 +17,7 @@
             <a href="{{url_for('index')}}">Create Form</a>
             <a href="{{url_for('viewform')}}" >View Form</a>
             <a href="{{url_for('profile')}}">View Profile</a>
+            <a href="{{url_for('edit')}}">Edit Form</a>
             
       </div>
       <div class="row">
@@ -29,14 +30,14 @@
             <form action="" method="post">
                 <label for = "option">Select the form you would like to view below:</label>
                 <h5></h5>
-                Form: <input list="Choice" id="option" name="formnumlist" size="65">
-                <datalist id="Choice" > 
+                Form:<br>
+                <select size =15 id="choice" name="formnum"> 
                   {% for i in new_list %}
-                    <option id="optchoice" value = "{{i}}">
+                    <option id="optchoice" name="formnum">{{i}} {{formInfo}}</option>
                   {% endfor %}
-                  </option>
+                  
                 <!--  ((2,),(1,) [0][0])-->  
-                </datalist>
+                </select>
                 <h5></h5>
                 <input type="submit" value="submit">
             </form>

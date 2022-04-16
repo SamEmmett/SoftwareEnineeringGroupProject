@@ -503,3 +503,12 @@ h3 {
   background-color: #EFEFEF; 
   padding: 20px; 
 }
+
+#choice {
+  background-color: white;
+  border-style: double;
+  overflow-y: auto;
+  height: 50%;
+  width: 70%;
+
+}

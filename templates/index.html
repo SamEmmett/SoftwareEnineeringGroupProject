@@ -20,6 +20,7 @@
 			<a href="{{url_for('index')}}">Create Form</a>
 			<a href="{{url_for('viewform')}}">View Form</a>
 			<a href="{{url_for('profile')}}">View Profile</a>
+			<a href="{{url_for('edit')}}">Edit Form</a>
 			<div class="userbutton"><a href="{{url_for('index')}}">{{usermsg}}</a></div>
 		</div>
 	</div>
@@ -35,12 +36,13 @@
 			   {
 				   document.getElementById("signature").setAttribute("hidden", true);
 				   document.getElementById("signatureDate").setAttribute("hidden", true);
+				   document.getElementById("sig").setAttribute("hidden",true);
+				   document.getElementById("dsign").setAttribute("hidden",true);	
 			   }
 		   else
 			   {
 				   document.getElementById("signature").removeAttribute("hidden", true);
-				   document.getElementById("signatureDate").removeAttribute("hidden", true);	
-						   
+				   document.getElementById("signatureDate").removeAttribute("hidden", true);
 			   }
 		   }
 	   window.onload = loadSig
@@ -389,13 +391,13 @@
 	<!-- SIGNATURE GOES HERE -->
 	<div class="flexbox-wrapper form-section-hideable" id="Signature">
 		<div id="sigbox" class="form-block form-section-hideable" >
-			<h3>Signature of QA Director</h3>
-			<input name="Signature" type="text" id="signature" required>
+			<h3 id = "sig">Signature of QA Director</h3>
+			<input name="Signature" type="text" id="signature" >
 		</div>
 		
 		<div id="sigdate" class="form-block form-section-hideable">
-			<h3>Date Signed</h3>
-			<input name="SignatureDate" type="date" id="signatureDate" required>
+			<h3 id = "dsign">Date Signed</h3>
+			<input name="SignatureDate" type="date" id="signatureDate" >
 		</div>
 	</div>
 
