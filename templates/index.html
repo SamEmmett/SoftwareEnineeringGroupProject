@@ -400,13 +400,13 @@
 
 	<script type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
 	<script src="js/jquery-1.11.0.min.js" type="text/javascript">
-	$(document).ready(function () {
-        loadSig();
-    });
-   
- function loadSig() {
-		var isAdmin = "{{adminitem[0]}}"
 
+	var isAdmin = adminitem[0]
+    print(isAdmin)
+ 	function loadSig() {
+	
+
+		print(isAdmin)
 			alert(isAdmin)
 			if (isAdmin == 0) //checks t see if other checkbox is checked
 			{

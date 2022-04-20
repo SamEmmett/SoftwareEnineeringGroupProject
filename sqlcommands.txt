@@ -112,6 +112,7 @@ create table Form(
 `smdID` int NOT NULL,
 `aeoppID` int not NULL,
 `rcbID` int not NULL,
+`soID` int not NULL,
 `EventID` int not NULL,
 `artID` int not NULL,
 PRIMARY KEY(`FormID`),
@@ -121,6 +122,7 @@ CONSTRAINT FK_RFI FOREIGN KEY (rfiID) REFERENCES reportingfacilityinfo(rfiID),
 CONSTRAINT FK_SusDev FOREIGN KEY (smdID) REFERENCES susmedicaldevice(smdID),
 CONSTRAINT FK_aeopp FOREIGN KEY (aeoppID) REFERENCES adverseeventorproductproblem(aeoppID),
 CONSTRAINT FK_rcb FOREIGN KEY (rcbID) REFERENCES reportcompletedby(rcbID),
+CONSTRAINT FK_signoff FOREIGN KEY (soID) REFERENCES signoff(soID),
 CONSTRAINT FK_EventInfo FOREIGN KEY (EventID) REFERENCES EventInformation(EventID),
 Constraint FK_ART FOREIGN KEY (artID) REFERENCES AlsoReportedTo(artID)
 );
@@ -132,4 +134,6 @@ VALUES(1, 'Daniel', 'Woods', 'dwoods', 'password', 'Stockton University', '101 V
 # non admin user
 INSERT INTO users
 VALUES(2, 'John', 'Doe', 'jdoe', 'password', 'Stockton University', '101 Vera King Farris Drive', 'Galloway', 'New Jersey', 609652177, 'doej5@go.stockton.edu', 0);
+
+
 

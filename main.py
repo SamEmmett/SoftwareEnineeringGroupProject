@@ -279,7 +279,8 @@ def login():
             #account doesn't exist or incorrect info entered
             msg = "Incorrect credentials"
     return render_template('login.html', msg=msg)
-
+    
+#Route for our homepage
 @main.route('/homepage', methods=['GET', 'POST'])
 def home():
     page = 'login'
@@ -309,6 +310,8 @@ def viewform():
             cur.close()
     
             return render_template("ViewForm.html" , new_list = new_list )
+    #If a post request is made on the viewform it grabs all data from forms from the logged in ID from the current session then it stores the data in a list
+    # called seshlist and passes that in the session to the getform route
     if request.method == 'POST':
         formnum = request.form
         FORMNUML = formnum['formnumlist']
