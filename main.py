@@ -54,7 +54,7 @@ def index():
         else:
             PRODUCTPROBLEM = None
 
-        print(DESCRIBEEVENTORPROBLEM)
+        #print(DESCRIBEEVENTORPROBLEM)
         OUTCOME = request.form.getlist('outcome')
         b = 'death'
         b1 = 'Intervention'
@@ -123,7 +123,7 @@ def index():
         else:
             OTHER = None
 
-        print(OUTCOME)
+        #print(OUTCOME)
         OPERATOR = request.form.getlist('operator')
         c = 'HealthProfessional'
         c1 = 'User/Patient'
@@ -193,7 +193,7 @@ def index():
         cur.execute("INSERT INTO patientinfo(ptID, DoB, Sex, Weight)VALUES(%s, %s, %s, %s)",(PTID, DOB, SEX, WEIGHT))
         cur.execute("INSERT INTO reportingfacilityinfo(ReportedBy, FacilityName, Address, City, FacilityState, Zip, Phone)VALUES(%s, %s, %s, %s, %s, %s, %s)",(RPTBY, FACNAME, ADDRESS, CITY, FACILITYSTATE, ZIP, PHONE))
         cur.execute("INSERT INTO susmedicaldevice(BrandName, ModelNumber, TOD, SerialNumber, ManufacturerName, MCity, MState, HealthProfessional, LayUserPatient, Other2)VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s , %s)",(BRANDNAME, MODELNUMBER, DEVICETYPE, SERIALNUMBER, MANUNAME, MANUCITY, MANUSTATE,HEALTHPROFESSIONAL, LAYUSERPATIENT, OTHER2))
-        cur.execute("INSERT INTO adverseeventorproductproblem(AdverseEvent, ProductProblem, DoD, Intervention, LifeThreatening, Disability, Hospitalized, CongenitalAnomaly, Other, DateOfEvent, DateOfReport, DateReportClosed)VALUES(%s, %s, %s, %s,%s, %s, %s, %s, %s, %s, %s, %s)",(ADVERSEEVENT, PRODUCTPROBLEM, DATEOFDEATH, INTERVENTION, LIFETHREATENING, DISABILITY, HOSPITALIZED, CONGETITALANOMALY,OTHER, DATEOFEVENT, DATEOFREPORT, DATEREPORTCLOSED))
+        cur.execute("INSERT INTO adverseeventorproductproblem(AdverseEvent, ProductProblem, DoD, Intervention, LifeThreatening, Disability, Hospitalized, CongenitalAnomaly, Other, DateOfEvent, DateOfReport, DateReportClosed)VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",(ADVERSEEVENT, PRODUCTPROBLEM, DATEOFDEATH, INTERVENTION, LIFETHREATENING, DISABILITY, HOSPITALIZED, CONGETITALANOMALY,OTHER, DATEOFEVENT, DATEOFREPORT, DATEREPORTCLOSED))
         cur.execute("INSERT INTO reportcompletedby(RepCompany, RepName, RepAddress, RepCity, RepState, RepPhone)Values(%s,%s,%s,%s,%s,%s)",(REPCOMPANY, REPNAME, REPADDRESS, REPCITY , REPSTATE, REPPHONE))
         cur.execute("INSERT INTO SignOff(Signature, DateCompleted)VALUES(%s, %s)",(SIGNATURE, DATECOMP))
         cur.execute("INSERT INTO EventInformation(DescribeEoP, Findings )VALUES(%s, %s)",(DESCRIBE,FINDINGS))
@@ -231,7 +231,7 @@ def index():
         SOID = SOIDVAL[0][0]
         EVENTID = EVENTIDVAL[0][0]
         ARTID = ARTIDVAL[0][0]
-        cur.execute("INSERT INTO Form (UserID, piID, rfiID, smdID, aeoppID, rcbID, soID, EventID, artID) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)", (UID,PIID,RFIID,SMDID,AEOPPID,RCBID,SOID,EVENTID,ARTID))
+        cur.execute("INSERT INTO Form (UserID, piID, rfiID, smdID, aeoppID, rcbID, soID, EventID, artID) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)", (UID,PIID,RFIID,SMDID,AEOPPID,RCBID,SOID,EVENTID,ARTID,))
         mysql.connection.commit()
        
         cur.close()
@@ -247,7 +247,7 @@ def index():
             alist.append(item)
             session['admincheck'] = alist[0]
         
-        print(admincheck)
+        #print(admincheck)
         adminitem = session['admincheck']
         return render_template("index.html" , adminitem = adminitem)
 
@@ -263,7 +263,7 @@ def login():
         cur =mysql.connection.cursor()
         cur.execute("Select userID, Uname, FirstName, LastName, IsAdmin from users WHERE UName = %s and Pword = %s", (Username, Password))
         account = cur.fetchone()
-        print(account)
+        #print(account)
         if account:
             session['loggedin']=True
             session['id'] = account[0]
@@ -293,8 +293,6 @@ def home():
     return render_template("Homepage.html" , page=page, usermsg=usermsg)
    
     
-    
-
 @main.route('/viewform', methods=['GET', 'POST'])
 def viewform():
     if request.method =='GET':
@@ -305,25 +303,29 @@ def viewform():
             #cur.execute("SELECT FormID, %s , piID, EventID, DateOfReport FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID",(ID,))
             myresult = cur.fetchall()
             new_list = []
+            formInfo = []
             for item in myresult:
                 new_list.append(item[0])
+                cur.execute("SELECT form.formID, adverseeventorproductproblem.DateOfEvent, reportingfacilityinfo.facilityName, susmedicaldevice.BrandName FROM form INNER JOIN adverseeventorproductproblem ON form.aeoppID = adverseeventorproductproblem.aeoppID INNER JOIN reportingfacilityinfo ON form.rfiID = reportingfacilityinfo.rfiID INNER JOIN susmedicaldevice ON form.smdID = susmedicaldevice.smdID WHERE form.formID = %s;",(item[0],))
+                formInfo.append(cur.fetchall())
             cur.close()
     
             return render_template("ViewForm.html" , new_list = new_list )
     #If a post request is made on the viewform it grabs all data from forms from the logged in ID from the current session then it stores the data in a list
     # called seshlist and passes that in the session to the getform route
     if request.method == 'POST':
-        formnum = request.form
-        FORMNUML = formnum['formnumlist']
+        formnum = request.form['formnum']
         cur = mysql.connection.cursor()
-        cur.execute("SELECT * FROM Form JOIN USERS on users.USERID = form.USERID JOIN PATIENTINFO ON patientinfo.PIID = form.PIID JOIN EventInformation ON EventInformation.EVENTID = form.EVENTID JOIN reportingfacilityinfo ON reportingfacilityinfo.RFIID = form.RFIID JOIN susmedicaldevice ON susmedicaldevice.SMDID = form.SMDID JOIN adverseeventorproductproblem ON adverseeventorproductproblem.aeoppID = form.aeoppID JOIN reportcompletedby ON reportcompletedby.rcbID = form.rcbID JOIN signoff ON signoff.soID = form.soID JOIN AlsoReportedTo ON AlsoReportedTo.artID = form.artID WHERE FormID = %s ORDER BY DateOfReport ASC", (FORMNUML,))
-        getformData = cur.fetchall()   
-        print(getformData)
+        cur.execute("SELECT * FROM Form JOIN USERS on users.USERID = form.USERID JOIN PATIENTINFO ON patientinfo.PIID = form.PIID JOIN EventInformation ON EventInformation.EVENTID = form.EVENTID JOIN reportingfacilityinfo ON reportingfacilityinfo.RFIID = form.RFIID JOIN susmedicaldevice ON susmedicaldevice.SMDID = form.SMDID JOIN adverseeventorproductproblem ON adverseeventorproductproblem.aeoppID = form.aeoppID JOIN reportcompletedby ON reportcompletedby.rcbID = form.rcbID JOIN signoff ON signoff.soID = form.soID JOIN AlsoReportedTo ON AlsoReportedTo.artID = form.artID WHERE FormID = %s ORDER BY DateOfReport ASC",(formnum,))
+        getformData = cur.fetchall()  
+        #print("this is before") 
+        #print(getformData)
         new_list1 = []
         for item in getformData:
             for j in item:
                 new_list1.append(j)
-        print(new_list1)
+        #print("this is after")
+        #print(new_list1)
         session['ses_list'] = new_list1
         cur.close()
         return redirect(url_for('getform')) 
@@ -332,7 +334,7 @@ def viewform():
 
 def getform():
     seshlist = session['ses_list'] 
-    print(seshlist)
+    #print(seshlist)
     if request.method =='GET':
         return render_template("Viewingindex.html", seshlist = seshlist)
 
@@ -349,6 +351,11 @@ def profile():
         ###print("\n\n\n\n\n\n\n"+info[2]+"\n\n\n\n\n\n\n\n")
         return render_template("profile.html", page=page, usermsg=usermsg, username=session['username'], email = info[0], FirstName = info[1], lastname = info[2], Company = info[3], Address=info[4], City=info[5], State=info[6], Phone=info[7], Admin = session['admin'])
     return render_template("profile.html" , page=page, usermsg=usermsg)
-    
+
+@main.route('/edit', methods=['GET', 'POST'])
+def edit():
+    if request.method =='GET':
+        return render_template("EditForm.html")
+    return render_template("EditForm.html")
 if __name__ == '__main__':
    main.run(debug=True)

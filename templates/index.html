@@ -4,14 +4,6 @@
 <html>
 
 <head>
-	<script>
-		function getText() {
-
-			var a = document.getElementById("ourPara")
-			alert("Your form has been succsfully submitted")
-		}
-
-	</script>
 	<meta content="en-us" http-equiv="Content-Language" />
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 	<link rel="stylesheet" href="../static/styles/styles.css" />
@@ -28,12 +20,33 @@
 			<a href="{{url_for('index')}}">Create Form</a>
 			<a href="{{url_for('viewform')}}">View Form</a>
 			<a href="{{url_for('profile')}}">View Profile</a>
+			<a href="{{url_for('edit')}}">Edit Form</a>
 			<div class="userbutton"><a href="{{url_for('index')}}">{{usermsg}}</a></div>
 		</div>
 	</div>
 </head>
 
 <body>
+	<script type="text/javascript">
+	
+		function loadSig() {
+		   var isAdmin = "{{adminitem[0]}}"
+   
+			   if (isAdmin == 0) //checks t see if other checkbox is checked
+			   {
+				   document.getElementById("signature").setAttribute("hidden", true);
+				   document.getElementById("signatureDate").setAttribute("hidden", true);
+				   document.getElementById("sig").setAttribute("hidden",true);
+				   document.getElementById("dsign").setAttribute("hidden",true);	
+			   }
+		   else
+			   {
+				   document.getElementById("signature").removeAttribute("hidden", true);
+				   document.getElementById("signatureDate").removeAttribute("hidden", true);
+			   }
+		   }
+	   window.onload = loadSig
+	   </script>
 <!--THIS IS A SCRIPT FOR DETECTING IF ANY CHECKBOXES ARE UNCHECKED-->
 <!--
 	Nav bars testing
@@ -378,13 +391,13 @@
 	<!-- SIGNATURE GOES HERE -->
 	<div class="flexbox-wrapper form-section-hideable" id="Signature">
 		<div id="sigbox" class="form-block form-section-hideable" >
-			<h3>Signature of QA Director</h3>
-			<input name="Signature" type="text" id="signature" required>
+			<h3 id = "sig">Signature of QA Director</h3>
+			<input name="Signature" type="text" id="signature" >
 		</div>
 		
 		<div id="sigdate" class="form-block form-section-hideable">
-			<h3>Date Signed</h3>
-			<input name="SignatureDate" type="date" id="signatureDate" required>
+			<h3 id = "dsign">Date Signed</h3>
+			<input name="SignatureDate" type="date" id="signatureDate" >
 		</div>
 	</div>
 
@@ -399,6 +412,7 @@
 	</div>
 
 	<script type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
+<<<<<<< HEAD
 	<script src="js/jquery-1.11.0.min.js" type="text/javascript">
 
 	var isAdmin = adminitem[0]
@@ -421,6 +435,9 @@
 			}
 			
 	</script>
+=======
+	
+>>>>>>> 4c04b4f180af5c93877e3386a8ae8e17c413543d
 </form>
 
 </body>

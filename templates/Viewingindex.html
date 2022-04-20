@@ -26,6 +26,7 @@
 			<a href="{{url_for('index')}}">Create Form</a>
 			<a href="{{url_for('viewform')}}">View Form</a>
 			<a href="{{url_for('profile')}}">View Profile</a>
+			<a href="{{url_for('edit')}}">Edit Form</a>
 			<div class="userbutton"><a href="{{url_for('index')}}"></a></div>
 		</div>
 	</div>
@@ -51,129 +52,230 @@
 			<h3><span class="numbering">1. </span>Patient Information</h3>
 			<p class="block-note">It is our policy not to collect any patient information unless requested to do so by the Original Equipment Manufacturer (OEM).</p>
 
-			<span class="numbering">a. </span><label for="ptID">PT Identifier: </label>{{seshlist[22]}} <br/>
-			<span class="numbering">b. </span><label for="DoB">Date of Birth: (mm/dd/year):</label>{{seshlist[23]}} <br />
-			<span class="numbering">c. </span><label>Sex: </label>{{seshlist[24]}}<br />
-			<span class="numbering">d. </span> <label for="Weight"> Weight (lbs):</label>{{seshlist[25]}} <br/>
+			<span class="numbering">a. </span><label for="ptID">PT Identifier: </label>{{seshlist[23]}} <br/>
+			<span class="numbering">b. </span><label for="DoB">Date of Birth: (mm/dd/year):</label>{{seshlist[24]}} <br />
+			<span class="numbering">c. </span><label>Sex: </label>{{seshlist[25]}}
+			<span class="numbering">d. </span> <label for="Weight"> Weight (lbs):</label>{{seshlist[26]}} <br/>
 		</div>
 		
 		<div class ="form-block" id="ReportingFacility" >
 			<h3><span class="numbering">2. </span>Reporting Facility Information</h3>
-			<label for="rptBy">Reported by:</label> {{seshlist[30]}}<br />
-			<label for="facName">Facility Name:</label>{{seshlist[31]}}<br />
-			<label for="Address"> Address:</label> {{seshlist[32]}}<br />
-			<label for="City">City:</label> {{seshlist[33]}}
-			<label for="FacilityState">State:{{seshlist[34]}}
+			<label for="rptBy">Reported by:</label> {{seshlist[31]}}<br />
+			<label for="facName">Facility Name:</label>{{seshlist[32]}}<br />
+			<label for="Address"> Address:</label> {{seshlist[33]}}<br />
+			<label for="City">City:</label> {{seshlist[34]}}
+			<label for="FacilityState">State:{{seshlist[35]}}
 			<br/>
-			Zip:{{seshlist[35]}}<br />
-			Phone: {{seshlist[36]}}<br />
+			Zip:{{seshlist[36]}}<br />
+			Phone: {{seshlist[37]}}<br />
 		</div>
 	</div>
 	
 	<div class="form-block form-section-hideable">
 		<h3><span class="numbering">3. </span>Adverse Event or Product Problem</h3>
+		<script>
+            function section1(){
+            const word = '{{ seshlist }}';
+			let arr = word.split(', ');''
+			for (let i=0; i < arr.length; i++){
+				print
+				arr[i] = unescape(arr[i])
 
-		<span class="numbering">a. </span><input id="AdverseEvent" name="EventOrProblem" type="checkbox" value="AdverseEvent" />
+			}
+			console.log(arr);
+            for (let i = 0; i <= arr.length; i++){
+				/*alert(arr[i])*/
+				console.log(arr);
+                if (arr[i] == "&#39;AdverseEvent&#39;"){
+					document.getElementById("AdverseEvent").setAttribute("disabled", true);
+                    document.getElementById("AdverseEvent").setAttribute("checked", true);
+                }
+                if (arr[i] == "&#39;EventOrProblem&#39;"){
+					document.getElementById("ProductProblem").setAttribute("disabled", true);
+                    document.getElementById("ProductProblem").setAttribute("checked", true);
+                }
+				if (arr[i] == "&#39;death&#39;"){
+					document.getElementById("DoD").value = arr[i+1]
+					document.getElementById("death").setAttribute("disabled", true);
+                    document.getElementById("death").setAttribute("checked", true);
+                }
+				if (arr[i] == "&#39;Intervention&#39;"){
+					document.getElementById("Intervention").setAttribute("disabled", true);
+                    document.getElementById("Intervention").setAttribute("checked", true);
+                }
+				if (arr[i] == "&#39;LifeThreatening&#39;"){
+					document.getElementById("LifeThreatening").setAttribute("disabled", true);
+                    document.getElementById("LifeThreatening").setAttribute("checked", true);
+                }
+				if (arr[i] == "&#39;Disability&#39;"){
+					document.getElementById("Disability").setAttribute("disabled", true);
+                    document.getElementById("Disability").setAttribute("checked", true);
+				}
+				if (arr[i] == "&#39;Hospitalized&#39;"){
+					document.getElementById("Hospitalized").setAttribute("disabled", true);
+                    document.getElementById("Hospitalized").setAttribute("checked", true);
+				}
+				if (arr[i] == "&#39;CongenitalAnomaly&#39;"){
+					document.getElementById("CongenitalAnomaly").setAttribute("disabled", true);
+                    document.getElementById("CongenitalAnomaly").setAttribute("checked", true);
+				}
+				if (arr[i] == "&#39;other&#39;"){
+					document.getElementById("other").value = arr[i+1]
+					document.getElementById("other").setAttribute("disabled", true);
+                    document.getElementById("other").setAttribute("checked", true);
+				}
+
+
+				if (arr[i] == arr[29]){
+					document.getElementById("Description").setAttribute("disabled", true);
+                	document.getElementById("Description").value=arr[29];
+				}
+				if (arr[i] == arr[30]){
+					document.getElementById("Findings").setAttribute("disabled", true);
+               	 	document.getElementById("Findings").value=arr[30];
+				}
+
+				
+
+
+				if (arr[i] == "&#39;User/Patient&#39;"){
+					document.getElementById("User/Patient").setAttribute("disabled", true);
+					document.getElementById("User/Patient").setAttribute("checked", true);
+				}
+					if (arr[i] == "&#39;HealthProfessional&#39;"){
+					document.getElementById("HealthProfessional").setAttribute("disabled", true);
+					document.getElementById("HealthProfessional").setAttribute("checked", true);
+				}
+					if (arr[i] == "&#39;otherCHK&#39;"){
+					document.getElementById("otherCHK").setAttribute("disabled", true);
+					document.getElementById("otherCHK").setAttribute("checked", true);
+				}
+				if (arr[i] == "&#39;other2&#39;"){
+					document.getElementById("other2").value = arr[i+1]
+					document.getElementById("other2").setAttribute("disabled", true);
+                    document.getElementById("other2").setAttribute("checked", true);
+				}
+
+
+
+
+				if (arr[i] == "&#39;chkManu&#39;"){
+					document.getElementById("chkManu").setAttribute("disabled", true);
+                    document.getElementById("chkManu").setAttribute("checked", true);
+				}
+				if (arr[i] == "&#39;chkRepFac2&#39;"){
+					document.getElementById("chkRepFac").setAttribute("disabled", true);
+                    document.getElementById("chkRepFac").setAttribute("checked", true);
+				}
+				if (arr[i] == "&#39;chkDistImp2&#39;"){
+					document.getElementById("chkDistImp").setAttribute("disabled", true);
+                    document.getElementById("chkDistImp").setAttribute("checked", true);
+				}
+				
+
+		}
+        }
+        window.onload = section1
+        </script>
+		<hr /> 
+		<span class="numbering">a. </span><input id="AdverseEvent" name="EventOrProblem" type="checkbox" value="AdverseEvent" disabled/>
 		<label for="AdverseEvent">Adverse Event</label>
 		and/or
-		<input name="EventOrProblem" type="checkbox" value="ProductProblem" id="ProductProblem"/>
+		<input name="EventOrProblem" type="checkbox" value="ProductProblem" id="ProductProblem" disabled/>
 		<label for="ProductProblem">Product Problem (defects/malfunctions)</label>
 		<hr /> 
-		
 		<span class="numbering">b. </span>Outcome attributed to adverse event (check all that apply): <br />
 		<br />
-		<input name="outcome" type="checkbox" value="death" id="death" onclick="setDoD()"/>
-		<label for="death">Death (mm/dd/year)</label>
+		<input name="outcome" type="checkbox" value="death" id="death" onclick="setDoD()" disabled/>
+		<label for="ProductProblem">Death (mm/dd/year)</label>
+		<input name="DoD" type="date" id="DoD" disabled/>
 
-		<input name="outcome" type="checkbox" value="Intervention" id="Intervention" />
+		<input name="outcome" type="checkbox" value="Intervention" id="Intervention" disabled/>
 		<label for="Intervention"> intervention to prevent permanent impairment/damage</label><br />
 
-		<input name="outcome" type="checkbox" value="LifeThreatening" id="LifeThreatening"/>
+		<input name="outcome" type="checkbox" value="LifeThreatening" id="LifeThreatening" disabled/>
 		<label for="LifeThreatening">Life-Threatening</label>
 
-		<input name="outcome" type="checkbox" value="Disability" id="Disability" />
+		<input name="outcome" type="checkbox" value="Disability" id="Disability" disabled/>
 		<label for="Disability">Disability</label><br />
 
-		<input name="outcome" type="checkbox" value="Hospitalized" id="Hospitalized"/>
+		<input name="outcome" type="checkbox" value="Hospitalized" id="Hospitalized" disabled/>
 		<label for="Hospitalized">Hospitalized</label>
 
-		<input name="outcome" type="checkbox" value="CongenitalAnomaly" id="CongenitalAnomaly"/>
+		<input name="outcome" type="checkbox" value="CongenitalAnomaly" id="CongenitalAnomaly" disabled/>
 		<label for="CongenitalAnomaly">Congenital Anomaly</label>
 		<br />
 
-		<input name="outcome" type="checkbox" value="Other" id="other" onclick="setOther1()"/>
+		<input name="outcome" type="checkbox" value="Other" id="other" onclick="setOther1()" disabled/>
 		<label for="Other"> Other: </label>
-		<input name="OtherText1" type="text" id="otherText1" placeholder="type"/><br />
+		<input name="OtherText1" type="text" id="otherText1" placeholder="type" disabled/><br />
 		
 		<div id="Dates" class="flexbox-wrapper">
 			<div class="date">
 				<span class="numbering">4.</span>
 				<label for="DateOfEvent"> Date of event (mo/day/yr):</label> <br />
-				{{seshlist[58]}}
+				{{seshlist[59]}}
 			</div>
 			<div class="date">
 				<span class="numbering">5. </span>
 				<label for="DateOfReport">Date of this report (mo/day/yr):</label> <br />
-				{{seshlist[59]}}
+				{{seshlist[60]}}
 			</div>
 			<div class="date">
 				<span class="numbering">6. </span>
 				<label for="DateClosed">Date report closed (mo/day/yr):</label> <br />
-				{{seshlist[60]}}
+				{{seshlist[61]}}
 			</div>
 		</div>
 	</div>
 	
 	<div class ="form-block form-section-hideable" id="DescAndFindings">
 		<h3>Event Information</h3>
-
 		<span class="numbering">7. </span>
 		<label for="Description">Describe Event or Problem: </label> <br /><br />
-		{{seshlist[27]}}
+		<textarea name="Description" placeholder="Please type here..." id="Description" maxlength="256"  disabled> </textarea><br />
 		<br />
 		<span class="numbering">8. </span>
 		<label for="Findings">Findings:</label> <br /><br />
-		{{seshlist[28]}}
-		<br />
-		<br />
-
+		<textarea name="Findings" placeholder="Please type here..." id="Findings" maxlength = 100  disabled> </textarea></div>
+		
 	<div class ="form-block form-section-hideable" id="SusDevice">
 		<h3><span class="numbering">9. </span>
 			<h3>Suspect Medical Device</h3>
 
 		<span class="numbering">a. </span>
 		<label for="BrandName">Brand Name:</label>
-		{{seshlist[38]}}
+		{{seshlist[39]}}
 
 		<span class="numbering">c. </span>
 		<label for="ModelNum">Model # </label>
-		{{seshlist[39]}}
+		{{seshlist[40]}}
 
 		<span class="numbering">b. </span>
 		<label for="DeviceType">type of device:</label>
-		{{seshlist[40]}}
+		{{seshlist[41]}}
 
 		<span class="numbering">d. </span>
 		<label for="SerielNum">Serial #</label>
-		{{seshlist[41]}}
+		{{seshlist[42]}}
 		<br />
 		<br />
 
 		<label for="ManuName"> Manufacturer Name:</label>
-		{{seshlist[42]}}
+		{{seshlist[43]}}
 		
 		<label for="ManuCity"> City: </label>
-		{{seshlist[43]}}
+		{{seshlist[44]}}
 
 		<label for="ManuState">State: </label>
-		{{seshlist[44]}}
+		{{seshlist[45]}}
 		</select><br />
 		
 		<span class="numbering">f. </span>Operator of device:
-		<input name="operator" type="checkbox" value="HealthProfessional" />Health Professional
-		<input name="operator" type="checkbox" value="User/Patient"/>Lay user/patient
-		<input name="operator" type="checkbox" id="otherCHK" value="Other2" />Other: <!--<input name="outcome" type="checkbox" value="death" id="death" />-->
-		<input name="OtherText2" type="text" id="otherText2" /><br />
+		<input name="operator" type="checkbox" value="HealthProfessional" id="HealthProfessional" disabled/>Health Professional
+		<input name="operator" type="checkbox" value="User/Patient"id="User/Patient" disabled/>Lay user/patient
+		<input name="operator" type="checkbox" id="otherCHK" value="Other2" id="otherCHK" disabled/>Other: <!--<input name="outcome" type="checkbox" value="death" id="death" />-->
+		<input name="OtherText2" type="text" id="otherText2" disabled/><br />
 		<br />
 
 		
@@ -187,31 +289,31 @@
 					Report Completed by:</h3>
 
 				<label for="repComp">Company: </label>
-				{{seshlist[62]}}<br />
-				<label for="repName">Name: </label>
 				{{seshlist[63]}}<br />
-
-				<label for="repAddress">Address: </label>
+				<label for="repName">Name: </label>
 				{{seshlist[64]}}<br />
 
-				<label for="repCity"> City: </label>
+				<label for="repAddress">Address: </label>
 				{{seshlist[65]}}<br />
 
+				<label for="repCity"> City: </label>
+				{{seshlist[66]}}<br />
+
 				<label for="repState">State:</label>
-				{{seshlist[66]}}
+				{{seshlist[67]}}
 				<br />
 
 				<label for="repPhone">Phone: </label>
-				{{seshlist[67]}}
+				{{seshlist[68]}}
 				<br />
 			</div>
 		
 			<div id="ReportedTo" class="form-block form-section-hideable">
 				<h3><span class="numbering">11. </span>Also Reported to: </h3>
 				Name/Company<br />
-				<input name="chkManu" type="checkbox" value="yes" onclick="notifiedManu()"/>&nbsp;Manufacturer: <input name="RepManuName" id="repManuName" type="text" /><br />
-				<input name="chkRepFac" type="checkbox" value="yes" onclick="notifiedFac()" />&nbsp;User Facility: <input name="RepUserFac" id="repUserFac" type="text" /><br />
-				<input name="chkDistImp" type="checkbox" value="yes" onclick="notifiedDistImp()"/>&nbsp;Distributor/Importer: <input name="RepDisImp" id="repDistImp" type="text" /><br />
+				<input name="chkManu" type="checkbox" value="yes" onclick="notifiedManu()" id ="chkManu" disabled/>&nbsp;Manufacturer: <input name="RepManuName" id="repManuName" type="text" disabled/><br />
+				<input name="chkRepFac" type="checkbox" value="yes" onclick="notifiedFac()" id = "chkRepFac"disabled/>&nbsp;User Facility: <input name="RepUserFac" id="repUserFac" type="text" disabled/><br />
+				<input name="chkDistImp" type="checkbox" value="yes" onclick="notifiedDistImp()" id = "chkDistImp" disabled/>&nbsp;Distributor/Importer: <input name="RepDisImp" id="repDistImp" type="text" disabled/><br />
 			</div>
 	
 	</div>	

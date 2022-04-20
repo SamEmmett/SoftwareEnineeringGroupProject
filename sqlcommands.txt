@@ -1,6 +1,7 @@
+DROP database groupproject;
 create database groupproject;
 use groupproject;
-DROP database groupproject;
+
 
 -- Patient info entity
 create table patientinfo(
@@ -29,7 +30,7 @@ create table susmedicaldevice(
 `BrandName`nvarchar(50),
 `ModelNumber` int,
 `TOD` nvarchar(50),
-`SerialNumber` int,
+`SerialNumber` nvarchar(50),
 `ManufacturerName` nvarchar(50),
 `MCity` nvarchar(50),
 `MState` nvarchar(50),
