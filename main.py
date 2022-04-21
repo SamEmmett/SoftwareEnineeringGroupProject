@@ -252,12 +252,13 @@ def viewform():
             formInfo = []
             i=0
             for item in myresult:
-                i+=1
+                
                 #print("\n\n\n\n\n\n\n\n\n\n"+item)
                 #print(i+"\n\n\n\n\n\n\n\n\n\n\n\n\n")
                 new_list.append(item[0])
                 cur.execute("SELECT form.formID, adverseeventorproductproblem.DateOfEvent, reportingfacilityinfo.facilityName, susmedicaldevice.BrandName FROM form INNER JOIN adverseeventorproductproblem ON form.aeoppID = adverseeventorproductproblem.aeoppID INNER JOIN reportingfacilityinfo ON form.rfiID = reportingfacilityinfo.rfiID INNER JOIN susmedicaldevice ON form.smdID = susmedicaldevice.smdID WHERE form.formID = %s;",(item[0],))
-                #formInfo[i]=cur.fetchall()
+                formInfo[i]=cur.fetchall()
+                i+=1
             cur.close()
     
             return render_template("ViewForm.html" , new_list = new_list, formInfo=formInfo)
