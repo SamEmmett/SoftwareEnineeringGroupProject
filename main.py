@@ -28,31 +28,18 @@ def index():
         FACILITYSTATE = userDetails['FacilityState']
         ZIP = userDetails['Zip']
         PHONE = userDetails['Phone']
+
+
         DESCRIBEEVENTORPROBLEM = request.form.getlist('EventOrProblem')
-    
         a = 'AdverseEvent'
         a1 = 'ProductProblem'
-
-        achk = False
-        a1chk= False
-
+        ADVERSEEVENT = None
+        PRODUCTPROBLEM = None
         for i in range(len(DESCRIBEEVENTORPROBLEM)):
-
             if (DESCRIBEEVENTORPROBLEM[i] == a):
-                achk = True
+                 ADVERSEEVENT = DESCRIBEEVENTORPROBLEM[i]
             if (DESCRIBEEVENTORPROBLEM[i] == a1):
-                a1chk = True
-
-
-        if (achk == True):
-            ADVERSEEVENT = DESCRIBEEVENTORPROBLEM[i]
-        else:
-            ADVERSEEVENT = None
-
-        if (a1chk == True):
-            PRODUCTPROBLEM = DESCRIBEEVENTORPROBLEM[i]
-        else:
-            PRODUCTPROBLEM = None
+                PRODUCTPROBLEM = DESCRIBEEVENTORPROBLEM[i]
 
         #print(DESCRIBEEVENTORPROBLEM)
         OUTCOME = request.form.getlist('outcome')
@@ -63,99 +50,49 @@ def index():
         b4 = 'Hospitalized'
         b5 = 'CongenitalAnomaly'
         b6 = 'Other'
+        DATEOFDEATH = None
+        INTERVENTION = None
+        LIFETHREATENING = None
+        DISABILITY = None
+        HOSPITALIZED = None
+        CONGETITALANOMALY = None
+        OTHER = None
 
-        bchk = False
-        b1chk = False
-        b2chk = False
-        b3chk = False
-        b4chk = False
-        b5chk = False
-        b6chk = False
-
-        for i in range(len(OUTCOME)):
+      
+        for i in range(len(OUTCOME)): #Sam no longer wrote this ¯\_(ツ)_/¯
             if(OUTCOME[i] == b):
-                bchk = True
+                DATEOFDEATH = userDetails['DoD']
             if(OUTCOME[i] == b1):
-                b1chk = True
+                INTERVENTION = OUTCOME[i]
             if(OUTCOME[i] == b2):
-                b2chk = True
+                LIFETHREATENING = OUTCOME[i]
             if(OUTCOME[i] == b3):
-                b3chk = True
+                DISABILITY = OUTCOME[i]
             if(OUTCOME[i] == b4):
-                b4chk = True
+                HOSPITALIZED = OUTCOME[i]
             if(OUTCOME[i] == b5):
-                b5chk = True
+                CONGETITALANOMALY = OUTCOME[i]
             if(OUTCOME[i] == b6):
-                b6chk = True
+                OTHER = userDetails['OtherText1']
 
-        if (bchk == True):
-            DATEOFDEATH = userDetails['DoD']
-        else:
-            DATEOFDEATH = None
 
-        if (b1chk == True):
-            INTERVENTION = OUTCOME[i]
-        else:
-            INTERVENTION = None
-
-        if (b2chk == True):
-            LIFETHREATENING = OUTCOME[i]
-        else:
-            LIFETHREATENING = None
-
-        if (b3chk == True):
-            DISABILITY = OUTCOME[i]
-        else:
-            DISABILITY = None
-
-        if (b4chk == True):
-            HOSPITALIZED = OUTCOME[i]
-        else:
-            HOSPITALIZED = None
-
-        if (b5chk == True):
-            CONGETITALANOMALY = OUTCOME[i]
-        else:
-            CONGETITALANOMALY = None
-
-        if (b6chk == True):
-            OTHER = OUTCOME[i]
-        else:
-            OTHER = None
-
-        #print(OUTCOME)
+        print(OUTCOME)
         OPERATOR = request.form.getlist('operator')
         c = 'HealthProfessional'
         c1 = 'User/Patient'
         c2 = 'Other2'
-
-        cchk = False
-        c1chk = False
-        c2chk = False
-
-
+        HEALTHPROFESSIONAL = None
+        LAYUSERPATIENT = None
+        OTHER2 = None
         for i in range(len(OPERATOR)):
             if(OPERATOR[i] == c):
-              cchk = True
+               HEALTHPROFESSIONAL = OPERATOR[i]
             if(OPERATOR[i] == c1):
-               c1chk = True
+                LAYUSERPATIENT = OPERATOR[i]
             if(OPERATOR[i] == c2):
-                c2chk = True
+                OTHER2 = userDetails['OtherText2']
 
-        if (cchk == True):
-            HEALTHPROFESSIONAL = OPERATOR[i]
-        else:
-            HEALTHPROFESSIONAL = None
 
-        if (c1chk == True):
-            LAYUSERPATIENT = OPERATOR[i]
-        else:
-            LAYUSERPATIENT = None
-
-        if (c2chk == True):   
-            OTHER2 = userDetails['OtherText2']
-        else:
-            OTHER2 = None
 
         DATEOFEVENT = None
         DATEOFREPORT = None
@@ -191,19 +128,28 @@ def index():
       
 
         cur.execute("INSERT INTO patientinfo(ptID, DoB, Sex, Weight)VALUES(%s, %s, %s, %s)",(PTID, DOB, SEX, WEIGHT))
+        
         cur.execute("INSERT INTO reportingfacilityinfo(ReportedBy, FacilityName, Address, City, FacilityState, Zip, Phone)VALUES(%s, %s, %s, %s, %s, %s, %s)",(RPTBY, FACNAME, ADDRESS, CITY, FACILITYSTATE, ZIP, PHONE))
+        
         cur.execute("INSERT INTO susmedicaldevice(BrandName, ModelNumber, TOD, SerialNumber, ManufacturerName, MCity, MState, HealthProfessional, LayUserPatient, Other2)VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s , %s)",(BRANDNAME, MODELNUMBER, DEVICETYPE, SERIALNUMBER, MANUNAME, MANUCITY, MANUSTATE,HEALTHPROFESSIONAL, LAYUSERPATIENT, OTHER2))
+
         cur.execute("INSERT INTO adverseeventorproductproblem(AdverseEvent, ProductProblem, DoD, Intervention, LifeThreatening, Disability, Hospitalized, CongenitalAnomaly, Other, DateOfEvent, DateOfReport, DateReportClosed)VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",(ADVERSEEVENT, PRODUCTPROBLEM, DATEOFDEATH, INTERVENTION, LIFETHREATENING, DISABILITY, HOSPITALIZED, CONGETITALANOMALY,OTHER, DATEOFEVENT, DATEOFREPORT, DATEREPORTCLOSED))
+        
         cur.execute("INSERT INTO reportcompletedby(RepCompany, RepName, RepAddress, RepCity, RepState, RepPhone)Values(%s,%s,%s,%s,%s,%s)",(REPCOMPANY, REPNAME, REPADDRESS, REPCITY , REPSTATE, REPPHONE))
+        
         cur.execute("INSERT INTO SignOff(Signature, DateCompleted)VALUES(%s, %s)",(SIGNATURE, DATECOMP))
+       
         cur.execute("INSERT INTO EventInformation(DescribeEoP, Findings )VALUES(%s, %s)",(DESCRIBE,FINDINGS))
-        cur.execute("INSERT INTO AlsoReportedTo(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER)VALUES(%s, %s, %s)",(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER))
+        
+        cur.execute("INSERT INTO AlsoReportedTo(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER)VALUES(%s, %s, %s)",(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER))\
+        
         mysql.connection.commit()
-        form = 0
-        form += 1
-        
-        form = 1
-        
+      
+        form = cur.execute("select formID from form order by formid asc;")
+        if form == None:
+            form==1
+        form=form+1
+        print(form)
         cur.execute("SELECT UserID FROM Users WHERE UserID  = %s ", (ID,))
         UIDVAL = cur.fetchall()
         cur.execute("SELECT piID FROM patientinfo WHERE piID = %s ", (form,))
@@ -222,7 +168,7 @@ def index():
         EVENTIDVAL = cur.fetchall()
         cur.execute("SELECT artID FROM AlsoReportedTo WHERE artID = %s ", (form,))
         ARTIDVAL = cur.fetchall()
-        UID = UIDVAL[0][0]
+        UID = UIDVAL[0][0] #Evan wrote this ¯\_(ツ)_/¯
         PIID = PIIDVAL[0][0]
         RFIID = RFIIDVAL[0][0]
         SMDID = SMDIDVAL[0][0]
@@ -304,13 +250,17 @@ def viewform():
             myresult = cur.fetchall()
             new_list = []
             formInfo = []
+            i=0
             for item in myresult:
+                i+=1
+                #print("\n\n\n\n\n\n\n\n\n\n"+item)
+                #print(i+"\n\n\n\n\n\n\n\n\n\n\n\n\n")
                 new_list.append(item[0])
                 cur.execute("SELECT form.formID, adverseeventorproductproblem.DateOfEvent, reportingfacilityinfo.facilityName, susmedicaldevice.BrandName FROM form INNER JOIN adverseeventorproductproblem ON form.aeoppID = adverseeventorproductproblem.aeoppID INNER JOIN reportingfacilityinfo ON form.rfiID = reportingfacilityinfo.rfiID INNER JOIN susmedicaldevice ON form.smdID = susmedicaldevice.smdID WHERE form.formID = %s;",(item[0],))
-                formInfo.append(cur.fetchall())
+                #formInfo[i]=cur.fetchall()
             cur.close()
     
-            return render_template("ViewForm.html" , new_list = new_list )
+            return render_template("ViewForm.html" , new_list = new_list, formInfo=formInfo)
     #If a post request is made on the viewform it grabs all data from forms from the logged in ID from the current session then it stores the data in a list
     # called seshlist and passes that in the session to the getform route
     if request.method == 'POST':
@@ -334,7 +284,7 @@ def viewform():
 
 def getform():
     seshlist = session['ses_list'] 
-    #print(seshlist)
+    print(seshlist)
     if request.method =='GET':
         return render_template("Viewingindex.html", seshlist = seshlist)
 

@@ -35,8 +35,8 @@
 <body>
 <!--THIS IS A SCRIPT FOR DETECTING IF ANY CHECKBOXES ARE UNCHECKED-->
 <!--
-	Nav bars testing
-	<div id = "topnavbar"><div id ="userinfoleft"></div><div id="profilebutton right"><a href="profile.html">Profile</a></div></div>
+Nav bars testing
+<div id = "topnavbar"><div id ="userinfoleft"></div><div id="profilebutton right"><a href="profile.html">Profile</a></div></div>
 <div id="leftnavbar"><div>page1</div></div>
 -->
 <div id="header">
@@ -73,10 +73,15 @@
 	
 	<div class="form-block form-section-hideable">
 		<h3><span class="numbering">3. </span>Adverse Event or Product Problem</h3>
+
+	<!-- this is sams and pats java script
+	still needs to be finished currently working out an issue with index formating	
+	a fully selected list will work but thats about it, the other text boxes and dates throw a error
+	-->
 		<script>
             function section1(){
             const word = '{{ seshlist }}';
-			let arr = word.split(', ');''
+			let arr = word.split('','');''
 			for (let i=0; i < arr.length; i++){
 				print
 				arr[i] = unescape(arr[i])
@@ -84,18 +89,20 @@
 			}
 			console.log(arr);
             for (let i = 0; i <= arr.length; i++){
-				/*alert(arr[i])*/
+				console.log(arr[i])
 				console.log(arr);
                 if (arr[i] == "&#39;AdverseEvent&#39;"){
 					document.getElementById("AdverseEvent").setAttribute("disabled", true);
                     document.getElementById("AdverseEvent").setAttribute("checked", true);
                 }
-                if (arr[i] == "&#39;EventOrProblem&#39;"){
+                if (arr[i] == "&#39;ProductProblem&#39;"){
 					document.getElementById("ProductProblem").setAttribute("disabled", true);
                     document.getElementById("ProductProblem").setAttribute("checked", true);
                 }
-				if (arr[i] == "&#39;death&#39;"){
-					document.getElementById("DoD").value = arr[i+1]
+
+
+				if (arr[i] == arr[53]){
+					document.getElementById("DoD").value = arr[54];
 					document.getElementById("death").setAttribute("disabled", true);
                     document.getElementById("death").setAttribute("checked", true);
                 }
@@ -119,12 +126,11 @@
 					document.getElementById("CongenitalAnomaly").setAttribute("disabled", true);
                     document.getElementById("CongenitalAnomaly").setAttribute("checked", true);
 				}
-				if (arr[i] == "&#39;other&#39;"){
-					document.getElementById("other").value = arr[i+1]
+				if (arr[i] == arr[60]){
+					document.getElementById("otherText1").value=arr[60];
 					document.getElementById("other").setAttribute("disabled", true);
                     document.getElementById("other").setAttribute("checked", true);
 				}
-
 
 				if (arr[i] == arr[29]){
 					document.getElementById("Description").setAttribute("disabled", true);
@@ -150,24 +156,27 @@
 					document.getElementById("otherCHK").setAttribute("disabled", true);
 					document.getElementById("otherCHK").setAttribute("checked", true);
 				}
-				if (arr[i] == "&#39;other2&#39;"){
-					document.getElementById("other2").value = arr[i+1]
-					document.getElementById("other2").setAttribute("disabled", true);
-                    document.getElementById("other2").setAttribute("checked", true);
+				if (arr[i] == arr[39]){
+					document.getElementById("otherText2").value=arr[49];
+					document.getElementById("otherCHK").setAttribute("disabled", true);
+                    document.getElementById("otherCHK").setAttribute("checked", true);
 				}
 
 
 
 
-				if (arr[i] == "&#39;chkManu&#39;"){
+				if (arr[i] == arr[79]){
+					document.getElementById("repManuName").value=arr[79];
 					document.getElementById("chkManu").setAttribute("disabled", true);
                     document.getElementById("chkManu").setAttribute("checked", true);
 				}
-				if (arr[i] == "&#39;chkRepFac2&#39;"){
+				if (arr[i] == arr[80]){
+					document.getElementById("repUserFac").value=arr[80];
 					document.getElementById("chkRepFac").setAttribute("disabled", true);
                     document.getElementById("chkRepFac").setAttribute("checked", true);
 				}
-				if (arr[i] == "&#39;chkDistImp2&#39;"){
+				if (arr[i] == arr[81]){
+					document.getElementById("repDistImp").value=arr[81];
 					document.getElementById("chkDistImp").setAttribute("disabled", true);
                     document.getElementById("chkDistImp").setAttribute("checked", true);
 				}
@@ -188,7 +197,7 @@
 		<br />
 		<input name="outcome" type="checkbox" value="death" id="death" onclick="setDoD()" disabled/>
 		<label for="ProductProblem">Death (mm/dd/year)</label>
-		<input name="DoD" type="date" id="DoD" disabled/>
+		<input name="DoD" type="text" id="DoD" disabled/>
 
 		<input name="outcome" type="checkbox" value="Intervention" id="Intervention" disabled/>
 		<label for="Intervention"> intervention to prevent permanent impairment/damage</label><br />
