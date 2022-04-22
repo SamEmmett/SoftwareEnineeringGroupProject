@@ -5,7 +5,7 @@
   </head>
   
   <body>
-        <div class=header>
+        <div class="header">
             <h1>Welcome To The Incident Report Editing Page</h1>
             <p>Select which form you would like to edit below.</p>
         </div>
@@ -13,9 +13,10 @@
     <!-- NAVBAR -->  
         <div class="topnav" id="myTopnav">
             <a href="{{url_for('home')}}" class="active">Home</a>
+            <a href="{{url_for('profile')}}">View Profile</a>
             <a href="{{url_for('index')}}">Create Form</a>
             <a href="{{url_for('viewform')}}" >View Form</a>
-            <a href="{{url_for('profile')}}">View Profile</a>
+            
             <a href="{{url_for('edit')}}">Edit Form</a>
             
       </div>
@@ -26,27 +27,26 @@
           <br>
         </div>
         <div class="main">
-            <form action="" method="post">
-                <label for = "option">Select the form you would like to edit below:</label>
-                <h5></h5>
-                Form: <input list="Choice" id="option" name="formnumlist" size="65">
-                <datalist id="Choice" > 
-                  {% for i in new_list %}
-                    <option id="optchoice" value = "{{i}}">
-                  {% endfor %}
-                  </option>
-                <!--  ((2,),(1,) [0][0])-->  
-                </datalist>
-                
-                <input type="submit" value="submit">
-            </form>
+          <form action="" method="post">
+            <label for = "option">Select the form you would like to view below:</label>
+            <h5></h5>
+            Form:<br>
+            <select size =15 id="choice" name="formnum"> 
+              {% for i in formID %}
+                <option id="optchoice" name="formnum"><div id = "selectoptions">{{formID[i]}} Date: {{Date[i]}}, CompletedBy:{{CompletedBy[i]}}, Facility: {{Facility[i]}}, Brand: {{Brand[i]}}</div></option>
+              {% endfor %}
+              
+            <!--  ((2,),(1,) [0][0])-->  
+            </select>
+            <h5></h5>
+            <input type="submit" value="submit">
+        </form>
         </div>
       </div>
-      <table width = "100%"  align = "center" bgcolor=#1F497D>  
-        <tr style="height:30px">
-        <th><font color = "white" size="1" align="center">&#169; All Rights Reserved</font></th>
-        </tr>
+
+      <div id="footer">
+        <center><p>&#169; All Rights Reserved.</p></center>
       </div>
-    </div>
+
     <script type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
   </body>

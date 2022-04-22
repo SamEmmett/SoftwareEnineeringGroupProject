@@ -28,7 +28,7 @@ def index():
         FACILITYSTATE = userDetails['FacilityState']
         ZIP = userDetails['Zip']
         PHONE = userDetails['Phone']
-
+        
 
         DESCRIBEEVENTORPROBLEM = request.form.getlist('EventOrProblem')
         a = 'AdverseEvent'
@@ -43,7 +43,7 @@ def index():
 
         #print(DESCRIBEEVENTORPROBLEM)
         OUTCOME = request.form.getlist('outcome')
-        b = 'death'
+        b  = 'death'
         b1 = 'Intervention'
         b2 = 'LifeThreatening'
         b3 = 'Disability'
@@ -232,7 +232,7 @@ def home():
     page = 'login'
     usermsg = 'Log In'
     if 'loggedin' in session:
-        usermsg ='Hello, '+ session['first']+" "+session['last']
+        usermsg ='Hello, '+ session['first'] +" "+session['last']
         page = 'profile'
        
         return render_template("Homepage.html", page=page, usermsg=usermsg)
@@ -249,22 +249,43 @@ def viewform():
             #cur.execute("SELECT FormID, %s , piID, EventID, DateOfReport FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID",(ID,))
             myresult = cur.fetchall()
             new_list = []
-            formInfo = []
+            formID = ["         "]
+            Date=[" "]
+            CompletedBy =[" "]
+            Facility = [" "]
+            Brand = [" "]
+
             i=0
             for item in myresult:
-                
+                formInfo =[]
                 #print("\n\n\n\n\n\n\n\n\n\n"+item)
                 #print(i+"\n\n\n\n\n\n\n\n\n\n\n\n\n")
                 new_list.append(item[0])
-                cur.execute("SELECT form.formID, adverseeventorproductproblem.DateOfEvent, reportingfacilityinfo.facilityName, susmedicaldevice.BrandName FROM form INNER JOIN adverseeventorproductproblem ON form.aeoppID = adverseeventorproductproblem.aeoppID INNER JOIN reportingfacilityinfo ON form.rfiID = reportingfacilityinfo.rfiID INNER JOIN susmedicaldevice ON form.smdID = susmedicaldevice.smdID WHERE form.formID = %s;",(item[0],))
-                formInfo[i]=cur.fetchall()
-                i+=1
+                cur.execute("SELECT form.formID, adverseeventorproductproblem.DateOfEvent, reportcompletedby.RepName, reportingfacilityinfo.facilityName, susmedicaldevice.BrandName FROM form INNER JOIN adverseeventorproductproblem ON form.aeoppID = adverseeventorproductproblem.aeoppID INNER JOIN reportingfacilityinfo ON form.rfiID = reportingfacilityinfo.rfiID INNER JOIN susmedicaldevice ON form.smdID = susmedicaldevice.smdID INNER JOIN reportcompletedby ON form.rcbID = reportcompletedby.rcbID WHERE form.formID = %s;",(i,))
+                formInfo = cur.fetchone()
+                if i !=0:
+                    formID.append(formInfo[0])
+                    Date.append(formInfo[1])
+                    CompletedBy.append(formInfo[2])
+                    Facility.append(formInfo[3])
+                    Brand.append(formInfo[4])
+                i=i+1
+                
+           
+            cur.execute("SELECT form.formID, adverseeventorproductproblem.DateOfEvent, reportcompletedby.RepName, reportingfacilityinfo.facilityName, susmedicaldevice.BrandName FROM form INNER JOIN adverseeventorproductproblem ON form.aeoppID = adverseeventorproductproblem.aeoppID INNER JOIN reportingfacilityinfo ON form.rfiID = reportingfacilityinfo.rfiID INNER JOIN susmedicaldevice ON form.smdID = susmedicaldevice.smdID INNER JOIN reportcompletedby ON form.rcbID = reportcompletedby.rcbID WHERE form.formID = %s;",(i,))
+            formInfo = []
+            formInfo = cur.fetchone()
+            formID.append(formInfo[0])
+            Date.append(formInfo[1])
+            CompletedBy.append(formInfo[2])
+            Facility.append(formInfo[3])
+            Brand.append(formInfo[4])
             cur.close()
-    
-            return render_template("ViewForm.html" , new_list = new_list, formInfo=formInfo)
+            return render_template("ViewForm.html" , formID=formID, Date=Date, CompletedBy=CompletedBy, Facility=Facility, Brand=Brand )
     #If a post request is made on the viewform it grabs all data from forms from the logged in ID from the current session then it stores the data in a list
     # called seshlist and passes that in the session to the getform route
     if request.method == 'POST':
+        
         formnum = request.form['formnum']
         cur = mysql.connection.cursor()
         cur.execute("SELECT * FROM Form JOIN USERS on users.USERID = form.USERID JOIN PATIENTINFO ON patientinfo.PIID = form.PIID JOIN EventInformation ON EventInformation.EVENTID = form.EVENTID JOIN reportingfacilityinfo ON reportingfacilityinfo.RFIID = form.RFIID JOIN susmedicaldevice ON susmedicaldevice.SMDID = form.SMDID JOIN adverseeventorproductproblem ON adverseeventorproductproblem.aeoppID = form.aeoppID JOIN reportcompletedby ON reportcompletedby.rcbID = form.rcbID JOIN signoff ON signoff.soID = form.soID JOIN AlsoReportedTo ON AlsoReportedTo.artID = form.artID WHERE FormID = %s ORDER BY DateOfReport ASC",(formnum,))
@@ -305,8 +326,54 @@ def profile():
 
 @main.route('/edit', methods=['GET', 'POST'])
 def edit():
+
+    #Lists of forms based off of user ID 
     if request.method =='GET':
+            ID = session['id'] 
+            cur = mysql.connection.cursor()
+            cur.execute("SELECT FormID FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID WHERE UserID = %s ORDER BY DateOfReport ASC",(ID,))
+            
+            #cur.execute("SELECT FormID, %s , piID, EventID, DateOfReport FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID",(ID,))
+            myresult = cur.fetchall()
+            new_list = []
+            formID = ["         "]
+            Date=[" "]
+            CompletedBy =[" "]
+            Facility = [" "]
+            Brand = [" "]
+
+            i=0
+            for item in myresult:
+                formInfo =[]
+                #print("\n\n\n\n\n\n\n\n\n\n"+item)
+                #print(i+"\n\n\n\n\n\n\n\n\n\n\n\n\n")
+                new_list.append(item[0])
+                cur.execute("SELECT form.formID, adverseeventorproductproblem.DateOfEvent, reportcompletedby.RepName, reportingfacilityinfo.facilityName, susmedicaldevice.BrandName FROM form INNER JOIN adverseeventorproductproblem ON form.aeoppID = adverseeventorproductproblem.aeoppID INNER JOIN reportingfacilityinfo ON form.rfiID = reportingfacilityinfo.rfiID INNER JOIN susmedicaldevice ON form.smdID = susmedicaldevice.smdID INNER JOIN reportcompletedby ON form.rcbID = reportcompletedby.rcbID WHERE form.formID = %s;",(i,))
+                formInfo = cur.fetchone()
+                if i !=0:
+                    formID.append(formInfo[0])
+                    Date.append(formInfo[1])
+                    CompletedBy.append(formInfo[2])
+                    Facility.append(formInfo[3])
+                    Brand.append(formInfo[4])
+                i=i+1
+                
+           
+            cur.execute("SELECT form.formID, adverseeventorproductproblem.DateOfEvent, reportcompletedby.RepName, reportingfacilityinfo.facilityName, susmedicaldevice.BrandName FROM form INNER JOIN adverseeventorproductproblem ON form.aeoppID = adverseeventorproductproblem.aeoppID INNER JOIN reportingfacilityinfo ON form.rfiID = reportingfacilityinfo.rfiID INNER JOIN susmedicaldevice ON form.smdID = susmedicaldevice.smdID INNER JOIN reportcompletedby ON form.rcbID = reportcompletedby.rcbID WHERE form.formID = %s;",(i,))
+            formInfo = []
+            formInfo = cur.fetchone()
+            formID.append(formInfo[0])
+            Date.append(formInfo[1])
+            CompletedBy.append(formInfo[2])
+            Facility.append(formInfo[3])
+            Brand.append(formInfo[4])
+            cur.close()
+        
+            return render_template("EditForm.html" , formID=formID, Date=Date, CompletedBy=CompletedBy, Facility=Facility, Brand=Brand )
+    # when update is pressed it takes value submitted into the edit form page and passes them into the database the db used an update statement depending on FormID to update each table
+    if request.method == 'POST':
+
         return render_template("EditForm.html")
-    return render_template("EditForm.html")
+        
 if __name__ == '__main__':
-   main.run(debug=True)
+     main.run(debug=True)

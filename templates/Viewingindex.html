@@ -7,7 +7,7 @@
 		function getText() {
 
 			var a = document.getElementById("ourPara")
-			alert("Your form has been succsfully submitted")
+			alert("Your form has been successfully submitted.")
 		}
 
 	</script>
@@ -15,17 +15,17 @@
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 	<link rel="stylesheet" href="../static/styles/styles.css" />
 	<center>
-            <div class=header>
-                <h1><font>Form {{seshlist[1]}} Is shown below</font></h1>
-            </div>
-        </center>
+		<div class="header">
+			<h1>Form {{seshlist[1]}} Is shown below</h1>
+		</div>
+	</center>
     <!-- NAVBAR -->  
     <div class="topnav" id="myTopnav">
 		<div class="navwrapper">
 			<a href="{{url_for('home')}}" class="active">Home</a>
+			<a href="{{url_for('profile')}}">View Profile</a>
 			<a href="{{url_for('index')}}">Create Form</a>
 			<a href="{{url_for('viewform')}}">View Form</a>
-			<a href="{{url_for('profile')}}">View Profile</a>
 			<a href="{{url_for('edit')}}">Edit Form</a>
 			<div class="userbutton"><a href="{{url_for('index')}}"></a></div>
 		</div>
@@ -70,7 +70,6 @@ Nav bars testing
 			Phone: {{seshlist[37]}}<br />
 		</div>
 	</div>
-	
 	<div class="form-block form-section-hideable">
 		<h3><span class="numbering">3. </span>Adverse Event or Product Problem</h3>
 
@@ -79,59 +78,70 @@ Nav bars testing
 	a fully selected list will work but thats about it, the other text boxes and dates throw a error
 	-->
 		<script>
-            function section1(){
-            const word = '{{ seshlist }}';
-			let arr = word.split('','');''
-			for (let i=0; i < arr.length; i++){
-				print
-				arr[i] = unescape(arr[i])
-
+			function containsEncodedComponents(x) {
+  				// ie ?,=,&,/ etc
+  				return (decodeURI(x) !== decodeURIComponent(x));
+			
 			}
-			console.log(arr);
-            for (let i = 0; i <= arr.length; i++){
-				console.log(arr[i])
-				console.log(arr);
-                if (arr[i] == "&#39;AdverseEvent&#39;"){
+            function section1(){
+            var badword = '{{ seshlist }}'
+			var word = badword.replace(/&#39;/g, ""); //removes  the &#39 that gets added when going from HTML to javascript
+			console.log(word)
+			
+			
+			let arr = word.split(', '); //Splits all of the elements of seshlist and then adds them to an array
+			
+		
+            //this is the for lop that runs through the array from i to the end of the array
+			for (let i = 0; i <= arr.length; i++){
+				console.log(word)
+				// this is the adverse event and product problem if statments 
+				//this is the adverser event if statments so if the index equals adverseEvent then do this thing 
+                if (arr[i] == "AdverseEvent"){
+					// this gets the element in html by id so in this case the id is adverse event it then sets the checkbox to disabled and then checks it. 
 					document.getElementById("AdverseEvent").setAttribute("disabled", true);
                     document.getElementById("AdverseEvent").setAttribute("checked", true);
                 }
-                if (arr[i] == "&#39;ProductProblem&#39;"){
+                if (arr[i] == "ProductProblem"){
 					document.getElementById("ProductProblem").setAttribute("disabled", true);
                     document.getElementById("ProductProblem").setAttribute("checked", true);
                 }
 
-
+				// this is the if statments for all the other check box and textbox in the adverse event feild 
 				if (arr[i] == arr[53]){
-					document.getElementById("DoD").value = arr[54];
+					// this does the same thing as above but i added .value arr[54] which just plugs the date in the textbox field next to date
+					document.getElementById("DoD").value = arr[53];
 					document.getElementById("death").setAttribute("disabled", true);
                     document.getElementById("death").setAttribute("checked", true);
                 }
-				if (arr[i] == "&#39;Intervention&#39;"){
+				if (arr[i] == "Intervention"){
 					document.getElementById("Intervention").setAttribute("disabled", true);
                     document.getElementById("Intervention").setAttribute("checked", true);
                 }
-				if (arr[i] == "&#39;LifeThreatening&#39;"){
+				if (arr[i] == "LifeThreatening"){
 					document.getElementById("LifeThreatening").setAttribute("disabled", true);
                     document.getElementById("LifeThreatening").setAttribute("checked", true);
                 }
-				if (arr[i] == "&#39;Disability&#39;"){
+				if (arr[i] == "Disability"){
 					document.getElementById("Disability").setAttribute("disabled", true);
                     document.getElementById("Disability").setAttribute("checked", true);
 				}
-				if (arr[i] == "&#39;Hospitalized&#39;"){
+				if (arr[i] == "Hospitalized"){
 					document.getElementById("Hospitalized").setAttribute("disabled", true);
                     document.getElementById("Hospitalized").setAttribute("checked", true);
 				}
-				if (arr[i] == "&#39;CongenitalAnomaly&#39;"){
+				if (arr[i] == "CongenitalAnomaly"){
 					document.getElementById("CongenitalAnomaly").setAttribute("disabled", true);
                     document.getElementById("CongenitalAnomaly").setAttribute("checked", true);
 				}
-				if (arr[i] == arr[60]){
-					document.getElementById("otherText1").value=arr[60];
+				if (arr[i] == arr[59]){
+					document.getElementById("otherText1").value=arr[59];
 					document.getElementById("other").setAttribute("disabled", true);
                     document.getElementById("other").setAttribute("checked", true);
 				}
 
+
+				//this is the event information page array pulls 
 				if (arr[i] == arr[29]){
 					document.getElementById("Description").setAttribute("disabled", true);
                 	document.getElementById("Description").value=arr[29];
@@ -143,47 +153,102 @@ Nav bars testing
 
 				
 
-
-				if (arr[i] == "&#39;User/Patient&#39;"){
+				//this is the suspected medical devide array pulls
+				if (arr[i] == "User/Patient"){
 					document.getElementById("User/Patient").setAttribute("disabled", true);
 					document.getElementById("User/Patient").setAttribute("checked", true);
 				}
-					if (arr[i] == "&#39;HealthProfessional&#39;"){
+					if (arr[i] == "HealthProfessional"){
 					document.getElementById("HealthProfessional").setAttribute("disabled", true);
 					document.getElementById("HealthProfessional").setAttribute("checked", true);
 				}
-					if (arr[i] == "&#39;otherCHK&#39;"){
-					document.getElementById("otherCHK").setAttribute("disabled", true);
-					document.getElementById("otherCHK").setAttribute("checked", true);
-				}
-				if (arr[i] == arr[39]){
+				if (arr[i] == arr[49]){
 					document.getElementById("otherText2").value=arr[49];
 					document.getElementById("otherCHK").setAttribute("disabled", true);
                     document.getElementById("otherCHK").setAttribute("checked", true);
 				}
 
 
-
-
-				if (arr[i] == arr[79]){
-					document.getElementById("repManuName").value=arr[79];
+				//this is the reported by table:
+				if (arr[i] == arr[78]){
+					document.getElementById("repManuName").value=arr[78];
 					document.getElementById("chkManu").setAttribute("disabled", true);
                     document.getElementById("chkManu").setAttribute("checked", true);
 				}
-				if (arr[i] == arr[80]){
-					document.getElementById("repUserFac").value=arr[80];
+				if (arr[i] == arr[79]){
+					document.getElementById("repUserFac").value=arr[79];
 					document.getElementById("chkRepFac").setAttribute("disabled", true);
                     document.getElementById("chkRepFac").setAttribute("checked", true);
 				}
-				if (arr[i] == arr[81]){
-					document.getElementById("repDistImp").value=arr[81];
+				if (arr[i] == arr[80]){
+					document.getElementById("repDistImp").value=arr[80];
 					document.getElementById("chkDistImp").setAttribute("disabled", true);
                     document.getElementById("chkDistImp").setAttribute("checked", true);
 				}
-				
 
+
+				
+			// this is where things get weird since we are just going through all the array above this insures that if the boxes that are supposed to be none are none
+			// this done by manual seeing if the text fields that are supposed to be none are changed to be empty and the checkbox is not checked 
 		}
+		// for example this looks at the DOD and at the index 53 and say if this is none then change the value to blank and disable the text box and uncheck the check box
+		// this is then repeated for othertext and manu rep
+		if(arr[53]=="None"){
+			document.getElementById("DoD").value = " ";
+			document.getElementById("death").setAttribute("disabled", true);
+            document.getElementById("death").removeAttribute("checked");
+			} 
+		if(arr[59]=="None"){
+			document.getElementById("otherText1").value=" ";
+			document.getElementById("other").setAttribute("disabled", true);
+            document.getElementById("other").removeAttribute("checked");
+		}
+
+
+
+		if(arr[49]=="None"){
+			document.getElementById("otherText2").value=" ";
+			document.getElementById("otherCHK").setAttribute("disabled", true);
+            document.getElementById("otherCHK").removeAttribute("checked");
+		}
+
+
+
+		if (arr[78] == ""){
+					document.getElementById("repManuName").value=" ";
+					document.getElementById("chkManu").setAttribute("disabled", true);
+                    document.getElementById("chkManu").removeAttribute("checked");
+		}
+		if (arr[79] == ""){
+					document.getElementById("repUserFac").value=" ";
+					document.getElementById("chkRepFac").setAttribute("disabled", true);
+                    document.getElementById("chkRepFac").removeAttribute("checked");
+		}
+		if (arr[80] == "]"){
+					document.getElementById("repDistImp").value=" ";
+					document.getElementById("chkDistImp").setAttribute("disabled", true);
+                    document.getElementById("chkDistImp").removeAttribute("checked");
+		}
+		if (arr[78] == "]"){
+					document.getElementById("repManuName").value=" ";
+					document.getElementById("chkManu").setAttribute("disabled", true);
+                    document.getElementById("chkManu").removeAttribute("checked");
+		}
+		if (arr[79] == "]"){
+					document.getElementById("repUserFac").value=" ";
+					document.getElementById("chkRepFac").setAttribute("disabled", true);
+                    document.getElementById("chkRepFac").removeAttribute("checked");
+		}
+		if (arr[80] == null){
+					document.getElementById("repDistImp").value=" ";
+					document.getElementById("chkDistImp").setAttribute("disabled", true);
+                    document.getElementById("chkDistImp").removeAttribute("checked");
+		}
+		
+
         }
+		
+		
         window.onload = section1
         </script>
 		<hr /> 
@@ -250,7 +315,7 @@ Nav bars testing
 		
 	<div class ="form-block form-section-hideable" id="SusDevice">
 		<h3><span class="numbering">9. </span>
-			<h3>Suspect Medical Device</h3>
+			Suspect Medical Device</h3>
 
 		<span class="numbering">a. </span>
 		<label for="BrandName">Brand Name:</label>
@@ -292,7 +357,6 @@ Nav bars testing
 
 
 	<div class="flexbox-wrapper" id="ReportingInfo">
-		<!--<h3>Reporting Information</h3>-->
 			<div id="ReportedBy" class="form-block form-section-hideable">
 				<h3><span class="numbering">10. </span>
 					Report Completed by:</h3>
@@ -324,11 +388,51 @@ Nav bars testing
 				<input name="chkRepFac" type="checkbox" value="yes" onclick="notifiedFac()" id = "chkRepFac"disabled/>&nbsp;User Facility: <input name="RepUserFac" id="repUserFac" type="text" disabled/><br />
 				<input name="chkDistImp" type="checkbox" value="yes" onclick="notifiedDistImp()" id = "chkDistImp" disabled/>&nbsp;Distributor/Importer: <input name="RepDisImp" id="repDistImp" type="text" disabled/><br />
 			</div>
-	
 	</div>	
+	<div class="flexbox-wrapper form-section-hideable" id="Signature">
+		<div id="sigbox" class="form-block form-section-hideable" >
+			<h3 id = "sig">Signature of QA Director</h3>
+			
+			<input name="Signature" type="text" id="signature" >
+			<p class="block-note">A QA Director filling out this form must provide dated signature before submission. Please sign in the box above. </p>
+		</div>
+		
+		<div id="sigdate" class="form-block form-section-hideable">
+			<h3 id = "dsign">Date Signed</h3>
+			<input name="SignatureDate" type="date" id="signatureDate" >
+			<p class="block-note">Please fill out the date of signature in the box above.</p>
+		</div>
 	</div>
+	</div>
+
+	<script src="js/jquery-1.11.0.min.js" type="text/javascript">
+
+		var isAdmin = adminitem[0]
+		print(isAdmin)
+		 function loadSig() {
+		
+	
+			print(isAdmin)
+				alert(isAdmin)
+				if (isAdmin == 0) //checks t see if other checkbox is checked
+				{
+					document.getElementById("signature").setAttribute("hidden", true);
+					document.getElementById("signatureDate").setAttribute("hidden", true);
+				}
+			else
+				{
+					document.getElementById("signature").removeAttribute("hidden", true);
+					document.getElementById("signatureDate").removeAttribute("hidden", true);	
+							
+				}
+			}
+
+	</script>
+
 </form>
 
 </body>
+
+
 
 </html>

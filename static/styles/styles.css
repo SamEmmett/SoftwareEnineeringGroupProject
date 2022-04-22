@@ -6,6 +6,7 @@
 	font-family: "Arial", sans-serif;
 	line-height: 22px;
 }
+
 .jumbo{
     background: #1F497D
 
@@ -15,6 +16,11 @@
     text-align: center;
     background: #585757;
     color: white;
+    
+  }
+
+  .header h1 {
+    line-height: 37px;
   }
 
 
@@ -24,8 +30,9 @@
 .topnav {
     background-color: #1F497D;
     overflow: hidden;
-    border: 4px solid  #202020;
-    
+    /*border: 4px solid  #202020;*/
+    border-top: 2.5px solid black;
+    border-bottom: 2.5px solid black;
   }
   
   /* Style the links inside the navigation bar */
@@ -137,6 +144,7 @@
 .flexbox-wrapper { 
 	display: flex;
 }
+
 
 
 /* ROW 1 */
@@ -331,7 +339,7 @@ h3 {
 }
 
 
-/*cssing for the homepage */
+/*cssing for the HOMEPAGE */
 .headerHome {
     padding: 40px;
     text-align: center;
@@ -380,8 +388,19 @@ h3 {
       width: 100%;
     }
   }
-  
-/*CSSING for the login page  */
+
+
+/* css for VIEW/EDIT FORM */
+p.view-heading {
+  color: red;
+  font-size: 1.3em;
+  line-height: 25px;
+  font-weight:500;
+}
+
+
+
+/*CSSING for the LOGIN PAGE  */
 
 #login {
     padding: 10px;
@@ -484,6 +503,7 @@ h3 {
         min-width:0;
     }
 }
+
 .userbutton{
   float: right;
   color: white;
@@ -492,16 +512,30 @@ h3 {
   border: 2pt;
 }
 
-/*CSSING for the Profile page  */
+/*cssing for the PROFILE PAGE  */
 .Profilerow {
   display: flex;
-  flex-wrap: wrap;
+}
+
+.profile-img {
+  height: 50%;
+  width: 30%;
+  min-width: 50px;
+  display: block;
 }
 
 .Profileside {
-  flex: 30%; 
+  /* flex: 30%; */
+  flex-wrap: wrap;
+  width: 30%;
   background-color: #EFEFEF; 
   padding: 20px; 
+}
+
+.Profilemain {
+  flex-wrap: wrap;
+  background-color: rgba(255, 255, 255, 0.534);
+  width: 70%;
 }
 
 #choice {
@@ -511,4 +545,45 @@ h3 {
   height: 50%;
   width: 70%;
 
+}
+
+.Profilemain > h3 {
+  border-top: 2.5px black solid;
+}
+
+/* formats the profile info so theres a space before each heading */
+.profile-info-text {
+  margin-top: -5px;
+  padding-bottom: 25px;
+}
+
+
+@media screen and (max-width: 700px) {
+    .Profilerow {
+      flex-direction: column;
+    }
+
+    .Profilemain {
+      border-top: 2.5px solid black;
+    }
+
+    .Profilemain, .Profileside {
+      width: 100%;
+    }
+  }
+
+
+
+/* FOOTER */ 
+
+#footer {
+  border-top: 2.5px black solid;
+  background-color: #1F497D;
+  color: white;
+  height: 50px;
+  vertical-align: center;
+  padding: 0;
+  font-size: .8em;
+  font-style: italic;
+  font-weight: bold;
 }

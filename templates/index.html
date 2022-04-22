@@ -8,18 +8,18 @@
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 	<link rel="stylesheet" href="../static/styles/styles.css" />
 	<center>
-            <div class=header>
-                <h1><font>Welcome To The Incident Report Page</font></h1>
-                <p>Please fill out the form below</p>
-            </div>
-        </center>
+		<div class="header">
+			<h1>Welcome To The Incident Report Page</h1>
+			<p>Please fill out the form below.</p>
+		</div>
+	</center>
     <!-- NAVBAR -->  
     <div class="topnav" id="myTopnav">
 		<div class="navwrapper">
 			<a href="{{url_for('home')}}" class="active">Home</a>
+			<a href="{{url_for('profile')}}">View Profile</a>
 			<a href="{{url_for('index')}}">Create Form</a>
 			<a href="{{url_for('viewform')}}">View Form</a>
-			<a href="{{url_for('profile')}}">View Profile</a>
 			<a href="{{url_for('edit')}}">Edit Form</a>
 			<div class="userbutton"><a href="{{url_for('index')}}">{{usermsg}}</a></div>
 		</div>
@@ -151,7 +151,7 @@
 		<br />
 		<input name="outcome" type="checkbox" value="death" id="death" onclick="setDoD()"/>
 		<label for="death">Death (mm/dd/year)</label>
-		<input name="DoD" type="date" id="DoD" />
+		<input name="DoD" type="text" id="DoD"placeholder="mm/dd/yyyy" />
 
 		<input name="outcome" type="checkbox" value="Intervention" id="Intervention" />
 		<label for="Intervention"> intervention to prevent permanent impairment/damage</label><br />
@@ -387,17 +387,18 @@
 	
 	</div>
 
-
-	<!-- SIGNATURE GOES HERE -->
 	<div class="flexbox-wrapper form-section-hideable" id="Signature">
 		<div id="sigbox" class="form-block form-section-hideable" >
-			<h3 id = "sig">Signature of QA Director</h3>
+			<h3 id = "sig"><span class="numbering">12. </span>Signature of QA Director</h3>
 			<input name="Signature" type="text" id="signature" >
+			<p class="block-note" style="margin-top:20px;">A QA Director filling out this form must provide dated signature before submission. Please sign in the box above. </p>
 		</div>
 		
 		<div id="sigdate" class="form-block form-section-hideable">
 			<h3 id = "dsign">Date Signed</h3>
 			<input name="SignatureDate" type="date" id="signatureDate" >
+			
+			<p class="block-note" style="margin-top:20px;">Please fill out the date of signature in the box above.</p>
 		</div>
 	</div>
 
@@ -405,14 +406,16 @@
 	</div>
 
 	<div id="SubmitForm">
-		
 		<input id="reset" name="Reset1" type="reset" value="Reset" />
 		or
 		<input id = "ourPara" onClick = "getText()" id="submit" name="Submit" type="submit" value="Submit" />
 	</div>
 
+	<div id="footer">
+        <center><p>&#169; All Rights Reserved.</p></center>
+      </div>
+
 	<script type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
-<<<<<<< HEAD
 	<script src="js/jquery-1.11.0.min.js" type="text/javascript">
 
 	var isAdmin = adminitem[0]
@@ -433,11 +436,8 @@
 				document.getElementById("signatureDate").removeAttribute("hidden", true);	
 						
 			}
-			
+		}
 	</script>
-=======
-	
->>>>>>> 4c04b4f180af5c93877e3386a8ae8e17c413543d
 </form>
 
 </body>

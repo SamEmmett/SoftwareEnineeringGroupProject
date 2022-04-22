@@ -6,18 +6,19 @@
   
   <body>
         <center>
-            <div class=headerHome>
-                <h1><font>Welcome To The Profile page</font></h1>
-                <p>View your profile details below</p>
+            <div class="headerHome header">
+                <h1>Welcome To The Profile Page</h1>
+                <p>View your profile details below.</p>
             </div>
         </center>
+
     <!-- NAVBAR -->  
     <div class="topnav" id="myTopnav">
       <div class="navwrapper">
         <a href="{{url_for('home')}}" class="active">Home</a>
+        <a href="{{url_for('profile')}}">View Profile</a>
         <a href="{{url_for('index')}}">Create Form</a>
         <a href="{{url_for('viewform')}}">View Form</a>
-        <a href="{{url_for('profile')}}">View Profile</a>
         <a href="{{url_for('edit')}}">Edit Form</a>
         <div class="userbutton"><a href="{{url_for(page)}}">{{usermsg}}</a></div>
       </div>
@@ -25,60 +26,44 @@
     
     <div class="Profilerow">
         <div class="Profileside">
-          <h3>Profile settings</h3>
-          <center>
-          <img src="../static/styles/Profile.jpeg" height="50%" width="30%">
-          </center>
+          <center><img class="profile-img" src="../static/styles/Profile.jpeg"></center>
           <p>This page displays your profile settings. Your profile is set up through the hosptial, so if anything needs to be changed, please contact support. </p>
-          <br>
-          <br>
         </div>
-        <div class="main">
-        <h3>User Privileges:</h3>
-        <p >{{Admin}}</p>
-        <h5></h5>
+
+      <div class="main Profilemain"> 
+        <h3 style="border-top: 0;">User Privileges</h3>
+        <p class="profile-info-text">{{Admin}}</p>
 
         <h3>Username</h3>
-        <p>{{username}}</p>
-        <h5></h5>
+        <p class="profile-info-text">{{username}}</p>
 
-          <h3>Email</h3>
-          <p>{{email}}</p>
-          <h5></h5>
-  
-          <h3>Name:</h3>
-          <p>{{lastname}}  {{FirstName}}</p>
-          <h5></h5>
+        <h3>Email</h3>
+        <p class="profile-info-text">{{email}}</p>
 
-          <h3>Company</h3>
-          <p>{{Company}}</p>
-          <h5></h5>
+        <h3>Name:</h3>
+        <p class="profile-info-text">{{lastname}}  {{FirstName}}</p>
 
-          <h3>Address</h3>
-          <p>{{Address}}</p>
-          <h5></h5>
+        <h3>Company</h3>
+        <p class="profile-info-text">{{Company}}</p>
 
-          <h3>City</h3>
-          <p>{{City}}</p>
-          <h5></h5>
+        <h3>Address</h3>
+        <p class="profile-info-text">{{Address}}</p>
 
-          <h3>State</h3>
-          <p>{{State}}</p>
-          <h5></h5>
+        <h3>City</h3>
+        <p class="profile-info-text">{{City}}</p>
 
-          <h3>Phone</h3>
-          <p>{{Phone}}</p>
-          <h5></h5>
+        <h3>State</h3>
+        <p class="profile-info-text">{{State}}</p>
 
-          
-        </div>
+        <h3>Phone</h3>
+        <p class="profile-info-text">{{Phone}}</p>
+
       </div>
-      <table width = "100%"  align = "center" bgcolor=#1F497D>  
-        <center>
-            <tr style="height:30px">
-            <th><font color = "white" size="1" align="center">&#169; All Rights Reserved</font></th>
-            </tr>
-        </center>
-      </div>
-    </body>
+    </div>
+
+    <div id="footer">
+      <center><p>&#169; All Rights Reserved.</p></center>
+    </div>
+      
+  </body>
 </html>
