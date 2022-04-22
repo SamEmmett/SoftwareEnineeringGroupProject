@@ -137,11 +137,13 @@ def index():
         
         cur.execute("INSERT INTO reportcompletedby(RepCompany, RepName, RepAddress, RepCity, RepState, RepPhone)Values(%s,%s,%s,%s,%s,%s)",(REPCOMPANY, REPNAME, REPADDRESS, REPCITY , REPSTATE, REPPHONE))
         
-        cur.execute("INSERT INTO SignOff(Signature, DateCompleted)VALUES(%s, %s)",(SIGNATURE, DATECOMP))
+       
        
         cur.execute("INSERT INTO EventInformation(DescribeEoP, Findings )VALUES(%s, %s)",(DESCRIBE,FINDINGS))
         
-        cur.execute("INSERT INTO AlsoReportedTo(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER)VALUES(%s, %s, %s)",(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER))\
+        cur.execute("INSERT INTO AlsoReportedTo(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER)VALUES(%s, %s, %s)",(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER))
+        
+        cur.execute("INSERT INTO SignOff(Signature, DateCompleted)VALUES(%s, %s)",(SIGNATURE, DATECOMP))
         
         mysql.connection.commit()
       
@@ -287,8 +289,8 @@ def viewform():
     if request.method == 'POST':
         
         formnum = request.form['formnum']
-        cur = mysql.connection.cursor()
-        cur.execute("SELECT * FROM Form JOIN USERS on users.USERID = form.USERID JOIN PATIENTINFO ON patientinfo.PIID = form.PIID JOIN EventInformation ON EventInformation.EVENTID = form.EVENTID JOIN reportingfacilityinfo ON reportingfacilityinfo.RFIID = form.RFIID JOIN susmedicaldevice ON susmedicaldevice.SMDID = form.SMDID JOIN adverseeventorproductproblem ON adverseeventorproductproblem.aeoppID = form.aeoppID JOIN reportcompletedby ON reportcompletedby.rcbID = form.rcbID JOIN signoff ON signoff.soID = form.soID JOIN AlsoReportedTo ON AlsoReportedTo.artID = form.artID WHERE FormID = %s ORDER BY DateOfReport ASC",(formnum,))
+        cur = mysql.connection.cursor()                                                                                     
+        cur.execute("SELECT * FROM Form JOIN USERS on users.USERID = form.USERID JOIN PATIENTINFO ON patientinfo.PIID = form.PIID JOIN EventInformation ON EventInformation.EVENTID = form.EVENTID JOIN reportingfacilityinfo ON reportingfacilityinfo.RFIID = form.RFIID JOIN susmedicaldevice ON susmedicaldevice.SMDID = form.SMDID JOIN adverseeventorproductproblem ON adverseeventorproductproblem.aeoppID = form.aeoppID JOIN reportcompletedby ON reportcompletedby.rcbID = form.soID JOIN AlsoReportedTo ON AlsoReportedTo.artID = form.rcbID JOIN signoff ON signoff.soID = form.artID WHERE FormID = %s ORDER BY DateOfReport ASC",(formnum,))
         getformData = cur.fetchall()  
         #print("this is before") 
         #print(getformData)

@@ -170,21 +170,23 @@ Nav bars testing
 
 
 				//this is the reported by table:
-				if (arr[i] == arr[78]){
-					document.getElementById("repManuName").value=arr[78];
+				if (arr[i] == arr[74]){
+					document.getElementById("repManuName").value=arr[74];
 					document.getElementById("chkManu").setAttribute("disabled", true);
                     document.getElementById("chkManu").setAttribute("checked", true);
 				}
-				if (arr[i] == arr[79]){
-					document.getElementById("repUserFac").value=arr[79];
+				if (arr[i] == arr[75]){
+					document.getElementById("repUserFac").value=arr[75];
 					document.getElementById("chkRepFac").setAttribute("disabled", true);
                     document.getElementById("chkRepFac").setAttribute("checked", true);
 				}
-				if (arr[i] == arr[80]){
-					document.getElementById("repDistImp").value=arr[80];
+				if (arr[i] == arr[76]){
+					document.getElementById("repDistImp").value=arr[76];
 					document.getElementById("chkDistImp").setAttribute("disabled", true);
                     document.getElementById("chkDistImp").setAttribute("checked", true);
 				}
+
+			
 
 
 				
@@ -193,6 +195,7 @@ Nav bars testing
 		}
 		// for example this looks at the DOD and at the index 53 and say if this is none then change the value to blank and disable the text box and uncheck the check box
 		// this is then repeated for othertext and manu rep
+		console.log(arr[79])
 		if(arr[53]=="None"){
 			document.getElementById("DoD").value = " ";
 			document.getElementById("death").setAttribute("disabled", true);
@@ -213,42 +216,42 @@ Nav bars testing
 		}
 
 
-
+		// this is all error checking for the rep manu it was being funky thats why it looks the way it does
+		if (arr[74] == ""){
+					document.getElementById("repManuName").value=" ";
+					document.getElementById("chkManu").setAttribute("disabled", true);
+                    document.getElementById("chkManu").removeAttribute("checked");
+		}
+		if (arr[75] == ""){
+					document.getElementById("repUserFac").value=" ";
+					document.getElementById("chkRepFac").setAttribute("disabled", true);
+                    document.getElementById("chkRepFac").removeAttribute("checked");
+		}
+		if (arr[76] == ""){
+					document.getElementById("repDistImp").value=" ";
+					document.getElementById("chkDistImp").setAttribute("disabled", true);
+                    document.getElementById("chkDistImp").removeAttribute("checked");
+		}
+		
 		if (arr[78] == ""){
-					document.getElementById("repManuName").value=" ";
-					document.getElementById("chkManu").setAttribute("disabled", true);
-                    document.getElementById("chkManu").removeAttribute("checked");
-		}
-		if (arr[79] == ""){
-					document.getElementById("repUserFac").value=" ";
-					document.getElementById("chkRepFac").setAttribute("disabled", true);
-                    document.getElementById("chkRepFac").removeAttribute("checked");
-		}
-		if (arr[80] == "]"){
-					document.getElementById("repDistImp").value=" ";
-					document.getElementById("chkDistImp").setAttribute("disabled", true);
-                    document.getElementById("chkDistImp").removeAttribute("checked");
-		}
-		if (arr[78] == "]"){
-					document.getElementById("repManuName").value=" ";
-					document.getElementById("chkManu").setAttribute("disabled", true);
-                    document.getElementById("chkManu").removeAttribute("checked");
-		}
-		if (arr[79] == "]"){
-					document.getElementById("repUserFac").value=" ";
-					document.getElementById("chkRepFac").setAttribute("disabled", true);
-                    document.getElementById("chkRepFac").removeAttribute("checked");
-		}
-		if (arr[80] == null){
-					document.getElementById("repDistImp").value=" ";
-					document.getElementById("chkDistImp").setAttribute("disabled", true);
-                    document.getElementById("chkDistImp").removeAttribute("checked");
-		}
-		
+					document.getElementById("signature").value="Signature required";
+					document.getElementById("signature").setAttribute("disabled", true);
+				}
+				else {
+					document.getElementById("signature").value=arr[78];
+					document.getElementById("signature").setAttribute("disabled", true);
+				}
 
-        }
+		if (arr[79] == "None]"){
+					document.getElementById("signatureDate").value=" ";
+					document.getElementById("signatureDate").setAttribute("disabled", true);
+				}
+				else{
+					document.getElementById("signatureDate").value=arr[80];
+					document.getElementById("signatureDate").setAttribute("disabled", true);
+				}
 		
-		
+	}	
         window.onload = section1
         </script>
 		<hr /> 
@@ -399,7 +402,7 @@ Nav bars testing
 		
 		<div id="sigdate" class="form-block form-section-hideable">
 			<h3 id = "dsign">Date Signed</h3>
-			<input name="SignatureDate" type="date" id="signatureDate" >
+			<input name="SignatureDate" type="text" id="signatureDate" >
 			<p class="block-note">Please fill out the date of signature in the box above.</p>
 		</div>
 	</div>
