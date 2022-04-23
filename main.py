@@ -167,7 +167,7 @@ def index():
         FINDINGS = userDetails['Findings']
         cur = mysql.connection.cursor()
         ID = session['id']
-        
+    
         SIGNATURE = None
         DATECOMP = None
         SIGNATURE = userDetails['Signature']
@@ -199,11 +199,8 @@ def index():
         cur.execute("INSERT INTO EventInformation(DescribeEoP, Findings )VALUES(%s, %s)",(DESCRIBE,FINDINGS))
         cur.execute("INSERT INTO AlsoReportedTo(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER)VALUES(%s, %s, %s)",(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER))
         mysql.connection.commit()
-        form = 0
-        form += 1
         
-        form = 1
-        
+      
         cur.execute("SELECT UserID FROM Users WHERE UserID  = %s ", (ID,))
         UIDVAL = cur.fetchall()
         cur.execute("SELECT piID FROM patientinfo WHERE piID = %s ", (form,))
@@ -222,7 +219,7 @@ def index():
         EVENTIDVAL = cur.fetchall()
         cur.execute("SELECT artID FROM AlsoReportedTo WHERE artID = %s ", (form,))
         ARTIDVAL = cur.fetchall()
-        UID = UIDVAL[0][0]
+        UID = UIDVAL[0][0] 
         PIID = PIIDVAL[0][0]
         RFIID = RFIIDVAL[0][0]
         SMDID = SMDIDVAL[0][0]
@@ -232,6 +229,8 @@ def index():
         EVENTID = EVENTIDVAL[0][0]
         ARTID = ARTIDVAL[0][0]
         cur.execute("INSERT INTO Form (UserID, piID, rfiID, smdID, aeoppID, rcbID, soID, EventID, artID) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)", (UID,PIID,RFIID,SMDID,AEOPPID,RCBID,SOID,EVENTID,ARTID,))
+        form = form + 1
+    
         mysql.connection.commit()
        
         cur.close()
