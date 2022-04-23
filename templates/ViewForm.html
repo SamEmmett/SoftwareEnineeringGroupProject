@@ -6,24 +6,36 @@
   
   <body>
         <center>
-            <div class=header>
-                <h1><font>Welcome To The Incident Report Viewing Page</font></h1>
+            <div class="header">
+                <h1>Welcome To The Incident Report Viewing Page</h1>
                 <p>Select which form you would like to view below</p>
             </div>
         </center>
+
     <!-- NAVBAR -->  
         <div class="topnav" id="myTopnav">
             <a href="{{url_for('home')}}" class="active">Home</a>
+            <a href="{{url_for('profile')}}">View Profile</a>
             <a href="{{url_for('index')}}">Create Form</a>
             <a href="{{url_for('viewform')}}" >View Form</a>
-            <a href="{{url_for('profile')}}">View Profile</a>
-            <a href="{{url_for('edit')}}">Edit Form</a>
-            
+            <a id = "edit" href="{{url_for('edit')}}">Edit Form</a>
       </div>
+      <script>
+      function loadSig(){
+        var isAdmin = "{{adminitem[0]}}"
+   
+          if (isAdmin == 0) //checks t see if other checkbox is checked
+          {
+          
+            document.getElementById("edit").setAttribute("hidden", true);
+          }
+        }
+        window.onload = loadSig
+        </script>
       <div class="row">
         <div class="side">
-            <p style="color: rgb(255, 0, 0);"> <font size="6+">Please select the form you would like to view</font></p>
-            <p> <font size="3px">This is the viewing page for an already submited incident report forms. If you need to fill out a incident report click create form above or click <a href="{{url_for('index')}}">Here</a></font></p>
+            <p class="view-heading">Please select the form you would like to view.</p>
+            <p>This is the viewing page for an already submited incident report forms. If you need to fill out a incident report click create form above or click <a href="{{url_for('index')}}">Here</a></p>
           <br>
         </div>
         <div class="main">
@@ -32,8 +44,8 @@
                 <h5></h5>
                 Form:<br>
                 <select size =15 id="choice" name="formnum"> 
-                  {% for i in new_list %}
-                    <option id="optchoice" name="formnum">{{i}} {{formInfo}}</option>
+                  {% for i in formID %}
+                    <option id="optchoice" name="formnum"><div id = "selectoptions">{{formID[i]}} Date: {{Date[i]}}, CompletedBy:{{CompletedBy[i]}}, Facility: {{Facility[i]}}, Brand: {{Brand[i]}}</div></option>
                   {% endfor %}
                   
                 <!--  ((2,),(1,) [0][0])-->  
@@ -43,13 +55,10 @@
             </form>
         </div>
       </div>
-      <table width = "100%"  align = "center" bgcolor=#1F497D>  
-        <center>
-            <tr style="height:30px">
-            <th><font color = "white" size="1" align="center">Ⓒ All rights reseverd</font></th>
-            </tr>
-        </center>
+
+      <div id="footer">
+        <center><p>&#169; All Rights Reserved.</p></center>
       </div>
-    </div>
+      
     <script type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
   </body>

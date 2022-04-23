@@ -6,29 +6,30 @@
   
   <body>
         <center>
-            <div class=headerHome>
-                <h1><font>Welcome To The Incident Report Form Page</font></h1>
+            <div class="headerHome header">
+                <h1>Welcome To The Incident Report Form Page</h1>
                 <p>To fill out an incident report form, read and follow the instructions below.</p>
             </div>
         </center>
+
     <!-- NAVBAR -->  
     <div class="topnav" id="myTopnav">
       <div class="navwrapper">
         <a href="{{url_for('home')}}" class="active">Home</a>
+        <a href="{{url_for('profile')}}">View Profile</a>
         <a href="{{url_for('index')}}">Create Form</a>
         <a href="{{url_for('viewform')}}">View Form</a>
-        <a href="{{url_for('profile')}}">View Profile</a>
-        <a href="{{url_for('edit')}}">Edit Form</a>
+        <a id = "edit" href="{{url_for('edit')}}">Edit Form</a>
         <div class="userbutton"><a href="{{url_for(page)}}">{{usermsg}}</a></div>
       </div>
     </div>
-
+   
       <div class="row">
         <div class="side">
           <h3>Americal Medical</h3>
-          <img src="../static/styles/stock.jpg" alt="">
-          <p> Here at Americal Medical, we want to ensure everyone feels safe at all times. So, in the event that something does go wrong, we encourage you to fill out an incident report form.
-          </p>
+              <center><img src="../static/styles/stock.jpg" alt=""></center>
+              <p> Here at Americal Medical, we want to ensure everyone feels safe at all times. So, in the event that something does go wrong, we encourage you to fill out an incident report form.</p>
+            
           <br>
         </div>
         <div class="main">
@@ -38,12 +39,22 @@
           <p>An incident report form is a form that details the issues of a medical device that has issues and needs to be replaced</p>
         </div>
       </div>
-      <table width = "100%"  align = "center" bgcolor=#1F497D>  
-        <center>
-            <tr style="height:30px">
-            <th><font color = "white" size="1" align="center">&#169; All Rights Reserved</font></th>
-            </tr>
-        </center>
+      
+      <div id="footer">
+        <center><p>&#169; All Rights Reserved.</p></center>
       </div>
+      <script>
+        function loadSig(){
+          var isAdmin = "{{adminitem[0]}}"
+            console.log(isAdmin)
+            if (isAdmin == 0) //checks t see if other checkbox is checked
+            {
+           
+              document.getElementById("edit").setAttribute("hidden", true);
+            }
+       
+          }
+          window.onload = loadSig
+      </script>
   </body>
 </html>

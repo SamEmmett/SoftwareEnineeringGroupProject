@@ -43,7 +43,7 @@ create table adverseeventorproductproblem(
 `aeoppID` int NOT NULL AUTO_INCREMENT,
 `AdverseEvent` nvarchar(50),
 `ProductProblem` nvarchar(50),
-`DoD` date,
+`DoD` nvarchar(10),
 `Intervention` nvarchar(50),
 `LifeThreatening` nvarchar(50),
 `Disability` nvarchar(50),
@@ -135,6 +135,3 @@ VALUES(1, 'Daniel', 'Woods', 'dwoods', 'password', 'Stockton University', '101 V
 # non admin user
 INSERT INTO users
 VALUES(2, 'John', 'Doe', 'jdoe', 'password', 'Stockton University', '101 Vera King Farris Drive', 'Galloway', 'New Jersey', 609652177, 'doej5@go.stockton.edu', 0);
-
-
-
