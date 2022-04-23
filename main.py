@@ -226,6 +226,7 @@ def login():
         else:
             #account doesn't exist or incorrect info entered
             msg = "Incorrect credentials"
+           
     return render_template('login.html', msg=msg)
     
 #Route for our homepage
@@ -236,8 +237,8 @@ def home():
     if 'loggedin' in session:
         usermsg ='Hello, '+ session['first'] +" "+session['last']
         page = 'profile'
-       
-        return render_template("Homepage.html", page=page, usermsg=usermsg)
+        adminitem = session['admincheck']
+        return render_template("Homepage.html", page=page, usermsg=usermsg,adminitem  = adminitem )
     return render_template("Homepage.html" , page=page, usermsg=usermsg)
    
     
@@ -283,7 +284,8 @@ def viewform():
             Facility.append(formInfo[3])
             Brand.append(formInfo[4])
             cur.close()
-            return render_template("ViewForm.html" , formID=formID, Date=Date, CompletedBy=CompletedBy, Facility=Facility, Brand=Brand )
+            adminitem = session['admincheck']
+            return render_template("ViewForm.html" , formID=formID, Date=Date, CompletedBy=CompletedBy, Facility=Facility, Brand=Brand, adminitem = adminitem )
     #If a post request is made on the viewform it grabs all data from forms from the logged in ID from the current session then it stores the data in a list
     # called seshlist and passes that in the session to the getform route
     if request.method == 'POST':
@@ -310,7 +312,8 @@ def getform():
     seshlist = session['ses_list'] 
     print(seshlist)
     if request.method =='GET':
-        return render_template("Viewingindex.html", seshlist = seshlist)
+        adminitem = session['admincheck']
+        return render_template("Viewingindex.html", seshlist = seshlist, adminitem = adminitem)
 
 @main.route('/profile', methods=['GET', 'POST'])
 def profile(): 
@@ -323,7 +326,8 @@ def profile():
         cur.execute("Select email, FirstName, LastName, Company, Address, City, State, Phone from users WHERE UName = '{0}'".format(session['username']))
         info = cur.fetchone()
         ###print("\n\n\n\n\n\n\n"+info[2]+"\n\n\n\n\n\n\n\n")
-        return render_template("profile.html", page=page, usermsg=usermsg, username=session['username'], email = info[0], FirstName = info[1], lastname = info[2], Company = info[3], Address=info[4], City=info[5], State=info[6], Phone=info[7], Admin = session['admin'])
+        adminitem = session['admincheck']
+        return render_template("profile.html", page=page, usermsg=usermsg, username=session['username'], adminitem = adminitem, email = info[0], FirstName = info[1], lastname = info[2], Company = info[3], Address=info[4], City=info[5], State=info[6], Phone=info[7], Admin = session['admin'])
     return render_template("profile.html" , page=page, usermsg=usermsg)
 
 @main.route('/edit', methods=['GET', 'POST'])
@@ -370,12 +374,38 @@ def edit():
             Facility.append(formInfo[3])
             Brand.append(formInfo[4])
             cur.close()
-        
-            return render_template("EditForm.html" , formID=formID, Date=Date, CompletedBy=CompletedBy, Facility=Facility, Brand=Brand )
+            adminitem = session['admincheck']
+            return render_template("EditForm.html" , formID=formID, Date=Date, CompletedBy=CompletedBy, Facility=Facility, Brand=Brand, adminitem = adminitem)
     # when update is pressed it takes value submitted into the edit form page and passes them into the database the db used an update statement depending on FormID to update each table
     if request.method == 'POST':
+       
+        formnum = request.form['formnum']
+        cur = mysql.connection.cursor()                                                                                     
+        cur.execute("SELECT * FROM Form JOIN USERS on users.USERID = form.USERID JOIN PATIENTINFO ON patientinfo.PIID = form.PIID JOIN EventInformation ON EventInformation.EVENTID = form.EVENTID JOIN reportingfacilityinfo ON reportingfacilityinfo.RFIID = form.RFIID JOIN susmedicaldevice ON susmedicaldevice.SMDID = form.SMDID JOIN adverseeventorproductproblem ON adverseeventorproductproblem.aeoppID = form.aeoppID JOIN reportcompletedby ON reportcompletedby.rcbID = form.soID JOIN AlsoReportedTo ON AlsoReportedTo.artID = form.rcbID JOIN signoff ON signoff.soID = form.artID WHERE FormID = %s ORDER BY DateOfReport ASC",(formnum,))
+        getformData = cur.fetchall()  
+        #print("this is before") 
+        #print(getformData)
+        new_list1 = []
+        for item in getformData:
+            for j in item:
+                new_list1.append(j)
+        #print("this is after")
+        #print(new_list1)
+        session['ses_list'] = new_list1
+        cur.close()
+        return redirect(url_for('getform2')) 
 
-        return render_template("EditForm.html")
-        
+@main.route('/getform2', methods=['GET', 'POST'])
+
+def getform2():
+    seshlist = session['ses_list'] 
+    
+    if request.method =='GET':
+        adminitem = session['admincheck']
+        return render_template("Editindexing.html", seshlist = seshlist, adminitem = adminitem)
+#    if request.method == 'POST':
+
+
+
 if __name__ == '__main__':
-     main.run(debug=True)
+    main.run(debug=True)

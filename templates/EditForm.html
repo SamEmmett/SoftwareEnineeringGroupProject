@@ -15,11 +15,34 @@
             <a href="{{url_for('home')}}" class="active">Home</a>
             <a href="{{url_for('profile')}}">View Profile</a>
             <a href="{{url_for('index')}}">Create Form</a>
-            <a href="{{url_for('viewform')}}" >View Form</a>
+            <a  href="{{url_for('viewform')}}" >View Form</a>
             
-            <a href="{{url_for('edit')}}">Edit Form</a>
+            <a id = "edit" href="{{url_for('edit')}}">Edit Form</a>
             
       </div>
+      <script type="text/javascript">
+	
+        function loadSig() {
+           var isAdmin = "{{adminitem[0]}}"
+       
+             if (isAdmin == 0) //checks t see if other checkbox is checked
+             {
+               document.getElementById("signature").setAttribute("hidden", true);
+               document.getElementById("signatureDate").setAttribute("hidden", true);
+               document.getElementById("sig").setAttribute("hidden",true);
+               document.getElementById("dsign").setAttribute("hidden",true);	
+               document.getElementById("edit").setAttribute("hidden", true);
+             }
+           else
+             {
+               document.getElementById("signature").removeAttribute("hidden", true);
+               document.getElementById("signatureDate").removeAttribute("hidden", true);
+             
+             }
+           }
+         window.onload = loadSig
+         </script>
+
       <div class="row">
         <div class="side">
             <p style="color: red; font-size: 1.25em;">Please select the form you would like to edit.</p>

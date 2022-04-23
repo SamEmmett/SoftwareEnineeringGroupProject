@@ -19,11 +19,21 @@
         <a href="{{url_for('profile')}}">View Profile</a>
         <a href="{{url_for('index')}}">Create Form</a>
         <a href="{{url_for('viewform')}}">View Form</a>
-        <a href="{{url_for('edit')}}">Edit Form</a>
+        <a id = "edit" href="{{url_for('edit')}}">Edit Form</a>
         <div class="userbutton"><a href="{{url_for(page)}}">{{usermsg}}</a></div>
       </div>
     </div>
-    
+    <script>
+      function loadSig(){
+        var isAdmin = "{{adminitem[0]}}"
+   
+          if (isAdmin == 0) //checks t see if other checkbox is checked
+          {
+            document.getElementById("edit").setAttribute("hidden", true);
+          }
+        }
+        window.onload = loadSig
+        </script>
     <div class="Profilerow">
         <div class="Profileside">
           <center><img class="profile-img" src="../static/styles/Profile.jpeg"></center>

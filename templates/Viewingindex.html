@@ -3,14 +3,6 @@
 <html>
 
 <head>
-	<script>
-		function getText() {
-
-			var a = document.getElementById("ourPara")
-			alert("Your form has been successfully submitted.")
-		}
-
-	</script>
 	<meta content="en-us" http-equiv="Content-Language" />
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 	<link rel="stylesheet" href="../static/styles/styles.css" />
@@ -19,423 +11,871 @@
 			<h1>Form {{seshlist[1]}} Is shown below</h1>
 		</div>
 	</center>
-    <!-- NAVBAR -->  
-    <div class="topnav" id="myTopnav">
+	<!-- NAVBAR -->
+	<div class="topnav" id="myTopnav">
 		<div class="navwrapper">
 			<a href="{{url_for('home')}}" class="active">Home</a>
 			<a href="{{url_for('profile')}}">View Profile</a>
 			<a href="{{url_for('index')}}">Create Form</a>
 			<a href="{{url_for('viewform')}}">View Form</a>
-			<a href="{{url_for('edit')}}">Edit Form</a>
-			<div class="userbutton"><a href="{{url_for('index')}}"></a></div>
+			<a id = "edit" href="{{url_for('edit')}}">Edit Form</a>
+			<div class="userbutton"><a href="{{url_for('index')}}">{{usermsg}}</a></div>
 		</div>
 	</div>
 </head>
 
 <body>
-<!--THIS IS A SCRIPT FOR DETECTING IF ANY CHECKBOXES ARE UNCHECKED-->
-<!--
-Nav bars testing
-<div id = "topnavbar"><div id ="userinfoleft"></div><div id="profilebutton right"><a href="profile.html">Profile</a></div></div>
-<div id="leftnavbar"><div>page1</div></div>
--->
-<div id="header">
-	<h1>Medical Device Incident Reporting Form</h1>
-</div>
-
-
-<form action="" method="post" >
-<div id="form-container">
-	<div id="PatInfo" class="flexbox-wrapper form-section-hideable">
+	<script type="text/javascript">
 	
-		<div class ="form-block" id="PatientInfo">
-			<h3><span class="numbering">1. </span>Patient Information</h3>
-			<p class="block-note">It is our policy not to collect any patient information unless requested to do so by the Original Equipment Manufacturer (OEM).</p>
-
-			<span class="numbering">a. </span><label for="ptID">PT Identifier: </label>{{seshlist[23]}} <br/>
-			<span class="numbering">b. </span><label for="DoB">Date of Birth: (mm/dd/year):</label>{{seshlist[24]}} <br />
-			<span class="numbering">c. </span><label>Sex: </label>{{seshlist[25]}}
-			<span class="numbering">d. </span> <label for="Weight"> Weight (lbs):</label>{{seshlist[26]}} <br/>
-		</div>
+		function loadSig() {
+			var isAdmin = "{{adminitem[0]}}"
 		
-		<div class ="form-block" id="ReportingFacility" >
-			<h3><span class="numbering">2. </span>Reporting Facility Information</h3>
-			<label for="rptBy">Reported by:</label> {{seshlist[31]}}<br />
-			<label for="facName">Facility Name:</label>{{seshlist[32]}}<br />
-			<label for="Address"> Address:</label> {{seshlist[33]}}<br />
-			<label for="City">City:</label> {{seshlist[34]}}
-			<label for="FacilityState">State:{{seshlist[35]}}
-			<br/>
-			Zip:{{seshlist[36]}}<br />
-			Phone: {{seshlist[37]}}<br />
-		</div>
-	</div>
-	<div class="form-block form-section-hideable">
-		<h3><span class="numbering">3. </span>Adverse Event or Product Problem</h3>
-
-	<!-- this is sams and pats java script
-	still needs to be finished currently working out an issue with index formating	
-	a fully selected list will work but thats about it, the other text boxes and dates throw a error
-	-->
-		<script>
-			function containsEncodedComponents(x) {
-  				// ie ?,=,&,/ etc
-  				return (decodeURI(x) !== decodeURIComponent(x));
-			
+				if (isAdmin == 0) //checks t see if other checkbox is checked
+				{
+					document.getElementById("signature").setAttribute("hidden", true);
+					document.getElementById("signatureDate").setAttribute("hidden", true);
+					document.getElementById("sig").setAttribute("hidden",true);
+					document.getElementById("dsign").setAttribute("hidden",true);	
+					document.getElementById("edit").setAttribute("hidden", true);
+				}
+			else
+				{
+					document.getElementById("signature").removeAttribute("hidden", true);
+					document.getElementById("signatureDate").removeAttribute("hidden", true);
+					
+				}
 			}
-            function section1(){
-            var badword = '{{ seshlist }}'
+				window.onload = loadSig
+		
+			
+		function section1(){
+			var badword = '{{ seshlist }}'
 			var word = badword.replace(/&#39;/g, ""); //removes  the &#39 that gets added when going from HTML to javascript
 			console.log(word)
 			
 			
 			let arr = word.split(', '); //Splits all of the elements of seshlist and then adds them to an array
+			console.log(arr[74]);
+			//patient information
+			document.getElementById("ptID").value=arr[23];
+			var det = arr[25].toString()
+			var deta = arr[24].toString()
+			var month = det.substring(3,6)
+			var day = det.substring(0,2)
+			var year = det.substring(7,11)
+			console.log(day)
+			switch (month){  //Sets the month
+				case "Jan":
+					month = "01";
+				break;
+				case "Feb":
+					month = "02";
+				break;
+				case "Mar":
+					month = "03";
+				break;
+				case "Apr":
+					month = "04";
+				break;
+				case "May":
+					month = "05";
+				break;
+				case "Jun":
+					month = "06";
+				break;
+				case "Jul":
+					month = "07";
+				break;
+				case "Aug":
+					month = "08";
+				break;
+				case "Sep":
+					month= "09";
+				break;
+				case "Oct":
+					month= "10";
+				break;
+				case "Nov":
+					month = "11";
+					break;
+				case "Dec":
+					month = "12";
+					break;
+				
+			}  
+			var dash = "-"
+			var date = year.concat(dash)
+			date = date.concat(month)	
+			date = date.concat(dash)
+			date = date.concat(day)
+			document.getElementById("DoB").value= date;
+			//This concatinates the dates together
 			
-		
-            //this is the for lop that runs through the array from i to the end of the array
-			for (let i = 0; i <= arr.length; i++){
-				console.log(word)
+			if (arr[26]=="male"){
+				document.getElementById("male").setAttribute("checked", true);
+			}
+			else{
+				document.getElementById("female").setAttribute("checked", true);
+			}
+			document.getElementById("Weight").value=arr[27];
+			
+			//Reporting Facility Information
+			document.getElementById("rptBy").value=arr[32];
+			document.getElementById("facName").value=arr[33];
+			document.getElementById("Address").value=arr[34];
+			document.getElementById("City").value=arr[35];
+			document.getElementById("FacilityState").value=arr[36];
+			document.getElementById("Zip").value=arr[37];
+			document.getElementById("Phone").value=arr[38];
+			
+			
+			//Adverse Event or Product Problem
+			//this is the for lop that runs through the array from i to the end of the array
 				// this is the adverse event and product problem if statments 
 				//this is the adverser event if statments so if the index equals adverseEvent then do this thing 
-                if (arr[i] == "AdverseEvent"){
+			if (arr[51] == "AdverseEvent"){
 					// this gets the element in html by id so in this case the id is adverse event it then sets the checkbox to disabled and then checks it. 
-					document.getElementById("AdverseEvent").setAttribute("disabled", true);
-                    document.getElementById("AdverseEvent").setAttribute("checked", true);
-                }
-                if (arr[i] == "ProductProblem"){
-					document.getElementById("ProductProblem").setAttribute("disabled", true);
-                    document.getElementById("ProductProblem").setAttribute("checked", true);
-                }
-
-				// this is the if statments for all the other check box and textbox in the adverse event feild 
-				if (arr[i] == arr[53]){
-					// this does the same thing as above but i added .value arr[54] which just plugs the date in the textbox field next to date
-					document.getElementById("DoD").value = arr[53];
-					document.getElementById("death").setAttribute("disabled", true);
-                    document.getElementById("death").setAttribute("checked", true);
-                }
-				if (arr[i] == "Intervention"){
-					document.getElementById("Intervention").setAttribute("disabled", true);
-                    document.getElementById("Intervention").setAttribute("checked", true);
-                }
-				if (arr[i] == "LifeThreatening"){
-					document.getElementById("LifeThreatening").setAttribute("disabled", true);
-                    document.getElementById("LifeThreatening").setAttribute("checked", true);
-                }
-				if (arr[i] == "Disability"){
-					document.getElementById("Disability").setAttribute("disabled", true);
-                    document.getElementById("Disability").setAttribute("checked", true);
-				}
-				if (arr[i] == "Hospitalized"){
-					document.getElementById("Hospitalized").setAttribute("disabled", true);
-                    document.getElementById("Hospitalized").setAttribute("checked", true);
-				}
-				if (arr[i] == "CongenitalAnomaly"){
-					document.getElementById("CongenitalAnomaly").setAttribute("disabled", true);
-                    document.getElementById("CongenitalAnomaly").setAttribute("checked", true);
-				}
-				if (arr[i] == arr[59]){
-					document.getElementById("otherText1").value=arr[59];
-					document.getElementById("other").setAttribute("disabled", true);
-                    document.getElementById("other").setAttribute("checked", true);
-				}
-
-
-				//this is the event information page array pulls 
-				if (arr[i] == arr[29]){
-					document.getElementById("Description").setAttribute("disabled", true);
-                	document.getElementById("Description").value=arr[29];
-				}
-				if (arr[i] == arr[30]){
-					document.getElementById("Findings").setAttribute("disabled", true);
-               	 	document.getElementById("Findings").value=arr[30];
-				}
-
-				
-
-				//this is the suspected medical devide array pulls
-				if (arr[i] == "User/Patient"){
-					document.getElementById("User/Patient").setAttribute("disabled", true);
-					document.getElementById("User/Patient").setAttribute("checked", true);
-				}
-					if (arr[i] == "HealthProfessional"){
-					document.getElementById("HealthProfessional").setAttribute("disabled", true);
-					document.getElementById("HealthProfessional").setAttribute("checked", true);
-				}
-				if (arr[i] == arr[49]){
-					document.getElementById("otherText2").value=arr[49];
-					document.getElementById("otherCHK").setAttribute("disabled", true);
-                    document.getElementById("otherCHK").setAttribute("checked", true);
-				}
-
-
-				//this is the reported by table:
-				if (arr[i] == arr[74]){
-					document.getElementById("repManuName").value=arr[74];
-					document.getElementById("chkManu").setAttribute("disabled", true);
-                    document.getElementById("chkManu").setAttribute("checked", true);
-				}
-				if (arr[i] == arr[75]){
-					document.getElementById("repUserFac").value=arr[75];
-					document.getElementById("chkRepFac").setAttribute("disabled", true);
-                    document.getElementById("chkRepFac").setAttribute("checked", true);
-				}
-				if (arr[i] == arr[76]){
-					document.getElementById("repDistImp").value=arr[76];
-					document.getElementById("chkDistImp").setAttribute("disabled", true);
-                    document.getElementById("chkDistImp").setAttribute("checked", true);
-				}
-
-			
-
-
-				
-			// this is where things get weird since we are just going through all the array above this insures that if the boxes that are supposed to be none are none
-			// this done by manual seeing if the text fields that are supposed to be none are changed to be empty and the checkbox is not checked 
-		}
-		// for example this looks at the DOD and at the index 53 and say if this is none then change the value to blank and disable the text box and uncheck the check box
-		// this is then repeated for othertext and manu rep
-		console.log(arr[79])
-		if(arr[53]=="None"){
-			document.getElementById("DoD").value = " ";
-			document.getElementById("death").setAttribute("disabled", true);
-            document.getElementById("death").removeAttribute("checked");
-			} 
-		if(arr[59]=="None"){
-			document.getElementById("otherText1").value=" ";
-			document.getElementById("other").setAttribute("disabled", true);
-            document.getElementById("other").removeAttribute("checked");
-		}
-
-
-
-		if(arr[49]=="None"){
-			document.getElementById("otherText2").value=" ";
-			document.getElementById("otherCHK").setAttribute("disabled", true);
-            document.getElementById("otherCHK").removeAttribute("checked");
-		}
-
-
-		// this is all error checking for the rep manu it was being funky thats why it looks the way it does
-		if (arr[74] == ""){
-					document.getElementById("repManuName").value=" ";
-					document.getElementById("chkManu").setAttribute("disabled", true);
-                    document.getElementById("chkManu").removeAttribute("checked");
-		}
-		if (arr[75] == ""){
-					document.getElementById("repUserFac").value=" ";
-					document.getElementById("chkRepFac").setAttribute("disabled", true);
-                    document.getElementById("chkRepFac").removeAttribute("checked");
-		}
-		if (arr[76] == ""){
-					document.getElementById("repDistImp").value=" ";
-					document.getElementById("chkDistImp").setAttribute("disabled", true);
-                    document.getElementById("chkDistImp").removeAttribute("checked");
-		}
-		
-		if (arr[78] == ""){
-					document.getElementById("signature").value="Signature required";
-					document.getElementById("signature").setAttribute("disabled", true);
-				}
-				else {
-					document.getElementById("signature").value=arr[78];
-					document.getElementById("signature").setAttribute("disabled", true);
-				}
-
-		if (arr[79] == "None]"){
-					document.getElementById("signatureDate").value=" ";
-					document.getElementById("signatureDate").setAttribute("disabled", true);
-				}
-				else{
-					document.getElementById("signatureDate").value=arr[80];
-					document.getElementById("signatureDate").setAttribute("disabled", true);
-				}
-		
-	}	
-        window.onload = section1
-        </script>
-		<hr /> 
-		<span class="numbering">a. </span><input id="AdverseEvent" name="EventOrProblem" type="checkbox" value="AdverseEvent" disabled/>
-		<label for="AdverseEvent">Adverse Event</label>
-		and/or
-		<input name="EventOrProblem" type="checkbox" value="ProductProblem" id="ProductProblem" disabled/>
-		<label for="ProductProblem">Product Problem (defects/malfunctions)</label>
-		<hr /> 
-		<span class="numbering">b. </span>Outcome attributed to adverse event (check all that apply): <br />
-		<br />
-		<input name="outcome" type="checkbox" value="death" id="death" onclick="setDoD()" disabled/>
-		<label for="ProductProblem">Death (mm/dd/year)</label>
-		<input name="DoD" type="text" id="DoD" disabled/>
-
-		<input name="outcome" type="checkbox" value="Intervention" id="Intervention" disabled/>
-		<label for="Intervention"> intervention to prevent permanent impairment/damage</label><br />
-
-		<input name="outcome" type="checkbox" value="LifeThreatening" id="LifeThreatening" disabled/>
-		<label for="LifeThreatening">Life-Threatening</label>
-
-		<input name="outcome" type="checkbox" value="Disability" id="Disability" disabled/>
-		<label for="Disability">Disability</label><br />
-
-		<input name="outcome" type="checkbox" value="Hospitalized" id="Hospitalized" disabled/>
-		<label for="Hospitalized">Hospitalized</label>
-
-		<input name="outcome" type="checkbox" value="CongenitalAnomaly" id="CongenitalAnomaly" disabled/>
-		<label for="CongenitalAnomaly">Congenital Anomaly</label>
-		<br />
-
-		<input name="outcome" type="checkbox" value="Other" id="other" onclick="setOther1()" disabled/>
-		<label for="Other"> Other: </label>
-		<input name="OtherText1" type="text" id="otherText1" placeholder="type" disabled/><br />
-		
-		<div id="Dates" class="flexbox-wrapper">
-			<div class="date">
-				<span class="numbering">4.</span>
-				<label for="DateOfEvent"> Date of event (mo/day/yr):</label> <br />
-				{{seshlist[59]}}
-			</div>
-			<div class="date">
-				<span class="numbering">5. </span>
-				<label for="DateOfReport">Date of this report (mo/day/yr):</label> <br />
-				{{seshlist[60]}}
-			</div>
-			<div class="date">
-				<span class="numbering">6. </span>
-				<label for="DateClosed">Date report closed (mo/day/yr):</label> <br />
-				{{seshlist[61]}}
-			</div>
-		</div>
-	</div>
-	
-	<div class ="form-block form-section-hideable" id="DescAndFindings">
-		<h3>Event Information</h3>
-		<span class="numbering">7. </span>
-		<label for="Description">Describe Event or Problem: </label> <br /><br />
-		<textarea name="Description" placeholder="Please type here..." id="Description" maxlength="256"  disabled> </textarea><br />
-		<br />
-		<span class="numbering">8. </span>
-		<label for="Findings">Findings:</label> <br /><br />
-		<textarea name="Findings" placeholder="Please type here..." id="Findings" maxlength = 100  disabled> </textarea></div>
-		
-	<div class ="form-block form-section-hideable" id="SusDevice">
-		<h3><span class="numbering">9. </span>
-			Suspect Medical Device</h3>
-
-		<span class="numbering">a. </span>
-		<label for="BrandName">Brand Name:</label>
-		{{seshlist[39]}}
-
-		<span class="numbering">c. </span>
-		<label for="ModelNum">Model # </label>
-		{{seshlist[40]}}
-
-		<span class="numbering">b. </span>
-		<label for="DeviceType">type of device:</label>
-		{{seshlist[41]}}
-
-		<span class="numbering">d. </span>
-		<label for="SerielNum">Serial #</label>
-		{{seshlist[42]}}
-		<br />
-		<br />
-
-		<label for="ManuName"> Manufacturer Name:</label>
-		{{seshlist[43]}}
-		
-		<label for="ManuCity"> City: </label>
-		{{seshlist[44]}}
-
-		<label for="ManuState">State: </label>
-		{{seshlist[45]}}
-		</select><br />
-		
-		<span class="numbering">f. </span>Operator of device:
-		<input name="operator" type="checkbox" value="HealthProfessional" id="HealthProfessional" disabled/>Health Professional
-		<input name="operator" type="checkbox" value="User/Patient"id="User/Patient" disabled/>Lay user/patient
-		<input name="operator" type="checkbox" id="otherCHK" value="Other2" id="otherCHK" disabled/>Other: <!--<input name="outcome" type="checkbox" value="death" id="death" />-->
-		<input name="OtherText2" type="text" id="otherText2" disabled/><br />
-		<br />
-
-		
-	</div>
-
-
-	<div class="flexbox-wrapper" id="ReportingInfo">
-			<div id="ReportedBy" class="form-block form-section-hideable">
-				<h3><span class="numbering">10. </span>
-					Report Completed by:</h3>
-
-				<label for="repComp">Company: </label>
-				{{seshlist[63]}}<br />
-				<label for="repName">Name: </label>
-				{{seshlist[64]}}<br />
-
-				<label for="repAddress">Address: </label>
-				{{seshlist[65]}}<br />
-
-				<label for="repCity"> City: </label>
-				{{seshlist[66]}}<br />
-
-				<label for="repState">State:</label>
-				{{seshlist[67]}}
-				<br />
-
-				<label for="repPhone">Phone: </label>
-				{{seshlist[68]}}
-				<br />
-			</div>
-		
-			<div id="ReportedTo" class="form-block form-section-hideable">
-				<h3><span class="numbering">11. </span>Also Reported to: </h3>
-				Name/Company<br />
-				<input name="chkManu" type="checkbox" value="yes" onclick="notifiedManu()" id ="chkManu" disabled/>&nbsp;Manufacturer: <input name="RepManuName" id="repManuName" type="text" disabled/><br />
-				<input name="chkRepFac" type="checkbox" value="yes" onclick="notifiedFac()" id = "chkRepFac"disabled/>&nbsp;User Facility: <input name="RepUserFac" id="repUserFac" type="text" disabled/><br />
-				<input name="chkDistImp" type="checkbox" value="yes" onclick="notifiedDistImp()" id = "chkDistImp" disabled/>&nbsp;Distributor/Importer: <input name="RepDisImp" id="repDistImp" type="text" disabled/><br />
-			</div>
-	</div>	
-	<div class="flexbox-wrapper form-section-hideable" id="Signature">
-		<div id="sigbox" class="form-block form-section-hideable" >
-			<h3 id = "sig">Signature of QA Director</h3>
-			
-			<input name="Signature" type="text" id="signature" >
-			<p class="block-note">A QA Director filling out this form must provide dated signature before submission. Please sign in the box above. </p>
-		</div>
-		
-		<div id="sigdate" class="form-block form-section-hideable">
-			<h3 id = "dsign">Date Signed</h3>
-			<input name="SignatureDate" type="text" id="signatureDate" >
-			<p class="block-note">Please fill out the date of signature in the box above.</p>
-		</div>
-	</div>
-	</div>
-
-	<script src="js/jquery-1.11.0.min.js" type="text/javascript">
-
-		var isAdmin = adminitem[0]
-		print(isAdmin)
-		 function loadSig() {
-		
-	
-			print(isAdmin)
-				alert(isAdmin)
-				if (isAdmin == 0) //checks t see if other checkbox is checked
-				{
-					document.getElementById("signature").setAttribute("hidden", true);
-					document.getElementById("signatureDate").setAttribute("hidden", true);
-				}
-			else
-				{
-					document.getElementById("signature").removeAttribute("hidden", true);
-					document.getElementById("signatureDate").removeAttribute("hidden", true);	
-							
-				}
+				document.getElementById("AdverseEvent").setAttribute("checked", true);
 			}
+			if (arr[52] == "ProductProblem"){
+				document.getElementById("ProductProblem").setAttribute("checked", true);
+			}
+			
+		
+			if(arr[53]=="None"){
+			document.getElementById("DoD").value = " ";
+			document.getElementById("death").removeAttribute("checked");
+			}
+			else{
+			document.getElementById("DoD").value=arr[53];
+			document.getElementById("death").setAttribute("checked", true);
+			}
+			if (arr[54] == "Intervention"){
+				document.getElementById("Intervention").setAttribute("checked", true);
+			}
+			if (arr[55] == "LifeThreatening"){
+				document.getElementById("LifeThreatening").setAttribute("checked", true);
+			}
+			if (arr[56] == "Disability"){
+				document.getElementById("Disability").setAttribute("checked", true);
+			}
+			if (arr[57] == "Hospitalized"){
+				document.getElementById("Hospitalized").setAttribute("checked", true);
+			}
+			if (arr[58] == "CongenitalAnomaly"){
+				document.getElementById("CongenitalAnomaly").setAttribute("checked", true);
+			}
+			if(arr[59]=="None"){
+			document.getElementById("otherText1").value=" ";
+			document.getElementById("other").removeAttribute("checked");
+			}
+			else{
+			document.getElementById("otherText1").value=arr[59];
+			document.getElementById("other").setAttribute("checked", true);
+			}
+			// this is the date reported section 
+			var det = arr[61].toString()
+			var deta = arr[62].toString()
+			var month = det.substring(3,6)
+			var day = det.substring(0,2)
+			var year = det.substring(7,11)
+			switch (month){  //Sets the month
+				case "Jan":
+					month = "01";
+				break;
+				case "Feb":
+					month = "02";
+				break;
+				case "Mar":
+					month = "03";
+				break;
+				case "Apr":
+					month = "04";
+				break;
+				case "May":
+					month = "05";
+				break;
+				case "Jun":
+					month = "06";
+				break;
+				case "Jul":
+					month = "07";
+				break;
+				case "Aug":
+					month = "08";
+				break;
+				case "Sep":
+					month= "09";
+				break;
+				case "Oct":
+					month= "10";
+				break;
+				case "Nov":
+					month = "11";
+					break;
+				case "Dec":
+					month = "12";
+					break;
+				
+			}   
+			var dash = "-"
+			var date = year.concat(dash)
+			date = date.concat(month)	
+			date = date.concat(dash)
+			date = date.concat(day)
+			document.getElementById("DateOfEvent").value= date;
+			
+			var det = arr[63].toString()
+			var deta = arr[64].toString()
+			var month = det.substring(3,6)
+			var day = det.substring(0,2)
+			var year = det.substring(7,11)
+			switch (month){  //Sets the month
+				case "Jan":
+					month = "01";
+				break;
+				case "Feb":
+					month = "02";
+				break;
+				case "Mar":
+					month = "03";
+				break;
+				case "Apr":
+					month = "04";
+				break;
+				case "May":
+					month = "05";
+				break;
+				case "Jun":
+					month = "06";
+				break;
+				case "Jul":
+					month = "07";
+				break;
+				case "Aug":
+					month = "08";
+				break;
+				case "Sep":
+					month= "09";
+				break;
+				case "Oct":
+					month= "10";
+				break;
+				case "Nov":
+					month = "11";
+					break;
+				case "Dec":
+					month = "12";
+					break;
+			}  
 
-	</script>
+			// We need a switch statement to account for if the day is single digit and then 
+			var dash = "-"
+			var date = year.concat(dash)
+			date = date.concat(month)	
+			date = date.concat(dash)
+			date = date.concat(day)
+			document.getElementById("DateOfReport").value= date;
+			
 
-</form>
 
+			var det = arr[65].toString()
+			var deta = arr[66].toString()
+			var month = det.substring(3,6)
+			var day = det.substring(0,2)
+			var year = det.substring(7,11)
+			switch (month){  //Sets the month
+				case "Jan":
+					month = "01";
+				break;
+				case "Feb":
+					month = "02";
+				break;
+				case "Mar":
+					month = "03";
+				break;
+				case "Apr":
+					month = "04";
+				break;
+				case "May":
+					month = "05";
+				break;
+				case "Jun":
+					month = "06";
+				break;
+				case "Jul":
+					month = "07";
+				break;
+				case "Aug":
+					month = "08";
+				break;
+				case "Sep":
+					month= "09";
+				break;
+				case "Oct":
+					month= "10";
+				break;
+				case "Nov":
+					month = "11";
+					break;
+				case "Dec":
+					month = "12";
+					break;
+				
+			}   
+			var dash = "-"
+			var date = year.concat(dash)
+			date = date.concat(month)	
+			date = date.concat(dash)
+			date = date.concat(day)
+			document.getElementById("DateClosed").value= date;
+			//this is the event information page array pulls 
+			if (arr[29] == "None"){
+				document.getElementById("Description").value=" ";
+			}
+			else{
+				document.getElementById("Description").value=arr[29];
+			}
+			if (arr[30] == "None"){
+				document.getElementById("Findings").value=" ";
+			}
+			else{
+				document.getElementById("Findings").value=arr[30];
+			}
+	
+		
+			//Suspect Medical Device
+			document.getElementById("BrandName").value=arr[40];
+			document.getElementById("ModelNum").value=arr[41];
+			document.getElementById("DeviceType").value=arr[42];
+			document.getElementById("SerielNum").value=arr[43];
+			document.getElementById("ManuName").value=arr[44];
+			document.getElementById("ManuCity").value=arr[45];
+			document.getElementById("ManuState").value=arr[46];
+		
+			if (arr[47] == "HealthProfessional"){
+				document.getElementById("HealthProfessional").setAttribute("checked", true);
+			}
+			if (arr[48] == "User/Patient"){
+				document.getElementById("User/Patient").setAttribute("checked", true);
+			}
+			
+			if(arr[49]=="None"){
+				document.getElementById("otherText2").value=" ";
+			}
+			else{
+				document.getElementById("otherText2").value=arr[49];
+				document.getElementById("otherCHK").setAttribute("checked", true);
+			}
+		
+			//this is the report completed by:
+			document.getElementById("repComp").value=arr[67];
+			document.getElementById("repName").value=arr[68];
+			document.getElementById("repAddress").value=arr[69];
+			document.getElementById("repCity").value=arr[70];
+			document.getElementById("repState").value=arr[71];
+			document.getElementById("repPhone").value=arr[72];
+			
+			//this is the reported by table:
+			if (arr[74] == ""){
+				document.getElementById("repManuName").value=" ";
+			}
+			else{
+				
+				document.getElementById("repManuName").value=arr[74];
+				document.getElementById("chkManu").setAttribute("checked", true);
+			}
+		
+		
+			if (arr[75] == ""){
+				document.getElementById("repUserFac").value=" ";
+			}
+			else{
+				var str,
+				element = document.getElementById('chkRepFac');
+				console.log(element)
+				document.getElementById("repUserFac").value=arr[75];
+				document.getElementById("chkRepFac").setAttribute("checked", true);
+			}
+		
+			
+			if (arr[76] == ""){
+				document.getElementById("repDistImp").value=" ";
+			}
+			else{
+			
+				document.getElementById("repDistImp").value=arr[76];
+				document.getElementById("chkDistImp").setAttribute("checked", true);
+			}
+		
+		
+			//signature part
+			if (arr[78] == ""){
+				document.getElementById("signature").value="Signature required";
+			}
+			else {
+				document.getElementById("signature").value=arr[78];
+			}
+		
+			if (arr[79] == "None]"){
+				document.getElementById("signatureDate").value=null;
+				}
+			else{
+				// this is a stupid array that just gets the last two indexes in the array because the last two indexs are going to be the signature date
+				var arrylength = arr.length;
+				var num = arrylength-1;
+				var num1 = arrylength-2;
+				var det = arr[num].toString();
+				var deta = arr[num1].toString();
+				var month = det.substring(3,6)
+				var day = det.substring(0,2)
+				var year = det.substring(7,11)
+				switch (month){  //Sets the month
+					case "Jan":
+						month = "01";
+					break;
+					case "Feb":
+						month = "02";
+					break;
+					case "Mar":
+						month = "03";
+					break;
+					case "Apr":
+						month = "04";
+					break;
+					case "May":
+						month = "05";
+					break;
+					case "Jun":
+						month = "06";
+					break;
+					case "Jul":
+						month = "07";
+					break;
+					case "Aug":
+						month = "08";
+					break;
+					case "Sep":
+						month= "09";
+					break;
+					case "Oct":
+						month= "10";
+					break;
+					case "Nov":
+						month = "11";
+						break;
+					case "Dec":
+						month = "12";
+						break;
+				
+				}   
+				var dash = "-"
+				var date = year.concat(dash)
+				date = date.concat(month)	
+				date = date.concat(dash)
+				date = date.concat(day)
+				document.getElementById("signatureDate").value= date;
+			}
+			
+		}	
+		window.onload = section1
+</script>
+	<!---<div id = "topnavbar"><div id ="userinfoleft"></div><div id="profilebutton right"><a href="profile.html">Profile</a></div></div>
+<div id="leftnavbar"><div>page1</div></div>-->
+
+	<div id="header">
+		<h1>Medical Device Incident Reporting Form</h1>
+	</div>
+
+
+	<form action="" method="post">
+		<div id="form-container">
+			<div id="PatInfo" class="flexbox-wrapper form-section-hideable">
+
+				<div class="form-block" id="PatientInfo">
+					<h3><span class="numbering">1. </span>Patient Information</h3>
+					<p class="block-note">It is our policy not to collect any patient information unless requested to do
+						so by the Original Equipment Manufacturer (OEM).</p>
+
+					<span class="numbering">a. </span><label for="ptID">PT Identifier: </label><input name="ptID"
+						id="ptID" type="number" disabled /><br />
+					<span class="numbering">b. </span><label for="DoB">Date of Birth: (mm/dd/year)</label> <input
+						name="DoB" id="DoB" type="date" disabled /><br />
+					<span class="numbering">c. </span><label>Sex: </label> <input name="radSex" type="radio"
+						value="female" id="female" disabled />Female<input name="radSex" type="radio" value="male"
+						id="male" disabled />Male<br />
+					<span class="numbering">d. </span> <label for="Weight"> Weight (lbs): </label> <input id="Weight"
+						name="Weight" type="number" disabled /><br />
+				</div>
+
+				<div class="form-block" id="ReportingFacility">
+					<h3><span class="numbering">2. </span>Reporting Facility Information</h3>
+					<label for="rptBy">Reported by:</label> <input id="rptBy" name="rptBy" type="text" disabled /><br />
+					<label for="facName">Facility Name:</label><input id="facName" name="facName" type="text"
+						disabled /><br />
+					<label for="Address"> Address:</label> <input name="Address" id="Address" type="text"
+						disabled /><br />
+					<label for="City">City:</label> <input name="City" type="text" id="City" disabled />
+					<label for="FacilityState">State:</label><select name="FacilityState" id="FacilityState" size="1"
+						disabled>
+						<option></option>
+						<option value="Alabama">Alabama</option>
+						<option value="Alaska">Alaska</option>
+						<option value="Arizona">Arizona</option>
+						<option value="Arkansas">Arkansas</option>
+						<option value="California">California</option>
+						<option value="Colorado">Colorado</option>
+						<option value="Conneticut">Conneticut</option>
+						<option value="Deleware">Delaware</option>
+						<option value="Florida">Florida</option>
+						<option value="Georgia">Georgia</option>
+						<option value="Hawaii">Hawaii</option>
+						<option value="Idaho">Idaho</option>
+						<option value="Illinois">Illinois</option>
+						<option value="Indiana">Indiana</option>
+						<option value="Iowa">Iowa</option>
+						<option value="Kansas">Kansas</option>
+						<option value="Kentucky">Kentucky</option>
+						<option value="Louisiana">Louisiana</option>
+						<option value="Maine">Maine</option>
+						<option value="Maryland">Maryland</option>
+						<option value="Massachusetts">Massachusetts</option>
+						<option value="Michigan">Michigan</option>
+						<option value="Minnesota">Minnesota</option>
+						<option value="Mississippi">Mississippi</option>
+						<option value="Missouri">Missouri</option>
+						<option value="Montana">Montana</option>
+						<option value="Nebraska">Nebraska</option>
+						<option value="Nevada">Nevada</option>
+						<option value="New Hampshire">New Hampshire</option>
+						<option value="New Jersey">New Jersey</option>
+						<option value="New Mexico">New Mexico</option>
+						<option value="New York">New York</option>
+						<option value="North Carolina">North Carolina</option>
+						<option value="North Dakota">North Dakota</option>
+						<option value="Ohio">Ohio</option>
+						<option value="Oklahoma">Oklahoma</option>
+						<option value="Oregon">Oregon</option>
+						<option value="Pennsylvania">Pennsylvania</option>
+						<option value="Rhode Island">Rhode Island</option>
+						<option value="South Carolina">South Carolina</option>
+						<option value="South Dakota">South Dakota</option>
+						<option value="Tennessee">Tennessee</option>
+						<option value="Texas">Texas</option>
+						<option value="Utah">Utah</option>
+						<option value="Vermont">Vermont</option>
+						<option value="Virginia">Virginia</option>
+						<option value="Washington">Washington</option>
+						<option value="Washington DC">Washington DC</option>
+						<option value="West Virginia">West Virginia</option>
+						<option value="Wisconsin">Wisconsin</option>
+						<option value="Wyoming">Wyoming</option>
+					</select><br />
+					Zip: <input id="Zip" name="Zip" type="number" maxlength="5" placeholder="xxxxx" disabled><br />
+					Phone: <input name="Phone" id="Phone" type="tel" placeholder="xxxxxxxxxx"
+						pattern="[0-9]{3}[0-9]{3}[0-9]{4}" disabled />
+				</div>
+			</div>
+
+			<div class="form-block form-section-hideable">
+				<h3><span class="numbering">3. </span>Adverse Event or Product Problem</h3>
+
+				<span class="numbering">a. </span><input id="AdverseEvent" name="EventOrProblem" type="checkbox"
+					value="AdverseEvent" disabled />
+				<label for="AdverseEvent">Adverse Event</label>
+				and/or
+				<input name="EventOrProblem" type="checkbox" value="ProductProblem" id="ProductProblem" disabled />
+				<label for="ProductProblem">Product Problem (defects/malfunctions)</label>
+				<hr />
+
+				<span class="numbering">b. </span>Outcome attributed to adverse event (check all that apply): <br />
+				<br />
+				<input name="outcome" type="checkbox" value="death" id="death" onclick="setDoD()" disabled />
+				<label for="death">Death (mm/dd/year)</label>
+				<input name="DoD" type="text" id="DoD" placeholder="mm/dd/yyyy" disabled />
+
+				<input name="outcome" type="checkbox" value="Intervention" id="Intervention" disabled />
+				<label for="Intervention"> intervention to prevent permanent impairment/damage</label><br />
+
+				<input name="outcome" type="checkbox" value="LifeThreatening" id="LifeThreatening" disabled />
+				<label for="LifeThreatening">Life-Threatening</label>
+
+				<input name="outcome" type="checkbox" value="Disability" id="Disability" disabled />
+				<label for="Disability">Disability</label><br />
+
+				<input name="outcome" type="checkbox" value="Hospitalized" id="Hospitalized" disabled />
+				<label for="Hospitalized">Hospitalized</label>
+
+				<input name="outcome" type="checkbox" value="CongenitalAnomaly" id="CongenitalAnomaly" disabled />
+				<label for="CongenitalAnomaly">Congenital Anomaly</label>
+				<br />
+
+				<input name="outcome" type="checkbox" value="Other" id="other" onclick="setOther1()" disabled />
+				<label for="Other"> Other: </label>
+				<input name="OtherText1" type="text" id="otherText1" placeholder="type" disabled /><br />
+
+				<div id="Dates" class="flexbox-wrapper">
+					<div class="date">
+						<span class="numbering">4.</span>
+						<label for="DateOfEvent"> Date of event (mo/day/yr):</label> <br />
+						<input name="DateOfEvent" type="date" id="DateOfEvent" disabled />
+					</div>
+					<div class="date">
+						<span class="numbering">5. </span>
+						<label for="DateOfReport">Date of this report (mo/day/yr):</label> <br />
+						<input name="DateOfReport" type="date" id="DateOfReport" disabled />
+					</div>
+					<div class="date">
+						<span class="numbering">6. </span>
+						<label for="DateClosed">Date report closed (mo/day/yr):</label> <br />
+						<input name="DateClosed" type="date" id="DateClosed" disabled />
+					</div>
+				</div>
+			</div>
+
+			<div class="form-block form-section-hideable" id="DescAndFindings">
+				<h3>Event Information</h3>
+
+				<span class="numbering">7. </span>
+				<label for="Description">Describe Event or Problem: </label> <br /><br />
+				<textarea name="Description" placeholder="Please type here..." id="Description" maxlength="256"
+					disabled> </textarea><br />
+				<br />
+				<span class="numbering">8. </span>
+				<label for="Findings">Findings:</label> <br /><br />
+				<textarea name="Findings" placeholder="Please type here..." id="Findings" maxlength=100
+					disabled> </textarea>
+			</div>
+
+
+			<div class="form-block form-section-hideable" id="SusDevice" disabled>
+				<h3><span class="numbering">9. </span>
+					<h3>Suspect Medical Device</h3>
+
+					<span class="numbering">a. </span>
+					<label for="BrandName">Brand Name:</label>
+					<input name="BrandName" type="text" id="BrandName" disabled />
+
+					<span class="numbering">c. </span>
+					<label for="ModelNum">Model # </label>
+					<input name="ModelNum" type="text" id="ModelNum" disabled /><br />
+
+					<span class="numbering">b. </span>
+					<label for="DeviceType">type of device:</label>
+					<input name="DeviceType" type="text" id="DeviceType" disabled />
+
+					<span class="numbering">d. </span>
+					<label for="SerielNum">Serial #</label>
+					<input name="SerialNum" type="text" id="SerielNum" disabled /><br />
+
+					<br />
+
+					<label for="ManuName"> Manufacturer Name:</label>
+					<input name="ManuName" type="text" id="ManuName" disabled />
+
+					<label for="ManuCity"> City: </label>
+					<input name="ManuCity" type="text" id="ManuCity" disabled />
+
+					<label for="ManuState">State: </label>
+					<select name="ManuState" id="ManuState" size="1" disabled>
+						<option></option>
+						<option value="Alabama">Alabama</option>
+						<option value="Alaska">Alaska</option>
+						<option value="Arizona">Arizona</option>
+						<option value="Arkansas">Arkansas</option>
+						<option value="California">California</option>
+						<option value="Colorado">Colorado</option>
+						<option value="Conneticut">Conneticut</option>
+						<option value="Deleware">Delaware</option>
+						<option value="Florida">Florida</option>
+						<option value="Georgia">Georgia</option>
+						<option value="Hawaii">Hawaii</option>
+						<option value="Idaho">Idaho</option>
+						<option value="Illinois">Illinois</option>
+						<option value="Indiana">Indiana</option>
+						<option value="Iowa">Iowa</option>
+						<option value="Kansas">Kansas</option>
+						<option value="Kentucky">Kentucky</option>
+						<option value="Louisiana">Louisiana</option>
+						<option value="Maine">Maine</option>
+						<option value="Maryland">Maryland</option>
+						<option value="Massachusetts">Massachusetts</option>
+						<option value="Michigan">Michigan</option>
+						<option value="Minnesota">Minnesota</option>
+						<option value="Mississippi">Mississippi</option>
+						<option value="Missouri">Missouri</option>
+						<option value="Montana">Montana</option>
+						<option value="Nebraska">Nebraska</option>
+						<option value="Nevada">Nevada</option>
+						<option value="New Hampshire">New Hampshire</option>
+						<option value="New Jersey">New Jersey</option>
+						<option value="New Mexico">New Mexico</option>
+						<option value="New York">New York</option>
+						<option value="North Carolina">North Carolina</option>
+						<option value="North Dakota">North Dakota</option>
+						<option value="Ohio">Ohio</option>
+						<option value="Oklahoma">Oklahoma</option>
+						<option value="Oregon">Oregon</option>
+						<option value="Pennsylvania">Pennsylvania</option>
+						<option value="Rhode Island">Rhode Island</option>
+						<option value="South Carolina">South Carolina</option>
+						<option value="South Dakota">South Dakota</option>
+						<option value="Tennessee">Tennessee</option>
+						<option value="Texas">Texas</option>
+						<option value="Utah">Utah</option>
+						<option value="Vermont">Vermont</option>
+						<option value="Virginia">Virginia</option>
+						<option value="Washington">Washington</option>
+						<option value="Washington DC">Washington DC</option>
+						<option value="West Virginia">West Virginia</option>
+						<option value="Wisconsin">Wisconsin</option>
+						<option value="Wyoming">Wyoming</option>
+					</select><br />
+
+					<span class="numbering">f. </span>Operator of device:
+					<input name="operator" type="checkbox" id="HealthProfessional" value="HealthProfessional"
+						disabled />Health Professional
+					<input name="operator" type="checkbox" id="User/Patient" value="User/Patient" disabled />Lay
+					user/patient
+					<input name="operator" type="checkbox" id="otherCHK" value="Other2" disabled />Other:
+					<!--<input name="outcome" type="checkbox" value="death" id="death" />-->
+					<input name="OtherText2" type="text" id="otherText2" disabled /><br />
+					<br />
+
+
+			</div>
+
+
+			<div class="flexbox-wrapper" id="ReportingInfo">
+				<!--<h3>Reporting Information</h3>-->
+				<div id="ReportedBy" class="form-block form-section-hideable">
+					<h3><span class="numbering">10. </span>
+						Report Completed by:</h3>
+
+					<label for="repComp">Company: </label>
+					<input name="RepComp" type="text" id="repComp" disabled /><br />
+
+					<label for="repName">Name: </label>
+					<input name="RepName" type="text" id="repName" disabled /><br />
+
+					<label for="repAddress">Address: </label>
+					<input name="RepAddress" type="text" id="repAddress" disabled /><br />
+
+					<label for="repCity"> City: </label>
+					<input name="RepCity" type="text" id="repCity" disabled /><br />
+
+					<label for="repState">State:</label>
+					<select name="RepState" id="repState" size="1" disabled>
+						<option></option>
+						<option value="Alabama">Alabama</option>
+						<option value="Alaska">Alaska</option>
+						<option value="Arizona">Arizona</option>
+						<option value="Arkansas">Arkansas</option>
+						<option value="California">California</option>
+						<option value="Colorado">Colorado</option>
+						<option value="Conneticut">Conneticut</option>
+						<option value="Deleware">Delaware</option>
+						<option value="Florida">Florida</option>
+						<option value="Georgia">Georgia</option>
+						<option value="Hawaii">Hawaii</option>
+						<option value="Idaho">Idaho</option>
+						<option value="Illinois">Illinois</option>
+						<option value="Indiana">Indiana</option>
+						<option value="Iowa">Iowa</option>
+						<option value="Kansas">Kansas</option>
+						<option value="Kentucky">Kentucky</option>
+						<option value="Louisiana">Louisiana</option>
+						<option value="Maine">Maine</option>
+						<option value="Maryland">Maryland</option>
+						<option value="Massachusetts">Massachusetts</option>
+						<option value="Michigan">Michigan</option>
+						<option value="Minnesota">Minnesota</option>
+						<option value="Mississippi">Mississippi</option>
+						<option value="Missouri">Missouri</option>
+						<option value="Montana">Montana</option>
+						<option value="Nebraska">Nebraska</option>
+						<option value="Nevada">Nevada</option>
+						<option value="New Hampshire">New Hampshire</option>
+						<option value="New Jersey">New Jersey</option>
+						<option value="New Mexico">New Mexico</option>
+						<option value="New York">New York</option>
+						<option value="North Carolina">North Carolina</option>
+						<option value="North Dakota">North Dakota</option>
+						<option value="Ohio">Ohio</option>
+						<option value="Oklahoma">Oklahoma</option>
+						<option value="Oregon">Oregon</option>
+						<option value="Pennsylvania">Pennsylvania</option>
+						<option value="Rhode Island">Rhode Island</option>
+						<option value="South Carolina">South Carolina</option>
+						<option value="South Dakota">South Dakota</option>
+						<option value="Tennessee">Tennessee</option>
+						<option value="Texas">Texas</option>
+						<option value="Utah">Utah</option>
+						<option value="Vermont">Vermont</option>
+						<option value="Virginia">Virginia</option>
+						<option value="Washington">Washington</option>
+						<option value="Washington DC">Washington DC</option>
+						<option value="West Virginia">West Virginia</option>
+						<option value="Wisconsin">Wisconsin</option>
+						<option value="Wyoming">Wyoming</option>
+					</select><br />
+
+					<label for="repPhone">Phone: </label>
+					<input name="RepPhone" type="tel" placeholder="xxxxxxxxxx" pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+						id="repPhone" disabled><br />
+				</div>
+
+				<div id="ReportedTo" class="form-block form-section-hideable">
+					<h3><span class="numbering">11. </span>Also Reported to: </h3>
+					Name/Company<br />
+					<input name="chkManu" id="chkManu" type="checkbox" value="yes" onclick="notifiedManu()"
+						disabled />&nbsp;Manufacturer: <input name="RepManuName" id="repManuName" type="text"
+						disabled /><br />
+					<input name="chkRepFac" id="chkRepFac" type="checkbox" value="yes" onclick="notifiedFac()"
+						disabled />&nbsp;User Facility: <input name="RepUserFac" id="repUserFac" type="text"
+						disabled /><br />
+					<input name="chkDistImp" id="chkDistImp" type="checkbox" value="yes" onclick="notifiedDistImp()"
+						disabled />&nbsp;Distributor/Importer: <input name="RepDisImp" id="repDistImp" type="text"
+						disabled /><br />
+				</div>
+
+			</div>
+
+			<div class="flexbox-wrapper form-section-hideable" id="Signature">
+				<div id="sigbox" class="form-block form-section-hideable">
+					<h3 id="sig"><span class="numbering">12. </span>Signature of QA Director</h3>
+					<input name="Signature" type="text" id="signature" disabled>
+					<p class="block-note" style="margin-top:20px;">A QA Director filling out this form must provide
+						dated signature before submission. Please sign in the box above. </p>
+				</div>
+
+				<div id="sigdate" class="form-block form-section-hideable">
+					<h3 id="dsign">Date Signed</h3>
+					<input name="SignatureDate" type="date" id="signatureDate" disabled>
+
+					<p class="block-note" style="margin-top:20px;">Please fill out the date of signature in the box
+						above.</p>
+				</div>
+			</div>
+
+
+		</div>
+
+		<div id="SubmitForm">
+			<input id="reset" name="Reset1" type="reset" value="Reset" />
+			or
+			<input id="ourPara" onClick="getText()" id="submit" name="Submit" type="submit" value="Submit" />
+		</div>
+
+		<div id="footer">
+			<center>
+				<p>&#169; All Rights Reserved.</p>
+			</center>
+		</div>
+
+		<script type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
+	</form>
+	
 </body>
-
-
 
 </html>
