@@ -6,8 +6,8 @@
   
   <body>
         <div class="header">
-            <h1>Welcome To The Incident Report Editing Page</h1>
-            <p>Select which form you would like to edit below.</p>
+            <h1>Welcome to the Incident Report Editing Page</h1>
+            <p>You can edit any submitted forms here.</p>
         </div>
 
     <!-- NAVBAR -->  
@@ -16,7 +16,6 @@
             <a href="{{url_for('profile')}}">View Profile</a>
             <a href="{{url_for('index')}}">Create Form</a>
             <a  href="{{url_for('viewform')}}" >View Form</a>
-            
             <a id = "edit" href="{{url_for('edit')}}">Edit Form</a>
             
       </div>
@@ -45,15 +44,13 @@
 
       <div class="row">
         <div class="side">
-            <p style="color: red; font-size: 1.25em;">Please select the form you would like to edit.</p>
-            <p>This is the editing page for an already submited incident report form. If you need to fill out a incident report, click create form above, or click <a href="{{url_for('index')}}">Here</a></p>
+            <h1 class="red">Please select the form you would like to edit from the list.</h1>
+            <p>This is the editing page for an already submited incident report form. If you need to fill out a incident report, click create form above, or click <a href="{{url_for('index')}}">here</a>.</p>
           <br>
         </div>
         <div class="main">
           <form action="" method="post">
-            <label for = "option">Select the form you would like to view below:</label>
-            <h5></h5>
-            Form:<br>
+            <p><label for="option">Forms currently in your database:</label></p>
             <select size =15 id="choice" name="formnumedit"> 
               {% for i in formID %}
                 <option id="optchoice" name="formnum"><div id = "selectoptions">{{formID[i]}} Date: {{Date[i]}}, CompletedBy:{{CompletedBy[i]}}, Facility: {{Facility[i]}}, Brand: {{Brand[i]}}</div></option>

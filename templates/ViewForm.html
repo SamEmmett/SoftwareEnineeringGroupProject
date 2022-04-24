@@ -7,8 +7,8 @@
   <body>
         <center>
             <div class="header">
-                <h1>Welcome To The Incident Report Viewing Page</h1>
-                <p>Select which form you would like to view below</p>
+                <h1>Welcome to the Incident Report Viewing Page</h1>
+                <p>You can view any submitted forms here.</p>
             </div>
         </center>
 
@@ -34,15 +34,13 @@
         </script>
       <div class="row">
         <div class="side">
-            <p class="view-heading">Please select the form you would like to view.</p>
-            <p>This is the viewing page for an already submited incident report forms. If you need to fill out a incident report click create form above or click <a href="{{url_for('index')}}">Here</a></p>
+            <h1 class="red">Please select the form you would like to view from the list.</h1>
+            <p>This is the viewing page for an already submited incident report form. If you need to fill out a incident report click create form above or click <a href="{{url_for('index')}}">here</a>.</p>
           <br>
         </div>
         <div class="main">
             <form action="" method="post">
-                <label for = "option">Select the form you would like to view below:</label>
-                <h5></h5>
-                Form:<br>
+              <p><label for="option">Forms currently in your database:</label></p>
                 <select size =15 id="choice" name="formnum"> 
                   {% for i in formID %}
                     <option id="optchoice" name="formnum"><div id = "selectoptions">{{formID[i]}} Date: {{Date[i]}}, CompletedBy:{{CompletedBy[i]}}, Facility: {{Facility[i]}}, Brand: {{Brand[i]}}</div></option>

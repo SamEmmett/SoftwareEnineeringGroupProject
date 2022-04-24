@@ -113,9 +113,10 @@
 #header h1, #header h2 {
 	text-align: center;
 }
-#header h1 {
+h1.red {
 	font-size: 26px;
 	color: rgb(255,0,0);
+  line-height: 1em;
 }
 #header h2 {
 	font-size: 18px;
