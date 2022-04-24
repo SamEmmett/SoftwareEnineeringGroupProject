@@ -94,7 +94,7 @@ def index():
 
 
 
-        DATEOFEVENT = '1900-01-01'
+        DATEOFEVENT = None
         DATEOFREPORT = None
         DATEREPORTCLOSED = None
         DATEOFEVENT = userDetails['DateOfEvent']
@@ -106,7 +106,7 @@ def index():
         ID = session['id']
         
         SIGNATURE = None
-        DATECOMP = None
+        DATECOMP = "1900-01-01"
         SIGNATURE = userDetails['Signature']
         DATECOMP = userDetails['SignatureDate']
         BRANDNAME = userDetails['BrandName']
