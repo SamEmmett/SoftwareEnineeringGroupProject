@@ -109,8 +109,12 @@ def index():
         DATECOMP = "1900-01-01"
         SIGNATURE = userDetails['Signature']
         DATECOMP = userDetails['SignatureDate']
+        if DATECOMP == "":
+            DATECOMP = None
         BRANDNAME = userDetails['BrandName']
         MODELNUMBER = userDetails['ModelNum']
+        if MODELNUMBER == "":
+            MODELNUMBER = None
         DEVICETYPE = userDetails['DeviceType']
         SERIALNUMBER = userDetails['SerialNum']
         MANUNAME = userDetails['ManuName']
@@ -146,10 +150,11 @@ def index():
         mysql.connection.commit()
       
         form = cur.execute("select formID from form order by formid asc;")
+       
         if form == None:
-            form==1
+            form=0
         form=form+1
-        print(form)
+        
         cur.execute("SELECT UserID FROM Users WHERE UserID  = %s ", (ID,))
         UIDVAL = cur.fetchall()
         cur.execute("SELECT piID FROM patientinfo WHERE piID = %s ", (form,))
@@ -262,8 +267,12 @@ def home():
 def viewform():
     if request.method =='GET':
             ID = session['id'] 
+            
             cur = mysql.connection.cursor()
-            cur.execute("SELECT FormID FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID WHERE UserID = %s ORDER BY DateOfReport ASC",(ID,))
+            if ID != 1:
+                cur.execute("SELECT FormID FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID WHERE UserID = %s ORDER BY DateOfReport ASC",(ID,))
+            else: 
+                cur.execute("SELECT FormID FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID ORDER BY DateOfReport ASC")
             
             #cur.execute("SELECT FormID, %s , piID, EventID, DateOfReport FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID",(ID,))
             myresult = cur.fetchall()
@@ -353,7 +362,10 @@ def edit():
     if request.method =='GET':
             ID = session['id'] 
             cur = mysql.connection.cursor()
-            cur.execute("SELECT FormID FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID WHERE UserID = %s ORDER BY DateOfReport ASC",(ID,))
+            if ID != 1:
+                cur.execute("SELECT FormID FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID WHERE UserID = %s ORDER BY DateOfReport ASC",(ID,))
+            else: 
+                cur.execute("SELECT FormID FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID ORDER BY DateOfReport ASC")
             
             #cur.execute("SELECT FormID, %s , piID, EventID, DateOfReport FROM Form as f JOIN adverseeventorproductproblem as a ON a.aeoppID = f.aeoppID",(ID,))
             myresult = cur.fetchall()
@@ -520,8 +532,12 @@ def getform2():
         DATECOMP = None
         SIGNATURE = editForm['Signature']
         DATECOMP = editForm['SignatureDate']
+        if DATECOMP == "":
+            DATECOMP = None
         BRANDNAME = editForm['BrandName']
         MODELNUMBER = editForm['ModelNum']
+        if MODELNUMBER == "":
+            MODELNUMBER = None
         DEVICETYPE = editForm['DeviceType']
         SERIALNUMBER = editForm['SerialNum']
         MANUNAME = editForm['ManuName']
@@ -562,8 +578,8 @@ def getform2():
 
         mysql.connection.commit()
         cur.close() 
-        return render_template("EditForm.html", adminitem=adminitem)
-    return render_template("EditForm.html", adminitem=adminitem)  
+        return render_template("Homepage.html", adminitem=adminitem)
+    return render_template("Homepage.html", adminitem=adminitem)  
 
 if __name__ == '__main__':
     main.run(debug=True)
