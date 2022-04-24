@@ -94,7 +94,7 @@ def index():
 
 
 
-        DATEOFEVENT = None
+        DATEOFEVENT = '1900-01-01'
         DATEOFREPORT = None
         DATEREPORTCLOSED = None
         DATEOFEVENT = userDetails['DateOfEvent']
@@ -141,7 +141,7 @@ def index():
         
         cur.execute("INSERT INTO AlsoReportedTo(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER)VALUES(%s, %s, %s)",(MANUFACTURER, USERFACILITY, DISTRIBUTORIMPORTER))
         
-        #cur.execute("INSERT INTO SignOff(Signature, DateCompleted)VALUES(%s, %s)",(SIGNATURE, DATECOMP))
+        cur.execute("INSERT INTO SignOff(Signature, DateCompleted)VALUES(%s, %s)",(SIGNATURE, DATECOMP))
         
         mysql.connection.commit()
       
