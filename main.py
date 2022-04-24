@@ -188,6 +188,19 @@ def index():
         adminitem = session['admincheck']
         return render_template("index.html",adminitem  = adminitem )
 
+@main.route('/logout')      
+def logout():
+    session['loggedin']=False
+    session['id'] = None
+    session['username'] = None
+    session['first'] = None
+    session['last'] = None
+    session['admin'] = None
+    session['admincheck'] = 0
+    return redirect(url_for('login'))
+
+
+
 @main.route('/', methods=['GET', 'POST'])
 def login():
     msg = ''
