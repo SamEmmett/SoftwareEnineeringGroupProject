@@ -54,7 +54,7 @@
             <label for = "option">Select the form you would like to view below:</label>
             <h5></h5>
             Form:<br>
-            <select size =15 id="choice" name="formnum"> 
+            <select size =15 id="choice" name="formnumedit"> 
               {% for i in formID %}
                 <option id="optchoice" name="formnum"><div id = "selectoptions">{{formID[i]}} Date: {{Date[i]}}, CompletedBy:{{CompletedBy[i]}}, Facility: {{Facility[i]}}, Brand: {{Brand[i]}}</div></option>
               {% endfor %}

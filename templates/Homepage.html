@@ -23,7 +23,17 @@
         <div class="userbutton"><a href="{{url_for(page)}}">{{usermsg}}</a></div>
       </div>
     </div>
-   
+   <script>
+    var isAdmin = "{{ adminitem[0] }}"
+    
+    if (isAdmin == 0) //checks t see if other checkbox is checked
+    {
+      document.getElementById("edit").setAttribute("hidden", true);
+    }
+
+  
+    window.onload = loadSig
+</script>
       <div class="row">
         <div class="side">
           <h3>Americal Medical</h3>
@@ -42,19 +52,8 @@
       
       <div id="footer">
         <center><p>&#169; All Rights Reserved.</p></center>
-      </div>
-      <script>
-        function loadSig(){
-          var isAdmin = "{{adminitem[0]}}"
-            console.log(isAdmin)
-            if (isAdmin == 0) //checks t see if other checkbox is checked
-            {
-           
-              document.getElementById("edit").setAttribute("hidden", true);
-            }
-       
-          }
-          window.onload = loadSig
-      </script>
+      </div> 
+      
+      
   </body>
 </html>

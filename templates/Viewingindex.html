@@ -25,30 +25,15 @@
 </head>
 
 <body>
-	<script type="text/javascript">
-	
-		function loadSig() {
+	<script type="text/javascript">	
+		function section1(){
+			
 			var isAdmin = "{{adminitem[0]}}"
-		
 				if (isAdmin == 0) //checks t see if other checkbox is checked
-				{
-					document.getElementById("signature").setAttribute("hidden", true);
-					document.getElementById("signatureDate").setAttribute("hidden", true);
-					document.getElementById("sig").setAttribute("hidden",true);
-					document.getElementById("dsign").setAttribute("hidden",true);	
+				{	
 					document.getElementById("edit").setAttribute("hidden", true);
 				}
-			else
-				{
-					document.getElementById("signature").removeAttribute("hidden", true);
-					document.getElementById("signatureDate").removeAttribute("hidden", true);
-					
-				}
-			}
-				window.onload = loadSig
-		
 			
-		function section1(){
 			var badword = '{{ seshlist }}'
 			var word = badword.replace(/&#39;/g, ""); //removes  the &#39 that gets added when going from HTML to javascript
 			console.log(word)
@@ -378,7 +363,7 @@
 			
 			//this is the reported by table:
 			if (arr[74] == ""){
-				document.getElementById("repManuName").value=" ";
+				document.getElementById("repManuName");
 			}
 			else{
 				
@@ -388,26 +373,22 @@
 		
 		
 			if (arr[75] == ""){
-				document.getElementById("repUserFac").value=" ";
+				document.getElementById("repUserFac");
 			}
 			else{
-				var str,
-				element = document.getElementById('chkRepFac');
-				console.log(element)
 				document.getElementById("repUserFac").value=arr[75];
 				document.getElementById("chkRepFac").setAttribute("checked", true);
 			}
-		
+			
 			
 			if (arr[76] == ""){
-				document.getElementById("repDistImp").value=" ";
+				document.getElementById("repDistImp");
 			}
 			else{
 			
 				document.getElementById("repDistImp").value=arr[76];
 				document.getElementById("chkDistImp").setAttribute("checked", true);
 			}
-		
 		
 			//signature part
 			if (arr[78] == ""){
@@ -479,6 +460,7 @@
 			
 		}	
 		window.onload = section1
+	
 </script>
 	<!---<div id = "topnavbar"><div id ="userinfoleft"></div><div id="profilebutton right"><a href="profile.html">Profile</a></div></div>
 <div id="leftnavbar"><div>page1</div></div>-->
@@ -650,7 +632,7 @@
 
 			<div class="form-block form-section-hideable" id="SusDevice" disabled>
 				<h3><span class="numbering">9. </span>
-					<h3>Suspect Medical Device</h3>
+					Suspect Medical Device</h3>
 
 					<span class="numbering">a. </span>
 					<label for="BrandName">Brand Name:</label>
@@ -860,19 +842,9 @@
 
 
 		</div>
-
-		<div id="SubmitForm">
-			<input id="reset" name="Reset1" type="reset" value="Reset" />
-			or
-			<input id="ourPara" onClick="getText()" id="submit" name="Submit" type="submit" value="Submit" />
-		</div>
-
-		<div id="footer">
-			<center>
-				<p>&#169; All Rights Reserved.</p>
-			</center>
-		</div>
-
+		<br>
+		<br>
+		<br>
 		<script type="text/javascript" src="{{ url_for('static', filename='scripts.js') }}"></script>
 	</form>
 	
