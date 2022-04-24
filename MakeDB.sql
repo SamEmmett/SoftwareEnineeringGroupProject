@@ -1,0 +1,137 @@
+DROP database groupproject;
+create database groupproject;
+use groupproject;
+
+
+-- Patient info entity
+create table patientinfo(
+`piID` int NOT NULL AUTO_INCREMENT,
+`ptID` int NOT NULL,
+`DoB` date NOT NULL,
+`Sex` nvarchar(60) NOT NULL,
+`Weight` nvarchar(50) NOT NULL,
+PRIMARY KEY(`piID`));
+
+-- reportingfacilityinformation
+create table reportingfacilityinfo(
+`rfiID` int NOT NULL AUTO_INCREMENT,
+`ReportedBy` nvarchar(100) NOT NULL,
+`FacilityName` nvarchar(100) NOT NULL,
+`Address` nvarchar(100) NOT NULL,
+`City` nvarchar(50) NOT NULL,
+`FacilityState` nvarchar(50) NOT NULL,
+`Zip` int NOT NULL,
+`Phone` varchar(15) NOT NULL,
+PRIMARY KEY(`rfiID`));
+
+-- suspectmedicaldevice
+create table susmedicaldevice(
+`smdID` int NOT NULL AUTO_INCREMENT,
+`BrandName`nvarchar(50),
+`ModelNumber` int,
+`TOD` nvarchar(50),
+`SerialNumber` nvarchar(50),
+`ManufacturerName` nvarchar(50),
+`MCity` nvarchar(50),
+`MState` nvarchar(50),
+`HealthProfessional` nvarchar(60),
+`LayUserPatient` nvarchar(60),
+`Other2` nvarchar(60),
+PRIMARY KEY(`smdID`));
+
+create table adverseeventorproductproblem(
+`aeoppID` int NOT NULL AUTO_INCREMENT,
+`AdverseEvent` nvarchar(50),
+`ProductProblem` nvarchar(50),
+`DoD` nvarchar(10),
+`Intervention` nvarchar(50),
+`LifeThreatening` nvarchar(50),
+`Disability` nvarchar(50),
+`Hospitalized` nvarchar(50),
+`CongenitalAnomaly` nvarchar(50),
+`Other` nvarchar(60),
+`DateOfEvent` date,
+`DateofReport` date,
+`DateReportClosed` date,
+PRIMARY KEY(`aeoppID`));
+
+-- reportcompletedby
+create table reportcompletedby(
+`rcbID` int NOT NULL AUTO_INCREMENT,
+`RepCompany`nvarchar(50),
+`RepName` nvarchar(50),
+`RepAddress` nvarchar(50),
+`RepCity` nvarchar(50),
+`RepState` nvarchar(50),
+`RepPhone` nvarchar(50),
+PRIMARY KEY(`rcbID`));
+
+-- Sign Off
+create table signoff(
+`soID` int NOT NULL AUTO_INCREMENT,
+`Signature`nvarchar(50),
+`DateCompleted` date,
+PRIMARY KEY(`soID`));
+
+-- EventInformation
+create table EventInformation(
+`EventID` int NOT NULL AUTO_INCREMENT,
+`DescribeEoP` nvarchar(100),
+`Findings` nvarchar(100),
+PRIMARY KEY(`EventID`));
+
+-- Also Reported To
+create table AlsoReportedTo(
+`artID` int NOT NULL AUTO_INCREMENT,
+`Manufacturer` nvarchar(50),
+`UserFacility` nvarchar(50),
+`DistributorImporter` nvarchar(50),
+PRIMARY KEY(`artID`));
+
+create table Users(
+userID int NOT NULL,
+FirstName nvarchar(20),
+LastName nvarchar(20) NOT NULL,
+UName nvarchar(30) NOT NULL,
+Pword nvarchar(16) NOT NULL,
+Company nvarchar(20) NOT NULL,
+Address  nvarchar(100) NOT NULL,
+City nvarchar(50) NOT NULL,
+State nvarchar(50) NOT NULL,
+Phone int NOT NULL,
+email varchar(50) NOT NULL,
+IsAdmin int NOT NULL,
+primary key (userID)
+);
+
+-- Form Entity
+create table Form(
+`FormID` int NOT NULL AUTO_INCREMENT,
+`UserID` int NOT NULL,
+`piID` int NOT NULL,
+`rfiID` int NOT NULL, 
+`smdID` int NOT NULL,
+`aeoppID` int not NULL,
+`rcbID` int not NULL,
+`soID` int not NULL,
+`EventID` int not NULL,
+`artID` int not NULL,
+PRIMARY KEY(`FormID`),
+CONSTRAINT FK_UserID FOREIGN KEY (UserID)references Users(UserID),
+CONSTRAINT FK_PTInfo FOREIGN KEY (piID) REFERENCES patientinfo(piID),
+CONSTRAINT FK_RFI FOREIGN KEY (rfiID) REFERENCES reportingfacilityinfo(rfiID),
+CONSTRAINT FK_SusDev FOREIGN KEY (smdID) REFERENCES susmedicaldevice(smdID),
+CONSTRAINT FK_aeopp FOREIGN KEY (aeoppID) REFERENCES adverseeventorproductproblem(aeoppID),
+CONSTRAINT FK_rcb FOREIGN KEY (rcbID) REFERENCES reportcompletedby(rcbID),
+CONSTRAINT FK_signoff FOREIGN KEY (soID) REFERENCES signoff(soID),
+CONSTRAINT FK_EventInfo FOREIGN KEY (EventID) REFERENCES EventInformation(EventID),
+Constraint FK_ART FOREIGN KEY (artID) REFERENCES AlsoReportedTo(artID)
+);
+
+#add user
+INSERT INTO users
+VALUES(1, 'Daniel', 'Woods', 'dwoods', 'password', 'Stockton University', '101 Vera King Farris Drive', 'Galloway', 'New Jersey', 609652177, 'daniel.woods@stockton.edu', 1);
+ 
+# non admin user
+INSERT INTO users
+VALUES(2, 'John', 'Doe', 'jdoe', 'password', 'Stockton University', '101 Vera King Farris Drive', 'Galloway', 'New Jersey', 609652177, 'doej5@go.stockton.edu', 0);
